@@ -639,7 +639,7 @@ public class ShaderPlayground {
 
         for(ShaderUniform<float[]> fVec4Uniform : uniforms.getFVec4Uniforms()) { // Render 4D float vector uniforms.
             if(fVec4Uniform.getUName().equals("p_Color")) { // Automatically set color by playground.
-                ImGui.text(String.format("vec4(%f %f %f %f) p_Color (auto-set) | Color.", cMeshCol[0], cMeshCol[1], cMeshCol[2], cMeshCol[3]));
+                ImGui.text(String.format("vec4(%.2f %.2f %.2f %.2f) p_Color (auto-set) | Color.", cMeshCol[0], cMeshCol[1], cMeshCol[2], cMeshCol[3]));
 
                 Raylib.SetShaderValue(shader, Raylib.GetShaderLocation(shader, "p_Color"), new FloatPointer(cMeshCol[0], cMeshCol[1], cMeshCol[2], cMeshCol[3]), Raylib.SHADER_ATTRIB_VEC4);
             } else {
