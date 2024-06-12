@@ -33,19 +33,18 @@ public class GPU_RLObjManager {
     public static final int MESH = 18;
     public static final int MATERIAL = 19;
     public static final int MODEL_ANIMATION = 20;
-    public static final int MODEL_ANIMATIONS = 21;
-    public static final int WAVE = 22;
-    public static final int SOUND = 23;
-    public static final int SOUND_ALIAS = 24;
-    public static final int WAVE_SAMPLES = 25;
-    public static final int MUSIC_STREAM = 26;
-    public static final int AUDIO_STREAM = 27;
-    public static final int RENDER_BATCH = 28;
-    public static final int VERTEX_ARRAY = 29;
-    public static final int VERTEX_BUFFER = 30;
-    public static final int FRAMEBUFFER = 31;
-    public static final int SHADER_PROGRAM = 32;
-    public static final int SHADER_BUFFER = 33;
+    public static final int WAVE = 21;
+    public static final int SOUND = 22;
+    public static final int SOUND_ALIAS = 23;
+    public static final int WAVE_SAMPLES = 24;
+    public static final int MUSIC_STREAM = 25;
+    public static final int AUDIO_STREAM = 26;
+    public static final int RENDER_BATCH = 27;
+    public static final int VERTEX_ARRAY = 28;
+    public static final int VERTEX_BUFFER = 29;
+    public static final int FRAMEBUFFER = 30;
+    public static final int SHADER_PROGRAM = 31;
+    public static final int SHADER_BUFFER = 32;
 
     private final ArrayList<GPU_RLObj<Object>> objects = new ArrayList<>();
 
@@ -103,7 +102,6 @@ public class GPU_RLObjManager {
                 case MESH -> Raylib.UnloadMesh((Raylib.Mesh) gpuRlObj.rlObj);
                 case MATERIAL -> Raylib.UnloadMaterial((Raylib.Material) gpuRlObj.rlObj);
                 case MODEL_ANIMATION -> Raylib.UnloadModelAnimation((Raylib.ModelAnimation) gpuRlObj.rlObj);
-                case MODEL_ANIMATIONS -> {}
                 case WAVE -> Raylib.UnloadWave((Raylib.Wave) gpuRlObj.rlObj);
                 case SOUND -> Raylib.UnloadSound((Raylib.Sound) gpuRlObj.rlObj);
                 case SOUND_ALIAS -> Raylib.UnloadSoundAlias((Raylib.Sound) gpuRlObj.rlObj);
@@ -116,6 +114,7 @@ public class GPU_RLObjManager {
                 case FRAMEBUFFER -> Raylib.rlUnloadFramebuffer((int) gpuRlObj.rlObj);
                 case SHADER_PROGRAM -> Raylib.rlUnloadShaderProgram((int) gpuRlObj.rlObj);
                 case SHADER_BUFFER -> Raylib.rlUnloadShaderBuffer((int) gpuRlObj.rlObj);
+                default -> {}
             }
         }
 
