@@ -23,3 +23,4 @@ With comment starting with `p_DefVal=` you can set default uniform value. It's i
 
 Playground TODO:
 - Implement feature to change meshes.
+- Cover `ivec2 p_Res` uniform.
