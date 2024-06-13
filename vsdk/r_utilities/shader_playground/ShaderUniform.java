@@ -7,7 +7,7 @@ public class ShaderUniform<T> {
 
     private final String uType;
 
-    private boolean p_DefValSet = false;
+    private boolean p_DefValSet;
 
     public ShaderUniform(String uName_, T uValue_, String uType_) {
         uName = uName_;
@@ -34,7 +34,7 @@ public class ShaderUniform<T> {
     }
 
     public void setP_NoDefValSet() {
-        p_DefValSet = true;
+        p_DefValSet = false;
     }
 
     public boolean getP_DefValSet() {
