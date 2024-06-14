@@ -28,6 +28,8 @@ import org.bytedeco.javacpp.FloatPointer;
 
 import vsdk.sdk_vendor.jlImGui.JaylibImGui;
 
+import static vsdk.source.WindowIconUtil.setWinIcon;
+
 import static vsdk.source.ImGuiDeepDarkTheme.updateTheme;
 
 import static vsdk.r_utilities.PathResolver.resolvePath;
@@ -35,7 +37,7 @@ import static vsdk.r_utilities.PathResolver.resolvePath;
 import static vsdk.r_utilities.PathResolver.getLastPathFile;
 
 public class ShaderPlayground {
-    public static final String WINDOW_TITLE = "VSDK | Shader Playground V1.0.0";
+    public static final String WINDOW_TITLE = "VSDK | Shader Playground.";
 
     public static final String WINDOW_IMGUI_FONT = "vsdk/resources/Lato-Regular.ttf";
 
@@ -55,6 +57,8 @@ public class ShaderPlayground {
         Raylib.SetConfigFlags(Raylib.FLAG_MSAA_4X_HINT | Raylib.FLAG_WINDOW_RESIZABLE);
 
         Raylib.InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
+
+        setWinIcon("vsdk/resources/vicon.png", true);
 
         Raylib.SetWindowMinSize(WINDOW_WIDTH - 15, WINDOW_HEIGHT - 15);
 
