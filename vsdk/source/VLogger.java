@@ -19,7 +19,7 @@ public class VLogger {
     private static String log(String message, String type) {
         StackTraceElement caller = Thread.currentThread().getStackTrace()[3];
 
-        return String.format("[%s] %s->%s: %s [%s];", caller.getFileName(), caller.getClassName(), caller.getMethodName(), message, type);
+        return String.format("[%s] [%s] %s <-> %s : %s", type, caller.getFileName(), caller.getClassName().replace(".", "::"), caller.getMethodName(), message);
     }
 
     private static void printAndRemember(String log) {
