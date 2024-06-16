@@ -255,27 +255,24 @@ public class NoiseGenerator {
      * @param width Width.
      * @param height Height.
      */
-    public static Raylib.Image genWhiteNoiseImg(int seed, float scale, int width, int height) {
+    public static Raylib.Image genWhiteNoiseImg(int seed, int scale, int width, int height) {
         ByteBuffer buffer = ByteBuffer.allocateDirect(width * height * 4).order(nativeOrder());
 
+        WhiteN whiteN = new WhiteN(seed);
+
         for (int i = 0; i < width * height; i++) {
-            if((float) Raylib.GetRandomValue(0, 255) / 255 < scale) {
-                buffer.put((byte) 0);
-                buffer.put((byte) 0);
-                buffer.put((byte) 0);
+            if((whiteN.noise() / 255) < Raylib.GetRandomValue((int) whiteN.noise(), scale)) {
+                buffer.put((byte) 255);
+                buffer.put((byte) 255);
+                buffer.put((byte) 255);
                 buffer.put((byte) 255);
             } else {
-                buffer.put((byte) 255);
-                buffer.put((byte) 255);
-                buffer.put((byte) 255);
+                buffer.put((byte) 0);
+                buffer.put((byte) 0);
+                buffer.put((byte) 0);
                 buffer.put((byte) 255);
             }
         }
-
-        buffer.flip();
-
-        return new Raylib.Image().data(new BytePointer(buffer)).width(width).height(height).mipmaps(1).format(Raylib.PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
-    }
 
     /**
      * Generate perlin noise image.
