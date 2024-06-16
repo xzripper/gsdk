@@ -27,9 +27,11 @@ public class AmbientAudio {
      * Handle ambient audio.
      *
      * @param fadeInEnd Fade end (-1 to disable).
+     * @param fadeInStartVol Fade in start volume (can be 0.0f by default, or -1 if fade is disabled).
      * @param fadeOutStart Begin fade out before end (-1 to disable).
+     * @param fadeOutMinVol Fade out minimal value (can be 0.0f by default, or -1 if fade is disabled).
      */
-    public void handleAmbient(float fadeInEnd, float fadeOutStart) {
+    public void handleAmbient(float fadeInEnd, float fadeInStartVol, float fadeOutStart, float fadeOutMinVol) {
         if(!Raylib.IsMusicStreamPlaying(rlMusic)) return;
 
         Raylib.UpdateMusicStream(rlMusic);
@@ -38,12 +40,29 @@ public class AmbientAudio {
         float totalLen = Raylib.GetMusicTimeLength(rlMusic);
 
         if(fadeInEnd != -1 && playedLen < fadeInEnd) {
-            Raylib.SetMusicVolume(rlMusic, playedLen / fadeInEnd);
+            Raylib.SetMusicVolume(rlMusic, fadeInStartVol + ((1.0f - fadeInStartVol) * (playedLen / fadeInEnd)));
         }
 
         if(fadeOutStart != -1 && playedLen > (totalLen - fadeOutStart)) {
-            Raylib.SetMusicVolume(rlMusic, (totalLen - playedLen) / fadeOutStart);
+            Raylib.SetMusicVolume(rlMusic, Math.max(fadeOutMinVol + (((totalLen - playedLen) / fadeOutStart) * (1.0f - fadeOutMinVol)), fadeOutMinVol));
         }
+    }
+
+    /**
+     * Handle ambient audio.
+     *
+     * @param fadeInEnd Fade end (-1 to disable).
+     * @param fadeOutStart Begin fade out before end (-1 to disable).
+     */
+    public void handleAmbient(float fadeInEnd, float fadeOutStart) {
+        handleAmbient(fadeInEnd, 0.0f, fadeOutStart, 0.0f);
+    }
+
+    /**
+     * Handle ambient audio (no fade effects).
+     */
+    public void handleAmbient() {
+        handleAmbient(-1, -1, -1, -1);
     }
 
     /**
