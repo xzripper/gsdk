@@ -105,6 +105,13 @@ public class SpatialAudio {
     }
 
     /**
+     * Get audio current pan.
+     */
+    public float getAudioCurrPan() {
+        return spAudioData.getAudioCurrPan();
+    }
+
+    /**
      * Set audio loudness.
      *
      * @param loudness Loudness.
