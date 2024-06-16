@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Cached SFX Buffer.
  */
 public class CachedSFXBuffer {
-    protected ArrayList<String> buffer = new ArrayList<>();
+    private final ArrayList<String> buffer = new ArrayList<>();
 
     /**
      * Cache SFX.

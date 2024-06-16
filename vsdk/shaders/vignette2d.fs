@@ -1,3 +1,5 @@
+// VSDK 2D Vignette Fragment Shader (Created by Apfelstrudel Technologien).
+
 #version 330
 
 in vec2 fragTexCoord;

@@ -47,10 +47,10 @@ public class SpatialAudio {
         float dist = 0.0f;
 
         for(int posIndex=0; posIndex < 3; posIndex++) {
-            dist += Math.abs((spAudioData.getAudioPos().toArray()[posIndex] * 0.1f) - (camPos.toArray()[posIndex] * 0.1f));
+            dist += VMath.abs((spAudioData.getAudioPos().toArray()[posIndex] * 0.1f) - (camPos.toArray()[posIndex] * 0.1f));
         }
 
-        return Math.max(SpatialAudioData.MIN_VOL, Math.min(SpatialAudioData.MAX_VOL, (SpatialAudioData.MAX_VOL + spAudioData.getAudioLoudness()) - dist));
+        return (float) VMath.clamp(SpatialAudioData.MIN_VOL, SpatialAudioData.MAX_VOL,  (SpatialAudioData.MAX_VOL + spAudioData.getAudioLoudness()) - dist);
     }
 
     /**
@@ -61,8 +61,10 @@ public class SpatialAudio {
      * @param inverse Inverse effect?
      */
     public float calcDistPan(float camPositionZ, float camTargetZ, boolean inverse) {
-        if(inverse) return Math.max(SpatialAudioData.LEFT_PAN, Math.min(SpatialAudioData.CENTER_PAN - (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.1f, SpatialAudioData.RIGHT_PAN));
-        else return Math.max(SpatialAudioData.LEFT_PAN, Math.min(SpatialAudioData.CENTER_PAN + (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.1f, SpatialAudioData.RIGHT_PAN));
+        if(inverse)
+            return (float) VMath.clamp(SpatialAudioData.LEFT_PAN, SpatialAudioData.RIGHT_PAN, SpatialAudioData.CENTER_PAN - (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.1f);
+        else
+            return (float) VMath.clamp(SpatialAudioData.LEFT_PAN, SpatialAudioData.RIGHT_PAN, SpatialAudioData.CENTER_PAN + (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.1f);
     }
 
     /**
@@ -139,14 +141,5 @@ public class SpatialAudio {
      */
     public void unloadSound() {
         Raylib.UnloadSound(spAudioData.getAudio());
-    }
-
-    /**
-     * Get camera position as Vector3Df.
-     *
-     * @param cam 3D Camera.
-     */
-    public static Vector3Df getCamPos(Raylib.Camera3D cam) {
-        return new Vector3Df(cam._position().x(), cam._position().y(), cam._position().z());
     }
 }

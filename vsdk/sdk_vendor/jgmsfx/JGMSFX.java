@@ -30,9 +30,9 @@ import java.util.Random;
  * JGMSFX Class.
  */
 public class JGMSFX {
-    protected static Random random = new Random();
+    private static final Random random = new Random();
 
-    protected static CachedSFXBuffer cachedSFX = new CachedSFXBuffer();
+    private static final CachedSFXBuffer cachedSFX = new CachedSFXBuffer();
 
     /**
      * JGMSFX Constants.

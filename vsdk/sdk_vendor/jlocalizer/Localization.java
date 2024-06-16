@@ -6,15 +6,15 @@ package vsdk.sdk_vendor.jlocalizer;
  * Localization class.
  */
 public class Localization {
-    protected LocalizationPack locPack;
+    private final LocalizationPack locPack;
 
-    protected String defaultLanguage = null;
+    private String defaultLanguage = null;
 
     /**
      * Initialize localization manager.
      */
-    public Localization(LocalizationPack locPack_) {
-        locPack = locPack_;
+    public Localization(String locPackPath) {
+        locPack = new LocalizationPack(locPackPath);
     }
 
     /**

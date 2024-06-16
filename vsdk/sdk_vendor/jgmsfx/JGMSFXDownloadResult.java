@@ -6,9 +6,9 @@ package vsdk.sdk_vendor.jgmsfx;
  * Download result.
  */
 public class JGMSFXDownloadResult {
-    protected String sfxPath;
+    private final String sfxPath;
 
-    protected String[] error;
+    private final String[] error;
 
     /**
      * Initialize download result.

@@ -19,7 +19,7 @@ public class LocalizationPack {
     /**
      * Initialize localization pack parser.
      */
-    public LocalizationPack(String pack) throws Exception {
+    public LocalizationPack(String pack) {
         try(BufferedReader reader = new BufferedReader(new FileReader(pack))) {
             String line = reader.readLine();
 
@@ -27,7 +27,9 @@ public class LocalizationPack {
                 String[] colonSplit_ = line.split(":");
 
                 if(colonSplit_.length < 3) {
-                    throw new Exception("colonSplit_.length < 3 == true: Syntax error: Expected 3 elements.");
+                    localization.put("-1", null);
+
+                    break;
                 }
 
                 localization.put(String.format("%s_%s", colonSplit_[1], colonSplit_[0]), colonSplit_[2]);

@@ -70,6 +70,8 @@ public class VLogger {
      * @param file Path to file.
      */
     public static void saveLogs(String file) {
+        if(logs.size() <= 0) return;
+
         BufferedWriter buffWriter = null;
 
         try {

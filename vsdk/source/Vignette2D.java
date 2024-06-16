@@ -44,9 +44,9 @@ public class Vignette2D {
      */
     public Vignette2D(float vRadius_, float vBlur_, Vector3Df vCol_, float vPosX_, float vPosY_) {
         if(vBlur_ < 0.0f || vBlur_ > 2.0f) {
-            vBlur_ = Math.min(0.0f, Math.max(2.0f, vBlur_));
+            vBlur_ = (float) VMath.clamp(0.0, 2.0, vBlur_);
 
-            VLogger.warning("Invalid vignette blur value: clamped it between 0.0f and 2.0f.");
+            VLogger.warning("Invalid vignette blur value: clamped it between 0.0 and 2.0.");
         }
 
         vRadius = vRadius_;
@@ -121,10 +121,10 @@ public class Vignette2D {
     public void setVBlur(float blur) {
         assert_t(vBlurLoc == -1, "vBlurLoc == -1");
 
-        if(blur < 0.0f || blur > 2.0f) {
-            blur = Math.min(0.0f, Math.max(2.0f, blur));
+        if(vBlur < 0.0f || vBlur > 2.0f) {
+            vBlur = (float) VMath.clamp(0.0, 2.0, vBlur);
 
-            VLogger.warning("Invalid vignette blur value: clamped it between 0.0f and 2.0f.");
+            VLogger.warning("Invalid vignette blur value: clamped it between 0.0 and 2.0.");
         }
 
         vBlur = blur;
@@ -204,6 +204,7 @@ public class Vignette2D {
      */
     public void unloadVignette() {
         Raylib.UnloadShader(vShader);
+
         Raylib.UnloadRenderTexture(vRenderTex);
     }
 }

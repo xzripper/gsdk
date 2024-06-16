@@ -30,7 +30,7 @@ import vsdk.sdk_vendor.jlImGui.JaylibImGui;
 
 import static vsdk.source.WindowIconUtil.setWinIcon;
 
-import static vsdk.source.ImGuiDeepDarkTheme.updateTheme;
+import static vsdk.source.imthemes.ImGuiDeepDarkTheme.updateTheme;
 
 import static vsdk.r_utilities.PathResolver.resolvePath;
 
