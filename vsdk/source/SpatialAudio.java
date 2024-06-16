@@ -142,4 +142,13 @@ public class SpatialAudio {
     public void unloadSound() {
         Raylib.UnloadSound(spAudioData.getAudio());
     }
+
+    /**
+     * Get camera position as Vector3Df.
+     *
+     * @param cam 3D Camera.
+     */
+    public static Vector3Df getCamPos(Raylib.Camera3D cam) {
+        return new Vector3Df(cam._position().x(), cam._position().y(), cam._position().z());
+    }
 }
