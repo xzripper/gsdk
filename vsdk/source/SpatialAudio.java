@@ -24,6 +24,20 @@ public class SpatialAudio {
     }
 
     /**
+     * Play audio.
+     */
+    public void play() {
+        Raylib.PlaySound(spAudioData.getAudio());
+    }
+
+    /**
+     * Stop audio.
+     */
+    public void stop() {
+        Raylib.StopSound(spAudioData.getAudio());
+    }
+
+    /**
      * Handle spatial sound.
      *
      * @param camPos Camera position.
