@@ -62,9 +62,9 @@ public class SpatialAudio {
      */
     public float calcDistPan(float camPositionZ, float camTargetZ, boolean inverse) {
         if(inverse)
-            return (float) VMath.clamp(SpatialAudioData.LEFT_PAN, SpatialAudioData.RIGHT_PAN, SpatialAudioData.CENTER_PAN - (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.1f);
-        else
             return (float) VMath.clamp(SpatialAudioData.LEFT_PAN, SpatialAudioData.RIGHT_PAN, SpatialAudioData.CENTER_PAN + (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.1f);
+        else
+            return (float) VMath.clamp(SpatialAudioData.LEFT_PAN, SpatialAudioData.RIGHT_PAN, SpatialAudioData.CENTER_PAN - (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.1f);
     }
 
     /**
