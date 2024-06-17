@@ -49,4 +49,15 @@ public class Range {
 
         return range;
     }
+
+    /**
+     * Is value in range from start to end.
+     *
+     * @param value Value.
+     * @param rStart Range start.
+     * @param rEnd Range end.
+     */
+    public static boolean inRange(float value, float rStart, float rEnd) {
+        return value >= rStart && value <= rEnd;
+    }
 }

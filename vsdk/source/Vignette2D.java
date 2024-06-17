@@ -43,7 +43,7 @@ public class Vignette2D {
      * @param vPosY_ Vignette position Y.
      */
     public Vignette2D(float vRadius_, float vBlur_, Vector3Df vCol_, float vPosX_, float vPosY_) {
-        if(vBlur_ < 0.0f || vBlur_ > 2.0f) {
+        if(!Range.inRange(vBlur_, 0.0f, 2.0f)) {
             vBlur_ = (float) VMath.clamp(0.0, 2.0, vBlur_);
 
             VLogger.warning("Invalid vignette blur value: clamped it between 0.0 and 2.0.");
@@ -68,8 +68,8 @@ public class Vignette2D {
         vBlurLoc = Raylib.GetShaderLocation(vShader, "vBlur"); assert_t(vBlurLoc == -1, "vBlurLoc == -1");
         vColLoc = Raylib.GetShaderLocation(vShader, "vColor"); assert_t(vColLoc == -1, "vColLoc == -1");
 
-        vPosXLoc = Raylib.GetShaderLocation(vShader, "vPosX"); assert_t(vPosXLoc == -1, "vPosX == -1");
-        vPosYLoc = Raylib.GetShaderLocation(vShader, "vPosY"); assert_t(vPosYLoc == -1, "vPosY == -1");
+        vPosXLoc = Raylib.GetShaderLocation(vShader, "vPosX"); assert_t(vPosXLoc == -1, "vPosXLoc == -1");
+        vPosYLoc = Raylib.GetShaderLocation(vShader, "vPosY"); assert_t(vPosYLoc == -1, "vPosYLoc == -1");
 
         Raylib.SetShaderValue(vShader, vRadiusLoc, new FloatPointer(vRadius), Raylib.SHADER_UNIFORM_FLOAT);
         Raylib.SetShaderValue(vShader, vBlurLoc, new FloatPointer(vBlur), Raylib.SHADER_UNIFORM_FLOAT);
@@ -121,7 +121,7 @@ public class Vignette2D {
     public void setVBlur(float blur) {
         assert_t(vBlurLoc == -1, "vBlurLoc == -1");
 
-        if(vBlur < 0.0f || vBlur > 2.0f) {
+        if(!Range.inRange(vBlur, 0.0f, 2.0f)) {
             vBlur = (float) VMath.clamp(0.0, 2.0, vBlur);
 
             VLogger.warning("Invalid vignette blur value: clamped it between 0.0 and 2.0.");
