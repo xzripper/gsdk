@@ -1,5 +1,7 @@
 package vsdk.source;
 
+import java.util.Arrays;
+
 /**
  * VMath: VSDK Math has useful functions & constants for game development math.
  */
@@ -522,5 +524,14 @@ public class VMath {
         double[] rotatedVector = rotatePoint2D(new Vector2Df((float) translatedVec[0], (float) translatedVec[1]), angle);
 
         return new double[] {rotatedVector[0] + point.x(), rotatedVector[1] + point.y()};
+    }
+
+    /**
+     * Summarize vector (array).
+     *
+     * @param vec Vector.
+     */
+    public static double sumVec(double[] vec) {
+        return Arrays.stream(vec).sum();
     }
 }
