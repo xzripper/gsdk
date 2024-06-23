@@ -1,3 +1,6 @@
+EzXML is a high-level layer between JavaX.XML and W3C.DOM + (Java IO) with utilities to simplify some things.
+It allows you to read or write XML easier and faster.
+
 ### Reading XML.
 
 ```xml
@@ -10,6 +13,10 @@
 ```
 
 ```java
+import vsdk.vlib.ezxml.EzXML;
+
+import static vsdk.source.Assert.assert_t;
+
 public class Main {
     public static void main(String[] args) {
         EzXML xmlf = new EzXML();
