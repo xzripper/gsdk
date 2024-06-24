@@ -10,3 +10,7 @@
 <h3 align="center">VSDK Shader Playground.</h3>
 
 <p align="center"><img src="https://github.com/violent-studio/vsdk/blob/main/vsdk/r_utilities/shader_playground/utility.png?raw=true" width="600"></p>
+
+<h3 align="center">VSDK VUI.</h3>
+
+<p align="center"><img src="https://github.com/violent-studio/vsdk/assets/94743980/eb31a401-c091-4e33-bad9-0593741e54ca?raw=true" width="250"></p>
