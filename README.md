@@ -13,4 +13,4 @@
 
 <h3 align="center">VSDK VUI.</h3>
 
-<p align="center"><img src="https://github.com/violent-studio/vsdk/assets/94743980/eb31a401-c091-4e33-bad9-0593741e54ca?raw=true" width="250"></p>
+<p align="center"><img src="https://github.com/violent-studio/vsdk/assets/94743980/4208bfdc-1fdc-40eb-99c6-07c9c0511b1f?raw=true" width="650"></p>
