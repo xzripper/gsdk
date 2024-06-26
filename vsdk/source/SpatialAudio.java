@@ -5,7 +5,7 @@ import com.raylib.Raylib;
 import static vsdk.source.Assert.assert_f;
 
 /**
- * Spatial audio implementation (ALPHA): https://github.com/orgs/violent-studio/projects/1/views/1?pane=issue&itemId=63421011 (Reworked some things audio).
+ * Spatial audio implementation (ALPHA): https://github.com/orgs/violent-studio/projects/1/views/1?pane=issue&itemId=63421011 (Reworked some things).
  */
 public class SpatialAudio {
     private final SpatialAudioData spAudioData;
