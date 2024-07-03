@@ -4,6 +4,8 @@ import com.raylib.Raylib;
 
 import java.util.ArrayList;
 
+import org.bytedeco.javacpp.FloatPointer;
+
 import vsdk.source.Texture;
 
 import static vsdk.source.Range.inRange;
@@ -36,13 +38,17 @@ public class VUI {
     private static final int DEFAULT_SLIDER_BUTTON_WIDTH = 15;
     private static final int DEFAULT_SLIDER_BUTTON_HEIGHT = 25;
 
+    private static VUIStyle finalStyle;
+
     private static VUIStyle strSliderButtonStyle;
 
     private static float strSliderLeftButtonWidth;
 
-    private static Raylib.Shader texelBleedingFixShader = null;
+    private static Raylib.Shader texelBleedingFixShader, loadingIconShader = null;
 
-    private static VUIStyle finalStyle;
+    private static int loadingIconProgressLoc, loadingIconTintLoc;
+
+    private static float prevLoadingIconProgress, loadingIconTint;
 
     /**
      * Load texel bleeding fix shader.
@@ -73,6 +79,14 @@ public class VUI {
     public static void newVuiCtx(VUIStyle style) {
         VUIIO.newCtx(style);
 
+        loadingIconShader = Raylib.LoadShader(null, resolvePath("vsdk/shaders/loading_icon2d.fs"));
+
+        loadingIconTintLoc = Raylib.GetShaderLocation(loadingIconShader, "tint");
+
+        loadingIconProgressLoc = Raylib.GetShaderLocation(loadingIconShader, "progress");
+
+        setLoadingIconTint(0.3f);
+
         finalStyle = VUIIO.style;
 
         VUIColor focused = finalStyle.getFocusedCol();
@@ -86,6 +100,35 @@ public class VUI {
         );
 
         strSliderLeftButtonWidth = Raylib.MeasureTextEx(finalStyle.getTextFont().getFont(), "<", 20.0f, 0.1f).x();
+    }
+
+    /**
+     * Set loading icon tint (0.0->1.0).
+     *
+     * @param tint Tint.
+     */
+    public static void setLoadingIconTint(float tint) {
+        loadingIconTint = (float) clamp(0.0, 1.0, tint);
+
+        assert_t(loadingIconTintLoc == -1, "loadingIconTintLoc == -1: maybe call VUI::newVuiCtx?");
+
+        Raylib.SetShaderValue(loadingIconShader, loadingIconTintLoc, new FloatPointer(loadingIconTint), Raylib.SHADER_UNIFORM_FLOAT);
+    }
+
+    /**
+     * Get loading icon tint.
+     */
+    public static float getLoadingIconTint() {
+        return loadingIconTint;
+    }
+
+    /**
+     * Unload resources (shaders) required by IVUI.
+     */
+    public static void unloadResources() {
+        if(texelBleedingFixAvailable()) unloadTexelBleedingFixShader();
+
+        Raylib.UnloadShader(loadingIconShader);
     }
 
     /**
@@ -116,6 +159,34 @@ public class VUI {
      */
     public static void endStyle() {
         VUIIO.style = finalStyle;
+    }
+
+    /**
+     * Draw next objects with specified alpha.
+     *
+     * @param alpha Alpha (opacity 0->255).
+     */
+    public static void beginAlpha(int alpha) {
+        VUIIO.style.getDefaultCol().set('a', alpha);
+        VUIIO.style.getFocusedCol().set('a', alpha);
+        VUIIO.style.getPressedCol().set('a', alpha);
+
+        VUIIO.style.getBorderColor().set('a', alpha);
+
+        VUIIO.style.getTextCol().set('a', alpha);
+    }
+
+    /**
+     * Restore style alpha.
+     */
+    public static void endAlpha() {
+        VUIIO.style.getDefaultCol().set('a', finalStyle.getDefaultCol().get('a'));
+        VUIIO.style.getFocusedCol().set('a', finalStyle.getFocusedCol().get('a'));
+        VUIIO.style.getPressedCol().set('a', finalStyle.getPressedCol().get('a'));
+
+        VUIIO.style.getBorderColor().set('a', finalStyle.getBorderColor().get('a'));
+
+        VUIIO.style.getTextCol().set('a', finalStyle.getTextCol().get('a'));
     }
 
     /**
@@ -559,6 +630,17 @@ public class VUI {
     }
 
     /**
+     * Draw progress bar with default size.
+     *
+     * @param pRef Progress reference.
+     * @param x Position X.
+     * @param y Position Y.
+     */
+    public static void progressBar(VOutRef<Integer> pRef, int x, int y) {
+        progressBar(pRef, x, y, -1, -1);
+    }
+
+    /**
      * String almost-slider.
      *
      * @param indexRef Selected string index in array reference.
@@ -704,14 +786,67 @@ public class VUI {
     }
 
     /**
-     * Draw progress bar with default size.
+     * Draw image with white tint and default scale.
+     *
+     * @param image Image.
+     * @param x X Position.
+     * @param y Y Position.
+     * @return Is image clicked.
+     */
+    public static boolean image(Texture image, int x, int y) {
+        return image(image, x, y, 1.0f, new VUIColor(255, 255, 255, 255));
+    }
+
+
+    /**
+     * Draw loading icon.
      *
      * @param pRef Progress reference.
-     * @param x Position X.
-     * @param y Position Y.
+     * @param icon Icon.
+     * @param x X Position.
+     * @param y Y Position.
+     * @param scale Icon scale.
+     * @param tint Icon tint.
      */
-    public static void progressBar(VOutRef<Integer> pRef, int x, int y) {
-        progressBar(pRef, x, y, -1, -1);
+    public static void loadingIcon(VOutRef<Float> pRef, Texture icon, int x, int y, float scale, VUIColor tint) {
+        float progress = (float) clamp(0.0, 1.0, pRef.get() == null ? 0.0 : pRef.get());
+
+        if(prevLoadingIconProgress != progress) {
+            Raylib.SetShaderValue(loadingIconShader, loadingIconProgressLoc, new FloatPointer(progress), Raylib.SHADER_UNIFORM_FLOAT);
+
+            prevLoadingIconProgress = progress;
+        }
+
+        Raylib.BeginShaderMode(loadingIconShader);
+
+        image(icon, x, y, scale, tint);
+
+        Raylib.EndShaderMode();
+    }
+
+    /**
+     * Draw loading icon with default scale.
+     *
+     * @param pRef Progress reference (0.0->1.0).
+     * @param icon Icon.
+     * @param x X Position.
+     * @param y Y Position.
+     * @param scale Icon scale.
+     */
+    public static void loadingIcon(VOutRef<Float> pRef, Texture icon, int x, int y, float scale) {
+        loadingIcon(pRef, icon, x, y, scale, new VUIColor(255, 255, 255, 255));
+    }
+
+    /**
+     * Draw loading icon with default scale.
+     *
+     * @param pRef Progress reference (0.0->1.0).
+     * @param icon Icon.
+     * @param x X Position.
+     * @param y Y Position.
+     */
+    public static void loadingIcon(VOutRef<Float> pRef, Texture icon, int x, int y) {
+        loadingIcon(pRef, icon, x, y, 1.0f, new VUIColor(255, 255, 255, 255));
     }
 
     /**
