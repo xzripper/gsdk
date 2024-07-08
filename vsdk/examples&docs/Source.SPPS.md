@@ -39,9 +39,7 @@ public static void main(String[] args) {
 
             rectangle.bakeCollision(pointX, pointY);
 
-            boolean i = collider.intersectsSPCBaked(spriteX, spriteY, rectangle);
-
-            Raylib.UpdateCamera(cam, Raylib.CAMERA_FREE);
+            System.out.println(collider.intersectsSPCBaked(spriteX, spriteY, rectangle));
 
             Raylib.BeginDrawing();
 
