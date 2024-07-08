@@ -1,3 +1,18 @@
+/**
+ * SPPS is advanced intersection (collision) check technique for 2D sprites implemented by Violent Studio in VSDK project.
+ * Since this system is quite versatile you can use this technique in your project.
+ * But you should remember that the following files are licensed:
+ *      SpritePixelCollider.java (must-have when integrating SPPS),
+ *      PixelColliderContainer.java (must-have when integrating SPPS),
+ *      SPCData.java (must-have when integrating SPPS),
+ *      QuadTree.java (must-have when integrating SPPS).
+ * This means that you also have to fulfil the licence requirements without having to plug the whole SDK into your project.
+ * To integrate SPPS into your project, simply move the files written above to your project directory.
+ *
+ * Violent Studio :: VSDK 2024
+ * https://github.com/violent-studio/vsdk
+ */
+
 package vsdk.source;
 
 import com.raylib.Raylib;
