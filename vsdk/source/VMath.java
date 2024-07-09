@@ -534,4 +534,30 @@ public class VMath {
     public static double sumVec(double[] vec) {
         return Arrays.stream(vec).sum();
     }
+
+    /**
+     * Scale value from range to other range (I.E scaleRange(99, 75, 100) -> 74.25).
+     *
+     * @param value Value to scale.
+     * @param maxValue Max possible value.
+     * @param scale Scale.
+     */
+    public static double scale(double value, double maxValue, double scale) {
+        return ((value / scale) * maxValue);
+    }
+
+    /**
+     * Rotate 2D point around its origin.
+     *
+     * @param x Point X.
+     * @param y Point Y.
+     * @param originX Origin X.
+     * @param originY Origin Y.
+     * @param angle Angle.
+     */
+    public static double[] rotate2DPoint(double x, double y, double originX, double originY, double angle) {
+        double radians = Math.toRadians(angle);
+
+        return new double[] {(x - originX) * Math.cos(radians) - (y - originY) * Math.sin(radians), (x - originX) * Math.sin(radians) + (y - originY) * Math.cos(radians)};
+    }
 }
