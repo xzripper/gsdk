@@ -2,11 +2,11 @@ package vsdk.source.vrender;
 
 import com.raylib.Raylib;
 
-import vsdk.source.vectors.Vector3Df;
-
 import static com.raylib.Jaylib.WHITE;
 
 import static com.raylib.Jaylib.BLANK;
+
+import vsdk.source.vectors.Vector3Df;
 
 import static vsdk.source.utils.Assert.assert_f;
 

@@ -6,13 +6,13 @@ import static com.raylib.Jaylib.BLANK;
 
 import org.bytedeco.javacpp.FloatPointer;
 
+import vsdk.source.vectors.Vector3Df;
+
 import static vsdk.source.utils.Range.inRange;
 
 import static vsdk.source.utils.VLogger.warning;
 
 import static vsdk.source.utils.VMath.clamp;
-
-import vsdk.source.vectors.Vector3Df;
 
 import static vsdk.source.utils.Assert.assert_t;
 import static vsdk.source.utils.Assert.assert_f;

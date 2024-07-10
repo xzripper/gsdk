@@ -2,9 +2,9 @@ package vsdk.source.vrender;
 
 import com.raylib.Raylib;
 
-import static vsdk.source.utils.VMath.PI;
-
 import vsdk.source.vectors.Vector3Df;
+
+import static vsdk.source.utils.VMath.PI;
 
 import static vsdk.source.utils.Assert.assert_f;
 

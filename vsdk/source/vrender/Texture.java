@@ -2,11 +2,11 @@ package vsdk.source.vrender;
 
 import com.raylib.Raylib;
 
-import static vsdk.source.utils.Range.inRange;
+import static com.raylib.Jaylib.WHITE;
 
 import vsdk.source.vectors.Vector2Di;
 
-import static com.raylib.Jaylib.WHITE;
+import static vsdk.source.utils.Range.inRange;
 
 import static vsdk.source.utils.Assert.assert_f;
 
