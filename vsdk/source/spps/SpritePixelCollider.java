@@ -19,15 +19,15 @@ package vsdk.source.spps;
 
 import com.raylib.Raylib;
 
-import vsdk.source.vectors.Vector2Di;
-
-import vsdk.source.structures.QuadTree;
-
 import java.util.ArrayList;
 
 import java.util.HashSet;
 
 import static java.util.Objects.hash;
+
+import vsdk.source.vectors.Vector2Di;
+
+import vsdk.source.structures.QuadTree;
 
 import static vsdk.source.utils.Assert.assert_f;
 

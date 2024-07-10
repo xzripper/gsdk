@@ -1,8 +1,8 @@
 package vsdk.source.spps;
 
-import vsdk.source.vectors.Vector2Di;
-
 import java.util.ArrayList;
+
+import vsdk.source.vectors.Vector2Di;
 
 /**
  * Pixel Collider Container.
