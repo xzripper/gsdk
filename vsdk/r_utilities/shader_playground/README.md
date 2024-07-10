@@ -24,4 +24,3 @@ With comment starting with `p_DefVal=` you can set default uniform value. It's i
 Playground TODO:
 - Implement feature to change meshes.
 - Cover `ivec2 p_Res` uniform.
-- Specify `sampler2D p_Tex(0-3)` (maybe via `//p_DefVal=sampler2D:texture.png` (load texture in the code)).

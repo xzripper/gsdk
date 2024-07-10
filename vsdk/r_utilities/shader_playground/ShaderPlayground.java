@@ -28,7 +28,7 @@ import org.bytedeco.javacpp.FloatPointer;
 
 import vsdk.sdk_vendor.jlImGui.JaylibImGui;
 
-import static vsdk.source.WindowIconUtil.setWinIcon;
+import static vsdk.source.utils.WindowIconUtil.setWinIcon;
 
 import static vsdk.source.imthemes.ImGuiDeepDarkTheme.updateTheme;
 
@@ -67,13 +67,13 @@ public class ShaderPlayground {
         JaylibImGui.setupImGui(330, resolvePath(WINDOW_IMGUI_FONT), WINDOW_IMGUI_FONT_SIZE); updateTheme();
 
         Raylib.Camera3D cam = new Raylib.Camera3D()
-                ._position(new Vector3(CAMERA_POSITION[0], CAMERA_POSITION[1], CAMERA_POSITION[2]))
-                .target(new Vector3(0.0f, 0.0f, 0.0f))
-                .up(new Vector3(0.0f, 1.0f, 0.0f))
+            ._position(new Vector3(CAMERA_POSITION[0], CAMERA_POSITION[1], CAMERA_POSITION[2]))
+            .target(new Vector3(0.0f, 0.0f, 0.0f))
+            .up(new Vector3(0.0f, 1.0f, 0.0f))
 
-                .fovy(CAMERA_FOV)
+            .fovy(CAMERA_FOV)
 
-                .projection(Raylib.CAMERA_PERSPECTIVE);
+            .projection(Raylib.CAMERA_PERSPECTIVE);
 
         float[] camPos = CAMERA_POSITION;
 
@@ -133,9 +133,9 @@ public class ShaderPlayground {
 
         // Generic.
         float[] backgroundColor = new float[] {
-                0.50980392156862745098039215686275f,
-                0.50980392156862745098039215686275f,
-                0.50980392156862745098039215686275f};
+            0.50980392156862745098039215686275f,
+            0.50980392156862745098039215686275f,
+            0.50980392156862745098039215686275f};
 
         System.out.println("Shader Playground: Starting!");
 
@@ -273,10 +273,10 @@ public class ShaderPlayground {
             Raylib.BeginDrawing();
 
             Raylib.ClearBackground(new Raylib.Color()
-                    .r((byte) (backgroundColor[0] * 255.0f))
-                    .g((byte) (backgroundColor[1] * 255.0f))
-                    .b((byte) (backgroundColor[2] * 255.0f))
-                    .a((byte) 255));
+                .r((byte) (backgroundColor[0] * 255.0f))
+                .g((byte) (backgroundColor[1] * 255.0f))
+                .b((byte) (backgroundColor[2] * 255.0f))
+                .a((byte) 255));
 
             Raylib.DrawFPS(Raylib.GetScreenWidth() - 80, 0);
 
@@ -294,10 +294,10 @@ public class ShaderPlayground {
             }
 
             Raylib.DrawModel(rModel, new Vector3(cMeshPos[0], cMeshPos[1], cMeshPos[2]), 1.0f, new Raylib.Color()
-                    .r((byte) (cMeshCol[0] * 255.0f))
-                    .g((byte) (cMeshCol[1] * 255.0f))
-                    .b((byte) (cMeshCol[2] * 255.0f))
-                    .a((byte) (cMeshCol[3] * 255.0f)));
+                .r((byte) (cMeshCol[0] * 255.0f))
+                .g((byte) (cMeshCol[1] * 255.0f))
+                .b((byte) (cMeshCol[2] * 255.0f))
+                .a((byte) (cMeshCol[3] * 255.0f)));
 
             // Draw wires if required.
             if(rWiresState.get()) {
