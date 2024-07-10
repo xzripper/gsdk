@@ -2,19 +2,17 @@ Example of using SPPS (made example while developing SPPS).
 
 ```java
 import com.raylib.Raylib;
-import vsdk.source.PixelColliderContainer;
-import vsdk.source.SPCData;
-import vsdk.source.SpritePixelCollider;
-import vsdk.source.Vector2Di;
-
-import static com.raylib.Jaylib.Vector3;
+import vsdk.source.spps.PixelColliderContainer;
+import vsdk.source.spps.SPCData;
+import vsdk.source.spps.SpritePixelCollider;
+import vsdk.source.vectors.Vector2Di;
 
 import static com.raylib.Jaylib.BLACK;
 
 import static com.raylib.Jaylib.WHITE;
 
 public class Main {
-public static void main(String[] args) {
+    public static void main(String[] args) {
         Raylib.InitWindow(1000, 800, "Test window.");
 
         Raylib.SetTargetFPS(60);
@@ -26,20 +24,22 @@ public static void main(String[] args) {
         collider.bake();
 
         int pointX = 250, pointY = 20;
-        int pointW = 10,  pointH = 10;
+        int pointW = 10, pointH = 10;
 
         int spriteX = 0, spriteY = 0;
         int spriteX2 = 340, spriteY2 = 250;
 
         Raylib.Texture tex = Raylib.LoadTextureFromImage(collider.getSpriteImage());
 
-        while(!Raylib.WindowShouldClose()) {
+        while (!Raylib.WindowShouldClose()) {
             pointX = Raylib.GetMouseX();
             pointY = Raylib.GetMouseY();
 
             rectangle.bakeCollision(pointX, pointY);
 
-            System.out.println(collider.intersectsSPCBaked(spriteX, spriteY, rectangle));
+            boolean i = collider.intersectsSPCBaked(spriteX, spriteY, rectangle);
+
+            Raylib.UpdateCamera(cam, Raylib.CAMERA_FREE);
 
             Raylib.BeginDrawing();
 
