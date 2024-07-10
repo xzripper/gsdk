@@ -2,7 +2,7 @@ package vsdk.source.ivui;
 
 import com.raylib.Raylib;
 
-import static vsdk.source.Assert.assert_f;
+import static vsdk.source.utils.Assert.assert_f;
 
 /**
  * VUI Font.

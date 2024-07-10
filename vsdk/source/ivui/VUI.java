@@ -6,16 +6,16 @@ import java.util.ArrayList;
 
 import org.bytedeco.javacpp.FloatPointer;
 
-import vsdk.source.Texture;
+import vsdk.source.vrender.Texture;
 
-import static vsdk.source.Range.inRange;
+import static vsdk.source.utils.Range.inRange;
 
-import static vsdk.source.VMath.clamp;
-import static vsdk.source.VMath.scale;
+import static vsdk.source.utils.VMath.clamp;
+import static vsdk.source.utils.VMath.scale;
 
 import static vsdk.r_utilities.PathResolver.resolvePath;
 
-import static vsdk.source.Assert.assert_t;
+import static vsdk.source.utils.Assert.assert_t;
 
 /**
  * Main Violent User Interface Class.
