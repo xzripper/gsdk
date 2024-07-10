@@ -564,17 +564,27 @@ public class VMath {
         return new double[] {(x - originX) * Math.cos(radians) - (y - originY) * Math.sin(radians), (x - originX) * Math.sin(radians) + (y - originY) * Math.cos(radians)};
     }
 
+    // Should all docstrings look like this to be really helpful?
     /**
-     * Checks if each value in the values array is within the corresponding threshold specified in the threshold array.
+     * Checks if the elements of the given arrays are within specified tolerance thresholds.
+     * <p>
+     * This method compares each element in the {@code values} array with the corresponding element
+     * in the {@code target} array. If the absolute difference between any pair of elements exceeds
+     * the specified threshold for that position, the method returns {@code false}. If all elements
+     * are within their respective thresholds, the method returns {@code true}.
+     * </p>
      *
-     * @param values An array of double values to be checked against the thresholds.
-     * @param threshold An array of double thresholds. Each threshold corresponds to the value at the same index in the values array.
+     * @param values    an array of double values to be compared
+     * @param target    an array of target double values to compare against
+     * @param threshold an array of threshold values specifying the allowable deviations for each element
+     * @return {@code true} if all elements in {@code values} are within the specified thresholds of
+     *         the corresponding elements in {@code target}, {@code false} otherwise
      */
-    public static boolean tolerance(double[] values, double[] threshold) {
-        if(values.length != threshold.length) return false;
+    public static boolean tolerance(double[] values, double[] target, double[] threshold) {
+        if(values.length != target.length || threshold.length != values.length) return false;
 
-        for(int i = 0; i < values.length; i++) {
-            if(Math.abs(values[i]) > threshold[i]) return false;
+        for(int i=0; i < values.length; i++) {
+            if(Math.abs(values[i] - target[i]) <= threshold[i]) return false;
         }
 
         return true;
