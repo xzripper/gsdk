@@ -9,7 +9,7 @@ import vsdk.source.vectors.Vector3Df;
 import static vsdk.source.utils.Assert.assert_f;
 
 /**
- * Spatial audio implementation (ALPHA): https://github.com/orgs/violent-studio/projects/1/views/1?pane=issue&itemId=63421011 (Reworked some things audio).
+ * Spatial audio implementation (ALPHA): https://github.com/orgs/violent-studio/projects/1/views/1?pane=issue&itemId=63421011 (Reworked some things).
  */
 public class SpatialAudio {
     private final SpatialAudioData spAudioData;
@@ -79,10 +79,8 @@ public class SpatialAudio {
      * @param inverse Inverse effect?
      */
     public float calcDistPan(float camPositionZ, float camTargetZ, boolean inverse) {
-        if(inverse)
-            return (float) VMath.clamp(SpatialAudioData.LEFT_PAN, SpatialAudioData.RIGHT_PAN, SpatialAudioData.CENTER_PAN + (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.1f);
-        else
-            return (float) VMath.clamp(SpatialAudioData.LEFT_PAN, SpatialAudioData.RIGHT_PAN, SpatialAudioData.CENTER_PAN - (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.1f);
+        if(inverse) return (float) VMath.clamp(SpatialAudioData.LEFT_PAN, SpatialAudioData.RIGHT_PAN, SpatialAudioData.CENTER_PAN + (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.1f);
+        else return (float) VMath.clamp(SpatialAudioData.LEFT_PAN, SpatialAudioData.RIGHT_PAN, SpatialAudioData.CENTER_PAN - (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.1f);
     }
 
     /**
