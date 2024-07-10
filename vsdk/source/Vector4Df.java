@@ -3,18 +3,19 @@ package vsdk.source;
 import com.raylib.Raylib;
 
 /**
- * Float 3D Vector.
+ * Float 4D Vector.
  */
-public class Vector3Df {
-    private float x, y, z;
+public class Vector4Df {
+    private float x, y, z, w;
 
     /**
-     * Create new 3D float vector.
+     * Create new 4D float vector.
      */
-    public Vector3Df(float x_, float y_, float z_) {
+    public Vector4Df(float x_, float y_, float z_, float w_) {
         x = x_;
         y = y_;
         z = z_;
+        w = w_;
     }
 
     /**
@@ -60,16 +61,37 @@ public class Vector3Df {
     }
 
     /**
+     * Set W.
+     */
+    public void w(float w_) {
+        w = w_;
+    }
+
+    /**
+     * Get W.
+     */
+    public float w() {
+        return w;
+    }
+
+    /**
      * Cast vector to Raylib vector.
      */
-    public Raylib.Vector3 toRlVec() {
-        return new Raylib.Vector3().x(x).y(y).z(z);
+    public Raylib.Vector4 toRlVec() {
+        return new Raylib.Vector4().x(x).y(y).z(z).w(w);
+    }
+
+    /**
+     * Cast vector to Raylib rectangle.
+     */
+    public Raylib.Rectangle toRlRect() {
+        return new Raylib.Rectangle().x(x).y(y).width(z).height(w);
     }
 
     /**
      * Cast vector to array.
      */
     public float[] toArray() {
-        return new float[] {x, y, z};
+        return new float[] {x, y, z, w};
     }
 }

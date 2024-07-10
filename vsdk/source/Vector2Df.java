@@ -6,8 +6,7 @@ import com.raylib.Raylib;
  * Float 2D Vector.
  */
 public class Vector2Df {
-    private float x;
-    private float y;
+    private float x, y;
 
     /**
      * Create new 2D float vector.
@@ -46,7 +45,7 @@ public class Vector2Df {
     }
 
     /**
-     * Cast vector Raylib vector.
+     * Cast vector to Raylib vector.
      */
     public Raylib.Vector2 toRlVec() {
         return new Raylib.Vector2().x(x).y(y);

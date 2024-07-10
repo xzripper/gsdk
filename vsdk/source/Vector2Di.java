@@ -3,14 +3,13 @@ package vsdk.source;
 import com.raylib.Raylib;
 
 /**
- * Int 2D Vector.
+ * Integer 2D Vector.
  */
 public class Vector2Di {
-    private int x;
-    private int y;
+    private int x, y;
 
     /**
-     * Create new 2D int vector.
+     * Create new 2D integer vector.
      */
     public Vector2Di(int x_, int y_) {
         x = x_;
@@ -46,7 +45,7 @@ public class Vector2Di {
     }
 
     /**
-     * Cast vector Raylib vector.
+     * Cast vector to Raylib vector.
      */
     public Raylib.Vector2 toRlVec() {
         return new Raylib.Vector2().x(x).y(y);
