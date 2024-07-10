@@ -584,7 +584,7 @@ public class VMath {
         if(values.length != target.length || threshold.length != values.length) return false;
 
         for(int i=0; i < values.length; i++) {
-            if(Math.abs(values[i] - target[i]) <= threshold[i]) return false;
+            if(Math.abs(values[i] - target[i]) > threshold[i]) return false;
         }
 
         return true;
