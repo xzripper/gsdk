@@ -1,9 +1,9 @@
 package vsdk.source.utils;
 
+import java.util.Arrays;
+
 import vsdk.source.vectors.Vector2Df;
 import vsdk.source.vectors.Vector3Df;
-
-import java.util.Arrays;
 
 /**
  * VMath: VSDK Math has useful functions & constants for game development math.
@@ -562,5 +562,21 @@ public class VMath {
         double radians = Math.toRadians(angle);
 
         return new double[] {(x - originX) * Math.cos(radians) - (y - originY) * Math.sin(radians), (x - originX) * Math.sin(radians) + (y - originY) * Math.cos(radians)};
+    }
+
+    /**
+     * Checks if each value in the values array is within the corresponding threshold specified in the threshold array.
+     *
+     * @param values An array of double values to be checked against the thresholds.
+     * @param threshold An array of double thresholds. Each threshold corresponds to the value at the same index in the values array.
+     */
+    public static boolean tolerance(double[] values, double[] threshold) {
+        if(values.length != threshold.length) return false;
+
+        for(int i = 0; i < values.length; i++) {
+            if(Math.abs(values[i]) > threshold[i]) return false;
+        }
+
+        return true;
     }
 }
