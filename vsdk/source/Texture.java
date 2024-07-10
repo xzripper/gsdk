@@ -2,6 +2,8 @@ package vsdk.source;
 
 import com.raylib.Raylib;
 
+import static com.raylib.Jaylib.WHITE;
+
 import static vsdk.source.Assert.assert_f;
 
 /**
@@ -24,6 +26,8 @@ public class Texture {
     public static final int TEX_WRAP_CLAMP = 1;
     public static final int TEX_WRAP_MIRROR_REPEAT = 2;
     public static final int TEX_WRAP_MIRROR_CLAMP = 3;
+
+    private Raylib.Color tint = WHITE;
 
     /**
      * Load texture.
@@ -169,6 +173,52 @@ public class Texture {
         assert_f(validMap(map), "invalid material map");
 
         model.materials().maps().position(map).texture(tex);
+    }
+
+    /**
+     * Set texture tint.
+     *
+     * @param tint_ Tint color.
+     */
+    public void setTexTint(Raylib.Color tint_) {
+        tint = tint_;
+    }
+
+    /**
+     * Get texture tint.
+     */
+    public Raylib.Color getTexTint() {
+        return tint;
+    }
+
+    /**
+     * Use user tint or texture tint.
+     *
+     * @param uTint User tint.
+     */
+    public Raylib.Color orTexTint(Raylib.Color uTint) {
+        return uTint == null ? tint : uTint;
+    }
+
+    /**
+     * Get texture width.
+     */
+    public int getTexWidth() {
+        return tex.width();
+    }
+
+    /**
+     * Get texture height.
+     */
+    public int getTexHeight() {
+        return tex.height();
+    }
+
+    /**
+     * Get texture size.
+     */
+    public Vector2Di getTexSize() {
+        return new Vector2Di(getTexWidth(), getTexHeight());
     }
 
     /**
