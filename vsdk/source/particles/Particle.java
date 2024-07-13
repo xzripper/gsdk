@@ -1,7 +1,8 @@
 package vsdk.source.particles;
 
 // Particle structure.
-class Particle {  private float[] pos;
+class Particle {
+    private float[] pos;
 
     private int[] color;
 
