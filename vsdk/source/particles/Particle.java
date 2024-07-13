@@ -1,8 +1,7 @@
 package vsdk.source.particles;
 
 // Particle structure.
-class Particle {
-    private float[] pos;
+class Particle {  private float[] pos;
 
     private int[] color;
 
@@ -36,111 +35,41 @@ class Particle {
         lifetime = 0;
     }
 
-    protected void setPos(float[] pos_) {
-        pos = pos_;
-    }
+    protected void setPos(float[] pos_) { pos = pos_; }
+    protected void addPos(float x, float y, float z) { setPos(new float[] {pos[0] + x, pos[1] + y, pos[2] + z}); }
+    protected void subPos(float x, float y, float z) { addPos(-x, -y, -z); }
+    protected float[] getPos() { return pos; }
 
-    protected void addPos(float x, float y, float z) {
-        setPos(new float[] {pos[0] + x, pos[1] + y, pos[2] + z});
-    }
+    protected void setColor(int[] color_) { color = color_; }
+    protected void addColor(int r, int g, int b) { setColor(new int[] {color[0] + r, color[1] + g, color[2] + b}); }
+    protected void subColor(int r, int g, int b) { addColor(-r, -g, -b); }
 
-    protected void subPos(float x, float y, float z) {
-        addPos(-x, -y, -z);
-    }
+    protected int[] getColor() { return color; }
 
-    protected float[] getPos() {
-        return pos;
-    }
+    protected void setAlpha(float alpha_) { alpha = alpha_; }
+    protected void addAlpha(float alpha_) { setAlpha(alpha + alpha_); }
+    protected void subAlpha(float alpha_) { addAlpha(-alpha_); }
+    protected float getAlpha() { return alpha; }
 
-    protected void setColor(int[] color_) {
-        color = color_;
-    }
+    protected void setSize(float size_) { size = size_; }
+    protected void addSize(float size_) { setSize(size + size_); }
+    protected void subSize(float size_) { addSize(-size_); }
+    protected float getSize() { return size; }
 
-    protected void addColor(int r, int g, int b) {
-        setColor(new int[] {color[0] + r, color[1] + g, color[2] + b});
-    }
+    protected void setRotation(float rotation_) { rotation = rotation_; }
+    protected void addRotation(float rotation_) { setRotation(rotation + rotation_); }
+    protected float getRotation() { return rotation; }
 
-    protected void subColor(int r, int g, int b) {
-        addColor(-r, -g, -b);
-    }
+    protected int getID() { return id; }
 
-    protected int[] getColor() {
-        return color;
-    }
+    protected void setSpawningProcess(boolean spawning) { spawningProcess = spawning; }
+    protected boolean getSpawningProcess() { return spawningProcess; }
 
-    protected void setAlpha(float alpha_) {
-        alpha = alpha_;
-    }
+    protected void setLifetime(float lifetime_) { lifetime = lifetime_; }
+    protected void subLifetime(float delta) { lifetime -= delta; }
+    protected float getLifetime() { return lifetime; }
 
-    protected void addAlpha(float alpha_) {
-        setAlpha(alpha + alpha_);
-    }
+    protected boolean isDead() { return lifetime <= 0 || alpha <= 0 || size <= 0; }
 
-    protected void subAlpha(float alpha_) {
-        addAlpha(-alpha_);
-    }
-
-    protected float getAlpha() {
-        return alpha;
-    }
-
-    protected void setSize(float size_) {
-        size = size_;
-    }
-
-    protected void addSize(float size_) {
-        setSize(size + size_);
-    }
-
-    protected void subSize(float size_) {
-        addSize(-size_);
-    }
-
-    protected float getSize() {
-        return size;
-    }
-
-    protected void setRotation(float rotation_) {
-        rotation = rotation_;
-    }
-
-    protected void addRotation(float rotation_) {
-        setRotation(rotation + rotation_);
-    }
-
-    protected float getRotation() {
-        return rotation;
-    }
-
-    protected int getID() {
-        return id;
-    }
-
-    protected void setSpawningProcess(boolean spawning) {
-        spawningProcess = spawning;
-    }
-
-    protected boolean getSpawningProcess() {
-        return spawningProcess;
-    }
-
-    protected void setLifetime(float lifetime_) {
-        lifetime = lifetime_;
-    }
-
-    protected void subLifetime(float delta) {
-        lifetime -= delta;
-    }
-
-    protected float getLifetime() {
-        return lifetime;
-    }
-
-    protected boolean isDead() {
-        return lifetime <= 0 || alpha <= 0 || size <= 0;
-    }
-
-    protected float[] getDesignatedVelocity() {
-        return designatedVelocity;
-    }
+    protected float[] getDesignatedVelocity() { return designatedVelocity; }
 }

@@ -5,22 +5,22 @@ package vsdk.source.particles;
  */
 public enum ParticleType {
     /**
-     * Rectangle type.
+     * Rectangle shape type.
      */
     RECTANGLE,
 
     /**
-     * Circle type.
+     * Circle shape type.
      */
     CIRCLE,
 
     /**
-     * Hexagon type.
+     * Hexagon shape type.
      */
     HEXAGON,
 
     /**
-     * Texture type.
+     * Texture shape type.
      */
     TEXTURE,
 

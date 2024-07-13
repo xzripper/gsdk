@@ -1,3 +1,25 @@
+/**
+ * 3D Particles' implementation by Violent Studio in the VSDK project: VFlux.
+ * VFlux is currently in an unstable state and under active development.
+ * Known issues:
+ * - Particles have invalid rotation origin (only if rotation is used).
+ * - Particles may have black borders (see https://www.reddit.com/r/raylib/comments/1e11xdo/weird_texture_billboard_black_borders/):
+ *      | Possible fix is to use setPFColThreshold and calibrate alpha for your particle texture.
+ * - Particles have wrong facing: particles only face the camera horizontally, not vertically (Raylib problem).
+ * - Particles have wrong positioning (no camera distance sorting).
+ * - Particles can spawn quickly at startup, even if emission rate is greater than 1.0f.
+ * - Particles may turn black when opacity is lowered, depending on their lifetime.
+ * - Particle simulation is slow: use trivial for-loop to iterate particles.
+ * - Particles may spawn with more black tint than others after some emission time (probably fixed).
+ * - Particle simulation can freeze game/application after some emission time.
+ *
+ * TODO Features:
+ * - Add support for multiple textures (each particle emission - new texture).
+ * - Random fade delay for each particle (based of pFade).
+ * - Random initial rotation for each particle.
+ * - Improve code quality (generic).
+ */
+
 package vsdk.source.particles;
 
 import com.raylib.Raylib;
@@ -23,6 +45,10 @@ import static vsdk.source.utils.Assert.assert_t;
 
 import static vsdk.r_utilities.PathResolver.resolvePath;
 
+/**
+ * 3D particle emitter for the VSDK project: VFlux.
+ * Handles the creation, simulation, and rendering of particles in a 3D environment.
+**/
 public class ParticleEmitter3D {
     private final ParticleEmitterConfig emitterConfig;
 
@@ -138,9 +164,11 @@ public class ParticleEmitter3D {
      * Fill particle container with particles.
      */
     public void loadParticles() {
+        warning("VFlux is currently in an unstable state and under active development.");
+
         for(int i=0; i < emitterConfig.getMaxParticles(); i++) {
             particleContainer[i] = new Particle(
-                new float[] {0, 0, 0},
+                CENTER,
                 emitterConfig.getPColor().toArray(),
                 emitterConfig.getPAlpha(),
                 emitterConfig.getPScale(),
@@ -228,11 +256,11 @@ public class ParticleEmitter3D {
 
         for(Particle particle : particleContainer) {
             if(emitterConfig.getPType() == ParticleType.RECTANGLE) {
-                // RECTANGLE...
+                // Rectangle...
             } else if(emitterConfig.getPType() == ParticleType.CIRCLE) {
-                // circle...
+                // Circle...
             } else if(emitterConfig.getPType() == ParticleType.HEXAGON) {
-                // hexagon..
+                // Hexagon...
             } else if(emitterConfig.getPType() == ParticleType.TEXTURE) {
                 Raylib.DrawBillboardPro(
                     cam, particleTex.getTex(), new Vector4Di(0, 0, particleTex.getTexWidth(), particleTex.getTexHeight()).toRlRect(),
@@ -257,7 +285,7 @@ public class ParticleEmitter3D {
                         .a((byte) (particle.getAlpha() * 255.0f))
                 );
             } else if(emitterConfig.getPType() == ParticleType.CUSTOM) {
-                // custom..
+                // Custom...
             }
         }
 
