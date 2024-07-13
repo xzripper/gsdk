@@ -22,3 +22,5 @@
 <h3 align="center">VSDK 3D Particle Emitter.</h3>
 
 <p align="center"><img src="https://github.com/user-attachments/assets/7e441f9e-fda3-4cee-bb28-99ecd8000b07" width="650"><br><i><sub>Smoke Tunnel</sub></i></p>
+<p align="center"><img src="https://github.com/user-attachments/assets/9883ddf4-c3df-41ba-bc22-4e079685ad88" width="650"><br><i><sub>Smoke Torus</sub></i></p>
+<p align="center"><img src="https://github.com/user-attachments/assets/6b8a1b14-1234-4797-8c7d-30d833676392" width="650"><br><i><sub>Particles</sub></i></p>
