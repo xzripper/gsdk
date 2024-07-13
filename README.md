@@ -18,3 +18,7 @@
 <h3 align="center">VSDK SPPS.</h3>
 
 <p align="center"><img src="https://github.com/violent-studio/vsdk/assets/94743980/58f7891d-ba0f-4f4b-b89f-3317fc21e094" width="650"></p>
+
+<h3 align="center">VSDK 3D Particle Emitter.</h3>
+
+<p align="center"><img src="https://github.com/user-attachments/assets/7e441f9e-fda3-4cee-bb28-99ecd8000b07" width="650"><br><i><sub>Smoke Tunnel</sub></i></p>
