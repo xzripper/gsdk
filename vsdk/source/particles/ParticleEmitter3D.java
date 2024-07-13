@@ -4,17 +4,24 @@ import com.raylib.Raylib;
 
 import java.util.Random;
 
+import org.bytedeco.javacpp.FloatPointer;
+
 import vsdk.source.vrender.Texture;
 
+import vsdk.source.vectors.Vector4Df;
 import vsdk.source.vectors.Vector4Di;
 import vsdk.source.vectors.Vector3Df;
 import vsdk.source.vectors.Vector2Df;
+
+import static vsdk.source.utils.ImagePixelsFilter.filterPixels;
 
 import static vsdk.source.utils.VMath.clamp;
 
 import static vsdk.source.utils.VLogger.warning;
 
 import static vsdk.source.utils.Assert.assert_t;
+
+import static vsdk.r_utilities.PathResolver.resolvePath;
 
 public class ParticleEmitter3D {
     private final ParticleEmitterConfig emitterConfig;
@@ -23,7 +30,15 @@ public class ParticleEmitter3D {
 
     private Texture particleTex = null;
 
+    private float lastSpawn;
+
+    private final Raylib.Shader pixelsFormatShader;
+
+    private final int pixelsFormatShaderThresholdLoc;
+
     private final Random random;
+
+    public static final Vector4Df PFCOL_THRESHOLD_DEFAULT = new Vector4Df(0.15f, 0.15f, 0.15f, 0.75f);
 
     public static final float[] CENTER = new float[] {0, 0, 0};
 
@@ -37,7 +52,38 @@ public class ParticleEmitter3D {
 
         particleContainer = new Particle[emitterConfig.getMaxParticles()];
 
+        pixelsFormatShader = Raylib.LoadShader(null, resolvePath("vsdk/shaders/pe3d_ppfilter.fs"));
+
+        pixelsFormatShaderThresholdLoc = Raylib.GetShaderLocation(pixelsFormatShader, "threshold");
+
+        setPFColThreshold(PFCOL_THRESHOLD_DEFAULT);
+
+        lastSpawn = 1.0f / emitterConfig.getEmissionRate();
+
         random = new Random();
+    }
+
+    /**
+     * Set pixel filter shader color threshold.
+     *
+     * @param threshold Threshold vector.
+     */
+    public void setPFColThreshold(Vector4Df threshold) {
+        assert_t(pixelsFormatShaderThresholdLoc == -1, "pixelsFormatShaderThresholdLoc == -1");
+
+        Raylib.SetShaderValue(pixelsFormatShader, pixelsFormatShaderThresholdLoc, new FloatPointer(threshold.toArray()), Raylib.SHADER_UNIFORM_VEC4);
+    }
+
+    /**
+     * Set pixel filter shader color threshold.
+     *
+     * @param thrR Red threshold.
+     * @param thrG Green threshold.
+     * @param thrB Blue threshold.
+     * @param thrA Alpha threshold.
+     */
+    public void setPFColThreshold(float thrR, float thrG, float thrB, float thrA) {
+        setPFColThreshold(new Vector4Df(thrR, thrG, thrB, thrA));
     }
 
     /**
@@ -47,6 +93,45 @@ public class ParticleEmitter3D {
      */
     public void setParticleTex(Texture tex) {
         particleTex = emitterConfig.getPType() == ParticleType.TEXTURE ? tex : particleTex;
+
+        Raylib.GenTextureMipmaps(particleTex.getTex());
+
+        tex.setTexFilter(Texture.TEX_FILTER_BILINEAR);
+    }
+
+    /**
+     * Removes all pixels with specified color with possible threshold.
+     *
+     * @param color Color.
+     * @param threshold Threshold.
+     */
+    public void filterParticleTex(Vector4Di color, Vector4Di threshold) {
+        if(particleTex.getTex() == null) return;
+
+        Raylib.Image image = Raylib.LoadImageFromTexture(particleTex.getTex());
+
+        Raylib.Image filtered = filterPixels(
+            image, new Raylib.Color()
+                .r((byte) color.x())
+                .g((byte) color.y())
+                .b((byte) color.z())
+                .a((byte) color.w()), threshold);
+
+        particleTex = new Texture(filtered);
+
+        Raylib.GenTextureMipmaps(particleTex.getTex());
+
+        Raylib.UnloadImage(image);
+        Raylib.UnloadImage(filtered);
+    }
+
+    /**
+     * Removes all pixels with specified color without any threshold.
+     *
+     * @param color Color.
+     */
+    public void filterParticleTex(Vector4Di color) {
+        filterParticleTex(color, new Vector4Di(0, 0, 0, 0));
     }
 
     /**
@@ -60,47 +145,35 @@ public class ParticleEmitter3D {
                 emitterConfig.getPAlpha(),
                 emitterConfig.getPScale(),
                 emitterConfig.getPRotation() > 0 ? Raylib.GetRandomValue(0, 360) : 0,
-                new float[]{
-                    emitterConfig.getEmissionVelocity()[0] * 0.1f * randomFloat(random, 0.1f, emitterConfig.getExplosiveness()),
-                    emitterConfig.getEmissionVelocity()[1] * 0.1f,
-                    emitterConfig.getEmissionVelocity()[2] * 0.1f * randomFloat(random, 0.1f, emitterConfig.getExplosiveness())
-                },
-                i);
+                emitterConfig.getEmissionVelocity()
+                    .calcVelocity(
+                        randomFloat(random, -emitterConfig.getExplosiveness(), emitterConfig.getExplosiveness()),
+                        randomFloat(random, -emitterConfig.getExplosiveness(), emitterConfig.getExplosiveness())), i);
         }
     }
 
+    /**
+     * Iterates each particle and simulates its behaviour.
+     */
     public void simulateParticles() {
         assert_t(!emitterConfig.deltaUpdated(), "deltaUpdated == false: use ParticleEmitterConfig::setDelta to update delta");
 
         if(emitterConfig.getPLifetime() < 2.0f) warning("pLifetime_ < 2.0f! particles lifetime is TOO low!; i.e expect non-smooth fades & etc");
 
+        lastSpawn += emitterConfig.getDelta();
+
         for(Particle particle : particleContainer) {
-            // Base velocity
-//            float[] velocity = new float[]{
-//                emitterConfig.getEmissionVelocity()[0] * 0.1f,
-//                emitterConfig.getEmissionVelocity()[1] * 0.1f,
-//                emitterConfig.getEmissionVelocity()[2] * 0.1f
-//            };
+            float[] velocity = particle.getDesignatedVelocity();
 
             if (emitterConfig.getInversedEmission()) {
-                particle.getDesignatedVelocity()[0] = -particle.getDesignatedVelocity()[0];
-                particle.getDesignatedVelocity()[1] = -particle.getDesignatedVelocity()[1];
-                particle.getDesignatedVelocity()[2] = -particle.getDesignatedVelocity()[2];
+                velocity[0] = -velocity[0];
+                velocity[1] = -velocity[1];
+                velocity[2] = -velocity[2];
             }
 
-//            // Apply random offset based on explosiveness
-//            float explosiveness = emitterConfig.getExplosiveness();
-//            float randomOffsetX = (random.nextFloat() - 0.5f) * explosiveness;
-//            float randomOffsetY = (random.nextFloat() - 0.5f) * explosiveness;
-//            float randomOffsetZ = (random.nextFloat() - 0.5f) * explosiveness;
-//
-//            particle.addPos(velocity[0] + randomOffsetX, velocity[1] + randomOffsetY, velocity[2] + randomOffsetZ);
+            if(particle.getLifetime() >= emitterConfig.getPLifetime() / 2) particle.addSize(emitterConfig.getPScale() * 0.001f);
 
-
-            particle.addPos(particle.getDesignatedVelocity()[0], particle.getDesignatedVelocity()[1], particle.getDesignatedVelocity()[2]);
-
-            particle.addSize(emitterConfig.getPScale() * 0.01f);
-
+            particle.addPos(velocity[0], velocity[1], velocity[2]);
             particle.addRotation(emitterConfig.getPRotation());
 
             particle.subLifetime(emitterConfig.getDelta());
@@ -116,19 +189,23 @@ public class ParticleEmitter3D {
             } else {
                 if(particle.getLifetime() <= emitterConfig.getPLifetime() / 2) {
                     particle.setAlpha((float) clamp(0, emitterConfig.getPAlpha(), particle.getAlpha() - (emitterConfig.getPFade() * 0.1f)));
+
+                    particle.setSize((float) clamp(0, emitterConfig.getPScale(), particle.getSize() - (emitterConfig.getPScale() * 0.1f)));
                 }
 
-                if(particle.isDead() || particle.getAlpha() <= 0) {
-                    particle.setSize(emitterConfig.getPScale());
+                if(particle.isDead()) {
+                    if(lastSpawn >= (1.0 / emitterConfig.getEmissionRate())) {
+                        particle.setSize(emitterConfig.getPScale());
+                        particle.setPos(CENTER);
 
-                    particle.setPos(CENTER);
+                        particle.setAlpha(0);
 
-                    particle.setAlpha(0);
+                        particle.setLifetime(emitterConfig.getPLifetime());
 
-                    particle.setLifetime(emitterConfig.getPLifetime());
+                        particle.setSpawningProcess(true);
 
-                    particle.setSpawningProcess(true);
-
+                        lastSpawn = 0.0f;
+                    }
                 }
             }
         }
@@ -143,11 +220,13 @@ public class ParticleEmitter3D {
     public void renderParticles(Raylib.Camera3D cam, Vector3Df pos) {
         assert_t(emitterConfig.getPType() == ParticleType.TEXTURE && particleTex == null, "can't render: particle type is texture but texture is null");
 
-        for(Particle particle : particleContainer) {
-            if(emitterConfig.blendingAvailable()) {
-                Raylib.BeginBlendMode(emitterConfig.getBlending() == ParticleBlending.ADDITIVE ? Raylib.BLEND_ADDITIVE : Raylib.BLEND_ALPHA);
-            }
+        Raylib.BeginShaderMode(pixelsFormatShader);
 
+        if(emitterConfig.blendingAvailable()) {
+            Raylib.BeginBlendMode(emitterConfig.getBlending() == ParticleBlending.ALPHA ? Raylib.BLEND_ALPHA : Raylib.BLEND_ADDITIVE);
+        }
+
+        for(Particle particle : particleContainer) {
             if(emitterConfig.getPType() == ParticleType.RECTANGLE) {
                 // RECTANGLE...
             } else if(emitterConfig.getPType() == ParticleType.CIRCLE) {
@@ -180,11 +259,29 @@ public class ParticleEmitter3D {
             } else if(emitterConfig.getPType() == ParticleType.CUSTOM) {
                 // custom..
             }
-
-            if(emitterConfig.blendingAvailable()) {
-                Raylib.EndBlendMode();
-            }
         }
+
+        if(emitterConfig.blendingAvailable()) {
+            Raylib.EndBlendMode();
+        }
+
+        Raylib.EndShaderMode();
+    }
+
+    /**
+     * Get emitter config.
+     */
+    public ParticleEmitterConfig getEmitterConfig() {
+        return emitterConfig;
+    }
+
+    /**
+     * Unload emitter resources.
+     */
+    public void unloadResources() {
+        if(particleTex != null) particleTex.unload();
+
+        Raylib.UnloadShader(pixelsFormatShader);
     }
 
     /**

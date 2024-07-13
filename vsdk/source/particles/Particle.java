@@ -137,7 +137,7 @@ class Particle {
     }
 
     protected boolean isDead() {
-        return lifetime <= 0;
+        return lifetime <= 0 || alpha <= 0 || size <= 0;
     }
 
     protected float[] getDesignatedVelocity() {

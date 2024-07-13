@@ -10,7 +10,7 @@ public class ParticleEmitterConfig {
 
     private float explosiveness, emissionRate;
 
-    private float[] emissionVelocity;
+    private EmissionVelocity emissionVelocity;
 
     private boolean inversedEmission;
 
@@ -47,7 +47,7 @@ public class ParticleEmitterConfig {
         float explosiveness_,
         float emissionRate_,
 
-        float[] emissionVelocity_,
+        EmissionVelocity emissionVelocity_,
 
         boolean inversedEmission_,
 
@@ -154,14 +154,14 @@ public class ParticleEmitterConfig {
      *
      * @param velocity Velocity.
      */
-    public void setEmissionVelocity(float[] velocity) {
+    public void setEmissionVelocity(EmissionVelocity velocity) {
         emissionVelocity = velocity;
     }
 
     /**
      * Get emission velocity.
      */
-    public float[] getEmissionVelocity() {
+    public EmissionVelocity getEmissionVelocity() {
         return emissionVelocity;
     }
 
