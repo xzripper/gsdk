@@ -6,7 +6,7 @@ import vsdk.source.vectors.Vector2Df;
 import vsdk.source.vectors.Vector3Df;
 
 /**
- * VMath: VSDK Math has useful functions & constants for game development math.
+ * VMath: VSDK Math has useful functions & constants for development math.
  */
 public class VMath {
     /**
@@ -591,5 +591,149 @@ public class VMath {
         }
 
         return true;
+    }
+
+    /**
+     * Calculate the average of an array of numbers.
+     *
+     * @param numbers Array of numbers.
+     */
+    public static double average(double[] numbers) {
+        return sumVec(numbers) / numbers.length;
+    }
+
+    /**
+     * Calculate the median of an array of numbers.
+     *
+     * @param numbers Array of numbers.
+     */
+    public static double median(double[] numbers) {
+        double[] sorted = Arrays.copyOf(numbers, numbers.length); Arrays.sort(sorted);
+
+        int middle = sorted.length / 2;
+
+        if(sorted.length % 2 == 0) {
+            return (sorted[middle - 1] + sorted[middle]) / 2.0;
+        } else {
+            return sorted[middle];
+        }
+    }
+
+    /**
+     * Calculate the variance of an array of numbers.
+     *
+     * @param numbers Array of numbers.
+     */
+    public static double variance(double[] numbers) {
+        double mean = average(numbers);
+
+        double temp = 0;
+
+        for(double num : numbers) temp += (num - mean) * (num - mean);
+
+        return temp / (numbers.length - 1);
+    }
+
+    /**
+     * Calculate the standard deviation of an array of numbers.
+     *
+     * @param numbers Array of numbers.
+     */
+    public static double standardDeviation(double[] numbers) {
+        return Math.sqrt(variance(numbers));
+    }
+
+    /**
+     * Find the maximum value in an array of numbers.
+     *
+     * @param numbers Array of numbers.
+     */
+    public static double max(double[] numbers) {
+        double maxVal = Double.NEGATIVE_INFINITY;
+
+        for(double num : numbers) {
+            if(num > maxVal) maxVal = num;
+        }
+
+        return maxVal;
+    }
+
+    /**
+     * Find the minimum value in an array of numbers.
+     *
+     * @param numbers Array of numbers.
+     */
+    public static double min(double[] numbers) {
+        double minVal = Double.POSITIVE_INFINITY;
+
+        for(double num : numbers) {
+            if(num < minVal) minVal = num;
+        }
+
+        return minVal;
+    }
+
+    /**
+     * Calculate the factorial of a number.
+     *
+     * @param num Number.
+     */
+    public static long factorial(int num) {
+        if(num < 0) return 0;
+
+        long result = 1;
+
+        for(int i = 1; i <= num; i++) result *= i;
+
+        return result;
+    }
+
+    /**
+     * Calculate the greatest common divisor (GCD) of two numbers.
+     *
+     * @param fNum First number.
+     * @param sNum Second number.
+     */
+    public static int gcd(int fNum, int sNum) {
+        while(sNum != 0) {
+            int temp = sNum;
+
+            sNum = fNum % sNum;
+            fNum = temp;
+        }
+
+        return fNum;
+    }
+
+    /**
+     * Calculate the least common multiple (LCM) of two numbers.
+     *
+     * @param fNum First number.
+     * @param sNum Second number.
+     */
+    public static int lcm(int fNum, int sNum) {
+        return Math.abs(fNum * sNum) / gcd(fNum, sNum);
+    }
+
+    /**
+     * Calculate the n-th Fibonacci number.
+     *
+     * @param num The position in the Fibonacci sequence.
+     */
+    public static long fibonacci(int num) {
+        if(num <= 0) return 0;
+
+        if(num == 1 || num == 2) return 1;
+
+        long a = 1, b = 1;
+
+        for(int i = 3; i <= num; i++) {
+            long next = a + b;
+
+            a = b;
+            b = next;
+        }
+
+        return b;
     }
 }
