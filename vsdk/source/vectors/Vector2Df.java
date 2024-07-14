@@ -57,4 +57,18 @@ public class Vector2Df {
     public float[] toArray() {
         return new float[] {x, y};
     }
+
+    /**
+     * Cast vector to double array.
+     */
+    public double[] toDoubleArray() {
+        return new double[] {(double) x, (double) y};
+    }
+
+    /**
+     * Shortcut for creating 2D float vector.
+     */
+    public static Vector2Df vec2df(int x, int y) {
+        return new Vector2Df(x, y);
+    }
 }

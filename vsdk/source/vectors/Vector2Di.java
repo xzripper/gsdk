@@ -57,4 +57,11 @@ public class Vector2Di {
     public int[] toArray() {
         return new int[] {x, y};
     }
+
+    /**
+     * Shortcut for creating 2D integer vector.
+     */
+    public static Vector2Di vec2di(int x, int y) {
+        return new Vector2Di(x, y);
+    }
 }

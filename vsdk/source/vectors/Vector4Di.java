@@ -89,9 +89,23 @@ public class Vector4Di {
     }
 
     /**
+     * Cast vector to Raylib color.
+     */
+    public Raylib.Color toRlCol() {
+        return new Raylib.Color().r((byte) x).g((byte) y).b((byte) z).a((byte) w);
+    }
+
+    /**
      * Cast vector to array.
      */
     public int[] toArray() {
         return new int[] {x, y, z, w};
+    }
+
+    /**
+     * Shortcut for creating 4D integer vector.
+     */
+    public static Vector4Di vec4di(int x, int y, int z, int w) {
+        return new Vector4Di(x, y, z, w);
     }
 }

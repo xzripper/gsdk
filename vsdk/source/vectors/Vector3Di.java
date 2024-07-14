@@ -67,9 +67,23 @@ public class Vector3Di {
     }
 
     /**
+     * Cast vector to Raylib color with 255 alpha value.
+     */
+    public Raylib.Color toRlCol() {
+        return new Raylib.Color().r((byte) x).g((byte) y).b((byte) z).a((byte) 255);
+    }
+
+    /**
      * Cast vector to array.
      */
     public int[] toArray() {
         return new int[] {x, y, z};
+    }
+
+    /**
+     * Shortcut for creating 3D integer vector.
+     */
+    public static Vector3Di vec3di(int x, int y, int z) {
+        return new Vector3Di(x, y, z);
     }
 }
