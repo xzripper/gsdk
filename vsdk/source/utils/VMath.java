@@ -539,6 +539,54 @@ public class VMath {
     }
 
     /**
+     * Subtract elements of two vectors.
+     *
+     * @param fVec First vector.
+     * @param sVec Second vector.
+     */
+    public static double[] subVec(double[] fVec, double[] sVec) {
+        if(fVec.length != sVec.length) return null;
+
+        double[] result = new double[fVec.length];
+
+        for(int i = 0; i < fVec.length; i++) result[i] = fVec[i] - sVec[i];
+
+        return result;
+    }
+
+    /**
+     * Multiply elements of two vectors.
+     *
+     * @param fVec First vector.
+     * @param sVec Second vector.
+     */
+    public static double[] multVec(double[] fVec, double[] sVec) {
+        if(fVec.length != sVec.length) return null;
+
+        double[] result = new double[fVec.length];
+
+        for(int i = 0; i < fVec.length; i++) result[i] = fVec[i] * sVec[i];
+
+        return result;
+    }
+
+    /**
+     * Divide elements of two vectors.
+     *
+     * @param fVec First vector.
+     * @param sVec Second vector.
+     */
+    public static double[] divVec(double[] fVec, double[] sVec) {
+        if(fVec.length != sVec.length) return null;
+
+        double[] result = new double[fVec.length];
+
+        for(int i = 0; i < fVec.length; i++) result[i] = fVec[i] / sVec[i];
+
+        return result;
+    }
+
+    /**
      * Scale value from range to other range (I.E scaleRange(99, 75, 100) -> 74.25).
      *
      * @param value Value to scale.
