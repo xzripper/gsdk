@@ -59,11 +59,11 @@ public class FilterShader {
     public void renderFilter() {
         Raylib.BeginShaderMode(filterShader);
 
-        Raylib.DrawTextureRec(filterTex.texture(), new Raylib.Rectangle()
+        Raylib.DrawTextureRec(
+            filterTex.texture(), new Raylib.Rectangle()
                 .x(0).y(0)
-                .width((float) filterTex.texture().width())
-                .height((float) -filterTex.texture().height()), new Raylib.Vector2()
-                .x(0).y(0), WHITE);
+                .width((float) filterTex.texture().width()).height((float) -filterTex.texture().height()),
+            new Raylib.Vector2().x(0).y(0), WHITE);
 
         Raylib.EndShaderMode();
     }

@@ -42,7 +42,7 @@ public class QuadTree {
     public void clear() {
         points.clear();
 
-        for (int i = 0; i < nodes.length; i++) {
+        for(int i = 0; i < nodes.length; i++) {
             if(nodes[i] != null) {
                 nodes[i].clear();
 
@@ -83,8 +83,11 @@ public class QuadTree {
         double vertMidp = bounds[0] + (bounds[2] - bounds[0]) / 2.0;
         double horMidp = bounds[1] + (bounds[3] - bounds[1]) / 2.0;
 
-        if(point[0] < vertMidp) index = (point[1] < horMidp) ? 1 : (point[1] > horMidp) ? 2 : index;
-        else if(point[0] > vertMidp) index = (point[1] < horMidp) ? 0 : (point[1] > horMidp) ? 3 : index;
+        if(point[0] < vertMidp) {
+            index = (point[1] < horMidp) ? 1 : (point[1] > horMidp) ? 2 : index;
+        } else if(point[0] > vertMidp) {
+            index = (point[1] < horMidp) ? 0 : (point[1] > horMidp) ? 3 : index;
+        }
 
         return index;
     }
@@ -115,7 +118,7 @@ public class QuadTree {
 
             int i = 0;
 
-            while (i < points.size()) {
+            while(i < points.size()) {
                 int index = getIndex(points.get(i));
 
                 if(index != -1) nodes[index].insert(points.remove(i));

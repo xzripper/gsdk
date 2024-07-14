@@ -247,9 +247,9 @@ public class VUI {
         if(VUIIO.style.getBorderThickness() > 0) {
             if(VUIIO.style.getBorderRounding() > 0) {
                 Raylib.DrawRectangleRoundedLines(new Raylib.Rectangle().x(x).y(y).width(w).height(h),
-                        VUIIO.style.getBorderRounding(), 16,
-                        VUIIO.style.getBorderThickness(),
-                        VUIIO.style.getBorderColor().toRlCol()
+                    VUIIO.style.getBorderRounding(), 16,
+                    VUIIO.style.getBorderThickness(),
+                    VUIIO.style.getBorderColor().toRlCol()
                 );
             } else {
                 Raylib.DrawRectangleLinesEx(new Raylib.Rectangle().x(x).y(y).width(w).height(h),
@@ -285,10 +285,10 @@ public class VUI {
      */
     public static boolean text(String content, int x, int y) {
         Raylib.DrawTextEx(
-                VUIIO.style.getTextFont().getFont(),
-                content, new Raylib.Vector2().x(x).y(y),
-                VUIIO.style.getTextSize(), VUIIO.style.getTextSpacing(),
-                VUIIO.style.getTextCol().toRlCol()
+            VUIIO.style.getTextFont().getFont(),
+            content, new Raylib.Vector2().x(x).y(y),
+            VUIIO.style.getTextSize(), VUIIO.style.getTextSpacing(),
+            VUIIO.style.getTextCol().toRlCol()
         );
 
         return !VUIIO.disabled && VUIIO.mouseHoversText(content, x, y) && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
@@ -310,7 +310,7 @@ public class VUI {
         float buttonWidth, buttonHeight;
 
         textSize = Raylib.MeasureTextEx(VUIIO.style.getTextFont().getFont(),
-                content, VUIIO.style.getTextSize(), VUIIO.style.getTextSpacing());
+            content, VUIIO.style.getTextSize(), VUIIO.style.getTextSpacing());
 
         if(w == -1 && h == -1) {
             buttonWidth = textSize.x() + 10;
@@ -520,8 +520,8 @@ public class VUI {
                     Raylib.BeginShaderMode(texelBleedingFixShader);
                 }
 
-                Raylib.DrawRectangleRounded(new Raylib.Rectangle()
-                    .x(x).y(y).width(CHECKBOX_WIDTH).height(CHECKBOX_HEIGHT),
+                Raylib.DrawRectangleRounded(
+                    new Raylib.Rectangle().x(x).y(y).width(CHECKBOX_WIDTH).height(CHECKBOX_HEIGHT),
                     VUIIO.style.getBorderRounding(), 16, buttonColor.toRlCol()
                 );
 
@@ -593,8 +593,8 @@ public class VUI {
                 Raylib.BeginShaderMode(texelBleedingFixShader);
             }
 
-            Raylib.DrawRectangleRounded(new Raylib.Rectangle()
-                .x(x - 1).y(y - 1).width(barProgress + 1).height(barHeight + 1),
+            Raylib.DrawRectangleRounded(
+                new Raylib.Rectangle().x(x - 1).y(y - 1).width(barProgress + 1).height(barHeight + 1),
                 VUIIO.style.getBorderRounding(), 16, VUIIO.style.getDefaultCol().toRlCol()
             );
 
@@ -655,7 +655,7 @@ public class VUI {
         int arrayIndex = indexRef.get() == null ? 0 : indexRef.get();
 
         Raylib.Vector2 textSize = Raylib.MeasureTextEx(VUIIO.style.getTextFont().getFont(),
-                array[arrayIndex], VUIIO.style.getTextSize(), VUIIO.style.getTextSpacing());
+            array[arrayIndex], VUIIO.style.getTextSize(), VUIIO.style.getTextSpacing());
 
         Raylib.DrawTextEx(
             VUIIO.style.getTextFont().getFont(), array[arrayIndex],
@@ -670,11 +670,15 @@ public class VUI {
 
         backwardsChanged = button("<", x - (int) strSliderLeftButtonWidth * 2, y - (int) (textSize.y() / 2) / 2);
 
-        if(backwardsChanged) indexRef.set(indexRef.get() == 0 ? array.length - 1 : indexRef.get() - 1);
+        if(backwardsChanged) {
+            indexRef.set(indexRef.get() == 0 ? array.length - 1 : indexRef.get() - 1);
+        }
 
         forwardsChanged = button(">", x + (int) textSize.x() + 2, y - (int) (textSize.y() / 2) / 2);
 
-        if(forwardsChanged) indexRef.set(indexRef.get() == array.length - 1 ? 0 : indexRef.get() + 1);
+        if(forwardsChanged) {
+            indexRef.set(indexRef.get() == array.length - 1 ? 0 : indexRef.get() + 1);
+        }
 
         endStyle();
 
@@ -939,6 +943,15 @@ public class VUI {
             for(int n=1; n <= amount + 1; n++) {
                 allocate(n == idActive);
             }
+        }
+
+        /**
+         * Allocate N amount of space in group for new radio button.
+         *
+         * @param amount Amount of space to allocate.
+         */
+        public void allocate(int amount) {
+            allocate(amount, -1);
         }
 
         /**

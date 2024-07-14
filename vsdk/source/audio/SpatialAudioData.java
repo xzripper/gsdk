@@ -4,6 +4,8 @@ import com.raylib.Raylib;
 
 import vsdk.source.vectors.Vector3Df;
 
+import static vsdk.source.utils.Range.inRange;
+
 import static vsdk.source.utils.Assert.assert_t;
 
 /**
@@ -78,8 +80,8 @@ public class SpatialAudioData {
      * @param pSens Pan sensitivity (can be 0.1 by default).
      */
     public SpatialAudioData(String audioP, Vector3Df audioPos_, float startVol, float startPan, float loudness, float pSens) {
-        assert_t(startVol < MIN_VOL || startVol > MAX_VOL, "startVol is not in expected range: 0.0f->1.0f");
-        assert_t(startPan < LEFT_PAN || startPan > RIGHT_PAN, "startPan is not in expected range: 0.0f->1.0f");
+        assert_t(inRange(startVol, MIN_VOL, MAX_VOL), "startVol is not in expected range: 0.0f->1.0f");
+        assert_t(inRange(startPan, LEFT_PAN, RIGHT_PAN), "startPan is not in expected range: 0.0f->1.0f");
 
         audio = Raylib.LoadSound(audioP);
 
