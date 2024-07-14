@@ -539,19 +539,51 @@ public class VMath {
     }
 
     /**
+     * Perform arithmetic operation on vector.
+     *
+     * @param fVec First vector.
+     * @param sVec Second vector.
+     * @param op Operator (+, -, *, /).
+     */
+    public static double[] vecOperation(double[] fVec, double[] sVec, char op) {
+        double[] result = new double[fVec.length];
+
+        for(int i = 0; i < fVec.length; i++) {
+            if(i >= sVec.length) {
+                result[i] = fVec[i];
+
+                continue;
+            }
+
+            switch(op) {
+                case '+' -> result[i] = fVec[i] + sVec[i];
+                case '-' -> result[i] = fVec[i] - sVec[i];
+                case '*' -> result[i] = fVec[i] * sVec[i];
+                case '/' -> result[i] = fVec[i] / sVec[i];
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Add elements of two vectors.
+     *
+     * @param fVec First vector.
+     * @param sVec Second vector.
+     */
+    public static double[] addVec(double[] fVec, double[] sVec) {
+        return vecOperation(fVec, sVec, '+');
+    }
+
+    /**
      * Subtract elements of two vectors.
      *
      * @param fVec First vector.
      * @param sVec Second vector.
      */
     public static double[] subVec(double[] fVec, double[] sVec) {
-        if(fVec.length != sVec.length) return null;
-
-        double[] result = new double[fVec.length];
-
-        for(int i = 0; i < fVec.length; i++) result[i] = fVec[i] - sVec[i];
-
-        return result;
+        return vecOperation(fVec, sVec, '-');
     }
 
     /**
@@ -561,13 +593,7 @@ public class VMath {
      * @param sVec Second vector.
      */
     public static double[] multVec(double[] fVec, double[] sVec) {
-        if(fVec.length != sVec.length) return null;
-
-        double[] result = new double[fVec.length];
-
-        for(int i = 0; i < fVec.length; i++) result[i] = fVec[i] * sVec[i];
-
-        return result;
+        return vecOperation(fVec, sVec, '*');
     }
 
     /**
@@ -577,13 +603,7 @@ public class VMath {
      * @param sVec Second vector.
      */
     public static double[] divVec(double[] fVec, double[] sVec) {
-        if(fVec.length != sVec.length) return null;
-
-        double[] result = new double[fVec.length];
-
-        for(int i = 0; i < fVec.length; i++) result[i] = fVec[i] / sVec[i];
-
-        return result;
+        return vecOperation(fVec, sVec, '/');
     }
 
     /**
