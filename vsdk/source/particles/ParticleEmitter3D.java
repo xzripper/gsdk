@@ -14,6 +14,7 @@
  * - Particle simulation can freeze game/application after some emission time.
  *
  * TODO Features:
+ * - Color curve based on lifetime (e.g red at start and green at end).
  * - Add support for multiple textures (each particle emission - new texture).
  * - Random fade delay for each particle (based of pFade).
  * - Random initial rotation for each particle.
