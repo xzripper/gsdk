@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import vsdk.source.vectors.Vector2Di;
 
+import vsdk.source.utils.VPolygon2D;
+
 /**
  * Pixel Collider Container.
  */
@@ -50,6 +52,35 @@ public class PixelColliderContainer {
     }
 
     /**
+     * Rescale the points container proportionally.
+     *
+     * @param scaleWidth  New width of the container.
+     * @param scaleHeight New height of the container.
+     */
+    public void scale(int scaleWidth, int scaleHeight) {
+        int[] originalSize = compSize();
+
+        ArrayList<int[]> scaled = new ArrayList<>();
+
+        for(int y = 0; y < scaleHeight; y++) {
+            for(int x = 0; x < scaleWidth; x++) {
+                for(int[] point : points) {
+                    if(point[0] == (int) (x / ((double) scaleWidth / originalSize[0])) &&
+                        point[1] == (int) (y / ((double) scaleHeight / originalSize[1]))) {
+                        scaled.add(new int[] {x, y}); break;
+                    }
+                }
+            }
+        }
+
+        int[][] scaledArray = new int[scaled.size()][2];
+
+        scaled.toArray(scaledArray);
+
+        setPoints(scaledArray);
+    }
+
+    /**
      * Get points array.
      */
     public int[][] getPoints() {
@@ -61,6 +92,26 @@ public class PixelColliderContainer {
      */
     public int getPointsLength() {
         return points.length;
+    }
+
+    /**
+     * Compute points dimension based on points size.
+     */
+    public int[] compSize() {
+        if(points.length <= 0) return new int[] {0, 0};
+
+        int minX = Integer.MAX_VALUE, minY = Integer.MAX_VALUE;
+        int maxX = Integer.MIN_VALUE, maxY = Integer.MIN_VALUE;
+    
+        for(int[] point : points) {
+            if(point[0] < minX) minX = point[0];
+            if(point[1] < minY) minY = point[1];
+
+            if(point[0] > maxX) maxX = point[0];
+            if(point[1] > maxY) maxY = point[1];
+        }
+    
+        return new int[] {maxX - minX + 1, maxY - minY + 1};
     }
 
     /**
@@ -90,8 +141,8 @@ public class PixelColliderContainer {
     public static PixelColliderContainer rectangle(int width, int height) {
         ArrayList<int[]> points = new ArrayList<>();
 
-        for(int y=0; y < height; y++) {
-            for(int x=0; x < width; x++) {
+        for(int y=0; y <= height; y++) {
+            for(int x=0; x <= width; x++) {
                 points.add(new int[] {x, y});
             }
         }
@@ -112,6 +163,68 @@ public class PixelColliderContainer {
                 if(x * x + y * y <= radius * radius) {
                     points.add(new int[] {x, y});
                 }
+            }
+        }
+
+        return _createContainer(points);
+    }
+
+    /**
+     * Generate line as points array.
+     * 
+     * @param startX Line start X.
+     * @param startY Line start Y.
+     * @param endX Line end X.
+     * @param endY Line end Y.
+     */
+    public static PixelColliderContainer line(int startX, int startY, int endX, int endY) {
+        ArrayList<int[]> points = new ArrayList<>();
+
+        int dx = Math.abs(endX - startX);
+        int dy = Math.abs(endY - startY);
+
+        int sx = startX < endX ? 1 : -1;
+        int sy = startY < endY ? 1 : -1;
+
+        int err = dx - dy;
+
+        while(true) {
+            points.add(new int[] {startX, startY});
+
+            if(startX == endX && startY == endY) break;
+
+            if((2 * err) > -dy) {
+                err -= dy;
+
+                startX += sx;
+            }
+
+            if((2 * err) < dx) {
+                err += dx;
+
+                startY += sy;
+            }
+        }
+
+        return _createContainer(points);
+    }
+
+    /**
+     * Generate polygon as points array.
+     * 
+     * @param polygon Polygon.
+     */
+    public static PixelColliderContainer polygon(VPolygon2D.Polygon polygon) {
+        ArrayList<int[]> points = new ArrayList<>();
+
+        for(int v=0; v < polygon.getLength(); v++) {
+            Vector2Di thisVertice = polygon.getVerticeVec2D(v);
+            Vector2Di nextVertice = polygon.getVerticeVec2D((v + 1) % polygon.getLength());
+
+            PixelColliderContainer container = line(thisVertice.x(), thisVertice.y(), nextVertice.x(), nextVertice.y());
+
+            for(int[] point : container.getPoints()) {
+                points.add(point);
             }
         }
 

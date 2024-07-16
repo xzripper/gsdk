@@ -19,6 +19,8 @@ package vsdk.source.spps;
 
 import com.raylib.Raylib;
 
+import static com.raylib.Jaylib.RED;
+
 import java.util.ArrayList;
 
 import java.util.HashSet;
@@ -64,7 +66,9 @@ public class SpritePixelCollider {
 
     private QuadTree qTree;
 
-    private final HashSet<CollisionPoint> collisionPointsBake;
+    private Vector2Di lBakedColliderPos;
+
+    private final HashSet<CollisionPoint> colliderPointsBake;
 
     private final Raylib.Image spriteImage;
 
@@ -74,7 +78,7 @@ public class SpritePixelCollider {
      * @param sprite Sprite (Raylib Image).
      */
     public SpritePixelCollider(Raylib.Image sprite) {
-        collisionPointsBake = new HashSet<>();
+        colliderPointsBake = new HashSet<>();
 
         spriteImage = sprite;
 
@@ -87,7 +91,7 @@ public class SpritePixelCollider {
      * @param points Points container.
      */
     public SpritePixelCollider(PixelColliderContainer points) {
-        collisionPointsBake = new HashSet<>();
+        colliderPointsBake = new HashSet<>();
 
         pointsContainer = points;
 
@@ -126,43 +130,45 @@ public class SpritePixelCollider {
 
         qTree = new QuadTree(0, new int[] {0, 0, spriteImage.width(), spriteImage.height()});
 
-        for (int[] point : pxListNoAlpha) qTree.insert(point);
+        pxListNoAlphaList.forEach(qTree::insert);
 
         SPCData.TOTAL_POINTS_BAKED += pointsContainer.getPointsLength();
     }
 
     /**
-     * Bake collision points set.
+     * Bake collider points set.
      *
      * @param pos Sprite position.
      */
-    public void bakeCollision(Vector2Di pos) {
+    public void bakeCollider(Vector2Di pos) {
         SPCData.TOTAL_BAKE_REQUESTS++;
 
-        collisionPointsBake.clear();
+        colliderPointsBake.clear();
 
         for(int[] point : getPointsContainer().getPoints()) {
-            collisionPointsBake.add(new CollisionPoint(point[0] + pos.x(), point[1] + pos.y()));
+            colliderPointsBake.add(new CollisionPoint(point[0] + pos.x(), point[1] + pos.y()));
         }
 
-        SPCData.TOTAL_COLLISION_POINTS_BAKED += collisionPointsBake.size();
+        lBakedColliderPos = pos;
+
+        SPCData.TOTAL_COLLIDER_POINTS_BAKED += colliderPointsBake.size();
     }
 
     /**
-     * Bake collision points set.
+     * Bake collider points set.
      *
      * @param x Sprite X Position.
      * @param y Sprite Y Position.
      */
-    public void bakeCollision(int x, int y) {
-        bakeCollision(new Vector2Di(x, y));
+    public void bakeCollider(int x, int y) {
+        bakeCollider(new Vector2Di(x, y));
     }
 
     /**
      * Is baked collision available?
      */
     public boolean bakedCollisionAvailable() {
-        return collisionPointsBake.size() > 0;
+        return colliderPointsBake.size() > 0;
     }
 
     /**
@@ -181,9 +187,30 @@ public class SpritePixelCollider {
      * @param origin Rotation origin.
      */
     public void rotateCollider(double angle, Vector2Di origin) {
+        if(pointsContainer != null) pointsContainer.rotate(angle, origin);
+    }
+
+    /**
+     * Rotate collider with center as origin.
+     * 
+     * @param angle Angle.
+     */
+    public void rotateCollider(double angle) {
         if(pointsContainer != null) {
-            pointsContainer.rotate(angle, origin);
+            int[] size = pointsContainer.compSize();
+
+            rotateCollider(angle, new Vector2Di(size[0] / 2, size[1] / 2));
         }
+    }
+
+    /**
+     * Re-scale collider.
+     * 
+     * @param scaleWidth New width.
+     * @param scaleHeight New height.
+     */
+    public void scaleCollider(int scaleWidth, int scaleHeight) {
+        if(pointsContainer != null) pointsContainer.scale(scaleWidth, scaleHeight);
     }
 
     /**
@@ -353,7 +380,7 @@ public class SpritePixelCollider {
             for(int[] point : getPointsContainer().getPoints()) {
                 CollisionPoint collisionPoint = new CollisionPoint(point[0] + spritePos.x(), point[1] + spritePos.y());
 
-                if(sprite2Collider.collisionPointsBake.contains(collisionPoint)) {
+                if(sprite2Collider.colliderPointsBake.contains(collisionPoint)) {
                     SPCData.TOTAL_COLLISIONS_SUCCEEDED++;
 
                     return true;
@@ -381,6 +408,29 @@ public class SpritePixelCollider {
     }
 
     /**
+     * Simple debug for collider points container. Draws each points as pixel on the screen.
+     * 
+     * @param pos Position.
+     * @param color Color.
+     */
+    public void debugCollider(Vector2Di pos, Raylib.Color color) {
+        if(pointsContainer != null) {
+            for(int[] point : pointsContainer.getPoints()) {
+                Raylib.DrawPixel(point[0] + pos.x(), point[1] + pos.y(), color);
+            }
+        }
+    }
+
+    /**
+     * Simple debug for collider points container. Draws each points as pixel on the screen.
+     * 
+     * @param pos Position.
+     */
+    public void debugCollider(Vector2Di pos) {
+        debugCollider(pos, RED);
+    }
+
+    /**
      * Get sprite raw size.
      */
     public Vector2Di getRawSize() {
@@ -394,12 +444,18 @@ public class SpritePixelCollider {
         return pointsContainer;
     }
 
-
     /**
      * Get points amount.
      */
     public int getPointsSize() {
         return pointsContainer.getPointsLength();
+    }
+
+    /**
+     * Get last baked collider position.
+     */
+    public Vector2Di getLBakedColliderPos() {
+        return lBakedColliderPos;
     }
 
     /**
@@ -413,7 +469,7 @@ public class SpritePixelCollider {
      * Get baked collision points set size.
      */
     public int getBakedCollisionPointsSize() {
-        return collisionPointsBake.size();
+        return colliderPointsBake.size();
     }
 
     /**
