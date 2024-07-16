@@ -402,6 +402,125 @@ public class VUI {
     }
 
     /**
+     * Draw selectable button (based on <code>button</code>).
+     *
+     * @param ref Selected button reference.
+     * @param content Button text.
+     * @param x X Position.
+     * @param y Y Position.
+     * @param w Button width.
+     * @param h Button height.
+     * @return Is selectable button clicked.
+     */
+    public static boolean selectButton(VOutRef<Boolean> ref, String content, int x, int y, int w, int h) {
+        if(ref.get() == null) ref.set(false);
+
+        Raylib.Vector2 textSize;
+
+        float buttonWidth, buttonHeight;
+
+        textSize = Raylib.MeasureTextEx(VUIIO.style.getTextFont().getFont(),
+            content, VUIIO.style.getTextSize(), VUIIO.style.getTextSpacing());
+
+        if(w == -1 && h == -1) {
+            buttonWidth = textSize.x() + 10;
+            buttonHeight = textSize.y() + 5;
+        } else {
+            buttonWidth = w;
+            buttonHeight = h;
+        }
+
+        VUIColor buttonColor = null;
+
+        if(!VUIIO.disabled && VUIIO.mouseHovers(x, y, buttonWidth, buttonHeight) && Raylib.IsMouseButtonDown(Raylib.MOUSE_BUTTON_LEFT) || ref.get()) {
+            buttonColor = VUIIO.style.getPressedCol();
+        } else if(!VUIIO.disabled && VUIIO.mouseHovers(x, y, buttonWidth, buttonHeight)) {
+            buttonColor = VUIIO.style.getFocusedCol();
+        } else if(VUIIO.disabled) {
+            buttonColor = VUIIO.style.getDisabledCol();
+        } else if(!ref.get()) {
+            buttonColor = VUIIO.style.getDefaultCol();
+        }
+
+        if(VUIIO.style.getBorderRounding() > 0) {
+            if(texelBleedingFixAvailable()) {
+                Raylib.BeginShaderMode(texelBleedingFixShader);
+            }
+
+            Raylib.DrawRectangleRounded(
+                new Raylib.Rectangle().x(x - 1).y(y - 1)
+                    .width(buttonWidth + 1).height(buttonHeight + 1),
+                VUIIO.style.getBorderRounding(), 16, buttonColor.toRlCol()
+            );
+
+            if(texelBleedingFixAvailable()) {
+                Raylib.EndShaderMode();
+            }
+        } else {
+            Raylib.DrawRectangle(x, y, (int) buttonWidth, (int) buttonHeight, buttonColor.toRlCol());
+        }
+
+        if(VUIIO.style.getBorderThickness() > 0) {
+            if(VUIIO.style.getBorderRounding() > 0) {
+                Raylib.DrawRectangleRoundedLines(
+                    new Raylib.Rectangle().x(x).y(y).width(buttonWidth).height(buttonHeight),
+                    VUIIO.style.getBorderRounding(), 16,
+                    VUIIO.style.getBorderThickness(), VUIIO.style.getBorderColor().toRlCol()
+                );
+            } else {
+                Raylib.DrawRectangleLinesEx(
+                    new Raylib.Rectangle().x(x).y(y).width(buttonWidth).height(buttonHeight),
+                    VUIIO.style.getBorderThickness(),
+                    VUIIO.style.getBorderColor().toRlCol()
+                );
+            }
+        }
+
+        Raylib.Vector2 textPos = new Raylib.Vector2().y(y + (buttonHeight - textSize.y()) / 2);
+
+        if(w != -1 && h != -1) {
+            int textAnchor = VUIIO.style.getTextAnchor();
+
+            if(textAnchor == VUIStyle.TEXT_ANCHOR_RIGHT) {
+                textPos.x(x + buttonWidth - textSize.x() - 5);
+            } else if(textAnchor == VUIStyle.TEXT_ANCHOR_CENTER) {
+                textPos.x(x + (buttonWidth - textSize.x()) / 2.0f);
+            } else if(textAnchor == VUIStyle.TEXT_ANCHOR_LEFT) {
+                textPos.x(x + 5);
+            }
+        } else {
+            textPos.x(x + buttonWidth - 5 - textSize.x());
+        }
+
+        Raylib.DrawTextEx(
+            VUIIO.style.getTextFont().getFont(), content,
+            textPos, VUIIO.style.getTextSize(),
+            VUIIO.style.getTextSpacing(), VUIIO.style.getTextCol().toRlCol()
+        );
+
+        boolean clicked = !VUIIO.disabled && VUIIO.mouseHovers(x, y, buttonWidth, buttonHeight) && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
+
+        if(clicked) {
+            ref.set(!ref.get());
+        }
+
+        return clicked;
+    }
+
+    /**
+     * Draw selectable button (without size specifies; based on <code>button</code>).
+     *
+     * @param ref Selected button reference.
+     * @param content Button content.
+     * @param x X Position.
+     * @param y Y Position.
+     * @return Is selectable button clicked.
+     */
+    public static boolean selectButton(VOutRef<Boolean> ref, String content, int x, int y) {
+        return selectButton(ref, content, x, y, -1, -1);
+    }
+
+    /**
      * Draw radio button.
      *
      * @param ref Radio button value reference.
