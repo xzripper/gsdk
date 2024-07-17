@@ -9,7 +9,7 @@
  * - Particles have wrong positioning (no camera distance sorting).
  * - Particles can spawn quickly at startup, even if emission rate is greater than 1.0f.
  * - Particles may turn black when opacity is lowered, depending on their lifetime.
- * - Particle simulation is slow: use trivial for-loop to iterate particles.
+ * - Particle simulation is slow: using trivial for-loop to iterate particles.
  * - Particles may spawn with more black tint than others after some emission time (probably fixed).
  * - Particle simulation can freeze game/application after some emission time.
  *
@@ -18,6 +18,7 @@
  * - Add support for multiple textures (each particle emission - new texture).
  * - Random fade delay for each particle (based of pFade).
  * - Random initial rotation for each particle.
+ * - Simulate only visible particles (optimization).
  * - Improve code quality (generic).
  */
 
