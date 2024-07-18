@@ -12,7 +12,6 @@ public class VinetTransferableObjectUtility{
     private static final String SINGLE_QUOTE_C = "sqv1";
     private static final String SIGNATURE_C = "VTrfO1-";
 
-
     /**
      * Assembles string for objects and encrypts it.
      *
