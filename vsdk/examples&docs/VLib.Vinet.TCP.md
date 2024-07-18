@@ -156,7 +156,7 @@ public class ServerTest {
 
         Scanner scanner = new Scanner(System.in);
 
-        while(true) {
+        while(server.isActive()) {
             String messageToClients = input(scanner, "Message to clients:\n");
 
             if(messageToClients.equals("stop")) {
