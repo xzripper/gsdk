@@ -104,7 +104,6 @@ public class VinetServerTCP {
                 } catch(IOException ioExc) {
                     events.exception(ioExc, this);
                 }
-
             }
 
             events.end(this);
