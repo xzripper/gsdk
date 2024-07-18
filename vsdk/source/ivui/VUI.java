@@ -2,8 +2,6 @@ package vsdk.source.ivui;
 
 import com.raylib.Raylib;
 
-import static com.raylib.Jaylib.RED;
-
 import java.util.ArrayList;
 
 import org.bytedeco.javacpp.FloatPointer;
@@ -894,7 +892,7 @@ public class VUI {
 
         return !VUIIO.disabled
             && VUIIO.mouseHovers(x, y, image.getTex().width() * scale, image.getTex().height() * scale)
-            && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
+                && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
     }
 
     /**
