@@ -2,6 +2,8 @@ package vsdk.source.ivui;
 
 import com.raylib.Raylib;
 
+import static com.raylib.Jaylib.RED;
+
 import java.util.ArrayList;
 
 import org.bytedeco.javacpp.FloatPointer;
@@ -337,7 +339,7 @@ public class VUI {
 
             Raylib.DrawRectangleRounded(
                 new Raylib.Rectangle().x(x - 1).y(y - 1)
-                        .width(buttonWidth + 1).height(buttonHeight + 1),
+                    .width(buttonWidth + 1).height(buttonHeight + 1),
                 VUIIO.style.getBorderRounding(), 16, buttonColor.toRlCol()
             );
 
@@ -891,8 +893,8 @@ public class VUI {
         Raylib.DrawTextureEx(image.getTex(), new Raylib.Vector2().x(x).y(y), 0.0f, scale, tint.toRlCol());
 
         return !VUIIO.disabled
-                && VUIIO.mouseHovers(x, y, image.getTex().width() * scale, image.getTex().height() * scale)
-                    && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
+            && VUIIO.mouseHovers(x, y, image.getTex().width() * scale, image.getTex().height() * scale)
+            && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
     }
 
     /**
@@ -970,6 +972,48 @@ public class VUI {
      */
     public static void loadingIcon(VOutRef<Float> pRef, Texture icon, int x, int y) {
         loadingIcon(pRef, icon, x, y, 1.0f, new VUIColor(255, 255, 255, 255));
+    }
+
+    /**
+     * Draw bezier line.
+     *
+     * @param startX Line Start X.
+     * @param startY Line Start Y.
+     * @param endX Line End X.
+     * @param endY Line End Y.
+     * @param thickness Line thickness.
+     * @param color Line color.
+     */
+    public static void bezierCurvePair(int startX, int startY, int endX, int endY, float thickness, Raylib.Color color) {
+        color = color == null ? VUIIO.style.getDefaultCol().toRlCol() : color;
+
+        Raylib.DrawLineBezier(new Raylib.Vector2().x(startX).y(startY), new Raylib.Vector2().x(endX).y(endY), thickness, color);
+
+        if(VUIIO.style.getBorderRounding() > 0) {
+            if(texelBleedingFixAvailable()) {
+                Raylib.BeginShaderMode(texelBleedingFixShader);
+            }
+
+            Raylib.DrawCircle(startX, startY, thickness / 2.0f, color);
+            Raylib.DrawCircle(endX, endY, thickness / 2.0f, color);
+
+            if(texelBleedingFixAvailable()) {
+                Raylib.EndShaderMode();
+            }
+        }
+    }
+
+    /**
+     * Draw bezier line with default color.
+     *
+     * @param startX Line Start X.
+     * @param startY Line Start Y.
+     * @param endX Line End X.
+     * @param endY Line End Y.
+     * @param thickness Line thickness.
+     */
+    public static void bezierCurvePair(int startX, int startY, int endX, int endY, float thickness) {
+        bezierCurvePair(startX, startY, endX, endY, thickness, null);
     }
 
     /**
