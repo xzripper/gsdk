@@ -804,4 +804,16 @@ public class VMath {
 
         return b;
     }
+
+    /**
+     * Calculate percentage of a value.<br>
+     * <code>percentage(10, 200)</code> -> <code>5%</code><br>
+     * <code>percentage(190, 200)</code> -> <code>95%</code>
+     *
+     * @param current Current value.
+     * @param max Maximal percentage.
+     */
+    public static double percentage(double current, double max) {
+        return clamp(0, max, (current / max)) * 100;
+    }
 }
