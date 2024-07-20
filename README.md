@@ -1,9 +1,12 @@
 <p align="center"><img src="https://github.com/violent-studio/vmedia/blob/main/vsdk.gif?raw=true"></p>
 <h3 align="center">VSDK Development Phase: <code>VSDK_V0.0.0.4-ALPHA/DEV_PUBLISH</code>.</h3>
 <h3 align="center">VSDK is currently being developed by a solo developer. I appreciate your patience and understanding as progress may take some time.</h3>
+
+![opera_bFDdi1rxJH](https://github.com/user-attachments/assets/eb75b696-df66-453c-98d9-80a1c10e35b3)
+New! Visit documentation (extremely unfinished)..
+
 <h3 align="center">VSDK Bump Mapping (Youtube).</h3>
 <p align="center"><a href="https://www.youtube.com/watch?v=HUJ3RxE8DhQ"><img src="http://markdown-videos-api.jorgenkh.no/youtube/HUJ3RxE8DhQ.gif?width=450&height=250&duration=1000" alt="Bump Mapping ALPHA" title="Bump Mapping ALPHA"/></a></p>
-
 <h3 align="center"><a href="https://github.com/violent-studio/vsdk/blob/main/vsdk/examples%26docs/VLib.Vinet.TCP.md">VSDK Chat implementation via Vinet (Violent Immediate mode Networking library).</a></h3>
 
 <h3 align="center">VSDK Noise Generator.</h3>
