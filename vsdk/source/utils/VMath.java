@@ -335,8 +335,9 @@ public class VMath {
                     determinant2x2(point1.x(), point1.y(), point2.x(), point2.y()), point1.x() - point2.x(),
                     determinant2x2(point3.x(), point3.y(), point4.x(), point4.y()), point3.x() - point4.x()) / denominator,
 
-            determinant2x2(determinant2x2(point1.x(), point1.y(), point2.x(), point2.y()), point1.y() - point2.y(),
-                    determinant2x2(point3.x(), point3.y(), point4.x(), point4.y()), point3.y() - point4.y()) / denominator
+            determinant2x2(
+                determinant2x2(point1.x(), point1.y(), point2.x(), point2.y()), point1.y() - point2.y(),
+                determinant2x2(point3.x(), point3.y(), point4.x(), point4.y()), point3.y() - point4.y()) / denominator
         };
     }
 
@@ -807,13 +808,112 @@ public class VMath {
 
     /**
      * Calculate percentage of a value.<br>
+     * <code>percentage(10, 200, 100)</code> -> <code>5%</code><br>
+     * <code>percentage(190, 200, 100)</code> -> <code>95%</code>
+     *
+     * @param current Current value.
+     * @param max Maximal percentage.
+     * @param scale Percentage scaling.
+     */
+    public static double percentage(double current, double max, double scale) {
+        return clamp(0, max, (current / max)) * scale;
+    }
+
+    /**
+     * Calculate percentage of a value with scale 100.<br>
      * <code>percentage(10, 200)</code> -> <code>5%</code><br>
      * <code>percentage(190, 200)</code> -> <code>95%</code>
-     *
+     * 
      * @param current Current value.
      * @param max Maximal percentage.
      */
     public static double percentage(double current, double max) {
         return clamp(0, max, (current / max)) * 100;
+    }
+
+    /**
+     * Add percentage to value (eg. <code>addperc(1000, 75, 250)</code> returns <code>1300.0</code>)
+     * 
+     * @param value Value.
+     * @param perc Percentage to add.
+     * @param max Maximal percentage value.
+     */
+    public static double addperc(double value, double perc, double max) {
+        return value + (value * perc / max);
+    }
+
+    /**
+     * Add percentage from value with maximal percentage 100: (eg. <code>addperc(1000, 75)</code> returns <code>1750.0</code>)
+     * 
+     * @param value Value.
+     * @param perc Percentage to add.
+     * @param max Max percentage value.
+     */
+    public static double addperc(double value, double perc) {
+        return addperc(value, perc, 100);
+    }
+
+    /**
+     * Subtract percentage to value (eg. <code>subperc(500, 50, 100)</code> returns <code>250.0</code>)
+     * 
+     * @param value Value.
+     * @param perc Percentage to subtract.
+     * @param max Maximal percentage value.
+     */
+    public static double subperc(double value, double perc, double max) {
+        return value - (value * perc / max);
+    }
+
+    /**
+     * Subtract percentage from value with maximal percentage 100 (eg. <code>subperc(500, 50)</code> returns <code>250.0</code>)
+     * 
+     * @param value Value.
+     * @param perc Percentage to subtract.
+     * @param max Maximal percentage value.
+     */
+    public static double subperc(double value, double perc) {
+        return subperc(value, perc, 100);
+    }
+
+    /**
+     * Get added percentage to value.
+     * 
+     * @param value Value.
+     * @param added New value.
+     * @param scale Percentage scale.
+     */
+    public static double percadd(double value, double added, double scale) {
+        return ((added - value) / value) * scale;
+    }
+
+    /**
+     * Get added percentage to value scale 100.
+     * 
+     * @param value Value.
+     * @param added New value.
+     */
+    public static double percadd(double value, double added) {
+        return percadd(value, added, 100);
+    }
+
+    /**
+     * Get subtracted percentage from value.
+     * 
+     * @param value Value.
+     * @param subbed New value.
+     * @param scale Percentage scale.
+     */
+    public static double percsub(double value, double subbed, double scale) {
+        return ((value - subbed) / value) * scale;
+    }
+
+    /**
+     * Get subtracted percentage from value.
+     * 
+     * @param value Value.
+     * @param subbed New value.
+     */
+    public static double percsub(double value, double subbed) {
+        return percsub(value, subbed, 100);
     }
 }
