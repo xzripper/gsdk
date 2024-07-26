@@ -908,7 +908,7 @@ public class VMath {
     }
 
     /**
-     * Get subtracted percentage from value.
+     * Get subtracted percentage from value with scale 100.
      * 
      * @param value Value.
      * @param subbed New value.
