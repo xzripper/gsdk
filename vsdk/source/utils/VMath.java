@@ -828,7 +828,28 @@ public class VMath {
      * @param max Maximal percentage.
      */
     public static double percentage(double current, double max) {
-        return clamp(0, max, (current / max)) * 100;
+        return percentage(current, max, 100);
+    }
+
+    /**
+     * Calculates the value based on a given percentage of the maximum value.
+     * 
+     * @param current Percentage.
+     * @param max Maximal value.
+     * @param scale Percentage scale.
+     */
+    public static double fromPercentage(double current, double max, double scale) {
+        return (current / scale) * max;
+    }
+
+    /**
+     * Calculates the value based on a given percentage of the maximum value.
+     * 
+     * @param current Percentage.
+     * @param max Maximal value.
+     */
+    public static double fromPercentage(double current, double max) {
+        return fromPercentage(current, max, 100);
     }
 
     /**
