@@ -1,5 +1,5 @@
 <p align="center"><img src="https://github.com/violent-studio/vmedia/blob/main/vsdk.gif?raw=true"></p>
-<h3 align="center">VSDK Development Phase: <code>VSDK_V0.0.0.4-ALPHA/DEV_PUBLISH</code>.</h3>
+<h3 align="center">VSDK Development Phase: <code>VSDK_V0.0.0.5-ALPHA/DEV_PUBLISH</code>.</h3>
 <h3 align="center">VSDK is currently being developed by a solo developer. I appreciate your patience and understanding as progress may take some time.</h3>
 
 ![opera_bFDdi1rxJH](https://github.com/user-attachments/assets/eb75b696-df66-453c-98d9-80a1c10e35b3)
