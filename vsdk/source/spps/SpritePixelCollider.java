@@ -1,21 +1,21 @@
 /**
- * SPPS is advanced intersection (collision) check technique for 2D sprites implemented by Violent Studio in VSDK project.
+ * OPC2D is advanced intersection (collision) check technique for 2D sprites implemented by Violent Studio in VSDK project.
  * Since this system is quite versatile you can use this technique in your project.
  * But you should remember that the following files are licensed:
- *      spps::SpritePixelCollider.java (must-have when integrating SPPS),
- *      spps::PixelColliderContainer.java (must-have when integrating SPPS),
- *      spps::SPCData.java (must-have when integrating SPPS),
- *      structures::QuadTree.java (must-have when integrating SPPS),
- *      vectors::Vector2Di.java (must-have when integrating SPPS),
- *      utils::Assert.java (must-have when integrating SPPS).
+ *      opc2d::SpritePixelCollider.java (must-have when integrating OPC2D),
+ *      opc2d::PixelColliderContainer.java (must-have when integrating OPC2D),
+ *      opc2d::SPCData.java (must-have when integrating OPC2D),
+ *      structures::QuadTree.java (must-have when integrating OPC2D),
+ *      vectors::Vector2Di.java (must-have when integrating OPC2D),
+ *      utils::Assert.java (must-have when integrating OPC2D).
  * This means that you also have to fulfil the licence requirements without having to plug the whole SDK into your project.
- * To integrate SPPS into your project, simply move the files written above to your project directory.
+ * To integrate OPC2D into your project, simply move the files written above to your project directory.
  *
  * Violent Studio :: VSDK 2024
  * https://github.com/violent-studio/vsdk
  */
 
-package vsdk.source.spps;
+package vsdk.source.opc2d;
 
 import com.raylib.Raylib;
 
@@ -59,7 +59,7 @@ class CollisionPoint {
 }
 
 /**
- * SPPS - Sprite pixel points scanning technique for 99.9% pixel correct colliders for sprites.
+ * OPC2D - Sprite pixel points scanning technique for 99.9% pixel correct colliders for sprites.
  */
 public class SpritePixelCollider {
     private PixelColliderContainer pointsContainer = null;

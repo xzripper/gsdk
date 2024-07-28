@@ -1,4 +1,4 @@
-package vsdk.source.spps;
+package vsdk.source.opc2d;
 
 import com.raylib.Raylib;
 
@@ -51,7 +51,7 @@ public class SPCData {
      * @param color Color.
      */
     public static void debug(int x, int y, Raylib.Color color) {
-        Raylib.DrawText("VSDK SPPS-technique | SpritePixelCollider Debug:", x, y, 18, color);
+        Raylib.DrawText("VSDK OPC2D-technique | SpritePixelCollider Debug:", x, y, 18, color);
         Raylib.DrawText(String.format("SPCData::TOTAL_POINTS_LOADED: %d", SPCData.TOTAL_POINTS_LOADED), x, 15 + y, 18, color);
         Raylib.DrawText(String.format("SPCData::TOTAL_BAKE_REQUESTS: %d", SPCData.TOTAL_BAKE_REQUESTS), x, 30 + y, 18, color);
         Raylib.DrawText(String.format("SPCData::TOTAL_POINTS_BAKED: %d", SPCData.TOTAL_POINTS_BAKED), x, 45 + y, 18, color);
