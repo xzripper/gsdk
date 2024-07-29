@@ -69,17 +69,18 @@ public class Quad {
      * @param pos Quad position.
      * @param rotation Quad rotation.
      * @param color Quad color.
-     * @param backfaceCulling Enable/disable backface culling.
+     * @param backface Render Quad backface?
      */
-    public static void drawQuad(Vector2Df size, Vector3Df pos, Vector3Df rotation, Raylib.Color color, boolean backfaceCulling) {
+    public static void drawQuad(Vector2Df size, Vector3Df pos, Vector3Df rotation, Raylib.Color color, boolean backface) {
         Vector3Df[] vertCoords = genQuadVertCoords(size, pos, rotation);
-
-        if(!backfaceCulling) Raylib.rlDisableBackfaceCulling();
 
         Raylib.DrawTriangle3D(vertCoords[0].toRlVec(), vertCoords[1].toRlVec(), vertCoords[2].toRlVec(), color);
         Raylib.DrawTriangle3D(vertCoords[0].toRlVec(), vertCoords[2].toRlVec(), vertCoords[3].toRlVec(), color);
 
-        if(!backfaceCulling) Raylib.rlEnableBackfaceCulling();
+        if(backface)  {
+            Raylib.DrawTriangle3D(vertCoords[2].toRlVec(), vertCoords[1].toRlVec(), vertCoords[0].toRlVec(), color);
+            Raylib.DrawTriangle3D(vertCoords[3].toRlVec(), vertCoords[2].toRlVec(), vertCoords[0].toRlVec(), color);
+        }
     }
 
     /**
@@ -91,7 +92,7 @@ public class Quad {
      * @param color Quad color.
      */
     public static void drawQuad(Vector2Df size, Vector3Df pos, Vector3Df rotation, Raylib.Color color) {
-        drawQuad(size, pos, color, true);
+        drawQuad(size, pos, color, false);
     }
 
     /**
@@ -100,17 +101,18 @@ public class Quad {
      * @param size Quad size.
      * @param pos Quad position.
      * @param color Quad color.
-     * @param backfaceCulling Enable/disable backface culling.
+     * @param backface Render Quad backface?
      */
-    public static void drawQuad(Vector2Df size, Vector3Df pos, Raylib.Color color, boolean backfaceCulling) {
+    public static void drawQuad(Vector2Df size, Vector3Df pos, Raylib.Color color, boolean backface) {
         Vector3Df[] vertCoords = genQuadVertCoords(size, pos);
-
-        if(!backfaceCulling) Raylib.rlDisableBackfaceCulling();
 
         Raylib.DrawTriangle3D(vertCoords[0].toRlVec(), vertCoords[1].toRlVec(), vertCoords[2].toRlVec(), color);
         Raylib.DrawTriangle3D(vertCoords[0].toRlVec(), vertCoords[2].toRlVec(), vertCoords[3].toRlVec(), color);
 
-        if(!backfaceCulling) Raylib.rlEnableBackfaceCulling();
+        if(backface) {
+            Raylib.DrawTriangle3D(vertCoords[2].toRlVec(), vertCoords[1].toRlVec(), vertCoords[0].toRlVec(), color);
+            Raylib.DrawTriangle3D(vertCoords[3].toRlVec(), vertCoords[2].toRlVec(), vertCoords[0].toRlVec(), color);
+        }
     }
 
     /**
@@ -121,6 +123,6 @@ public class Quad {
      * @param color Quad color.
      */
     public static void drawQuad(Vector2Df size, Vector3Df pos, Raylib.Color color) {
-        drawQuad(size, pos, color, true);
+        drawQuad(size, pos, color, false);
     }
 }
