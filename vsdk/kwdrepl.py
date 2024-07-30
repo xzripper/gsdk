@@ -4,24 +4,18 @@ import os
 import argparse
 
 def replace_in_file(file_path, keyword_pairs, log=False):
-    log_entries = []
     with open(file_path, 'r', encoding='utf-8') as file:
         lines = file.readlines()
 
     with open(file_path, 'w', encoding='utf-8') as file:
         for line_number, line in enumerate(lines):
-            original_line = line
             for old, new in keyword_pairs:
                 start_pos = 0
                 while (start_pos := line.find(old, start_pos)) != -1:
-                    log_entries.append(f"{file_path}:{line_number+1}: replaced {old} with {new} ({start_pos})")
+                    if(log):print(f"{file_path}:{line_number+1}:{start_pos}: replaced {old} with {new} ({keyword_pairs.index((old, new)) + 1})")
                     line = line[:start_pos] + new + line[start_pos + len(old):]
                     start_pos += len(new)
             file.write(line)
-
-    if log:
-        for entry in log_entries:
-            print(entry)
 
 def replace_in_directory(directory, keyword_pairs, log=False):
     for root, _, files in os.walk(directory):
@@ -38,8 +32,8 @@ def main():
     
     args = parser.parse_args()
 
-    keywords = args.keywords.split('$')
-    replacements = args.replacements.split('$')
+    keywords = args.keywords.split('~')
+    replacements = args.replacements.split('~')
 
     if len(keywords) != len(replacements):
         raise ValueError("The number of keywords and replacements must be the same.")
