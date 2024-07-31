@@ -59,9 +59,9 @@ class CollisionPoint {
 }
 
 /**
- * OPC2D - Sprite pixel points scanning technique for 99.9% pixel correct colliders for sprites.
+ * OPC2D - Object pixel points scanning technique for 99.9% pixel correct colliders for objects.
  */
-public class SpritePixelCollider {
+public class ObjectPixelCollider {
     private PixelColliderContainer pointsContainer = null;
 
     private QuadTree qTree;
