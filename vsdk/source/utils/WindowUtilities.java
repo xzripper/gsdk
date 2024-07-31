@@ -82,14 +82,14 @@ public class WindowUtilities {
      * @param flags Window flags.
      */
     public static void setWinBorderless(WindowFlags flags) {
+        flags.append(Raylib.FLAG_WINDOW_UNDECORATED);
+
+        flags.setWindowFlags();
+
         Raylib.SetWindowSize(
             Raylib.GetMonitorWidth(Raylib.GetCurrentMonitor()),
             Raylib.GetMonitorHeight(Raylib.GetCurrentMonitor())
         );
-
-        flags.append(Raylib.FLAG_WINDOW_UNDECORATED);
-
-        flags.setWindowFlags();
 
         Raylib.SetWindowPosition(0, 0);
     }
