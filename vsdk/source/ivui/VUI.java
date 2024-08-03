@@ -953,8 +953,6 @@ public class VUI {
             prevLoadingIconProgress = progress;
         }
 
-        // setLoadingIconTint(loadingIconTint);
-
         loadingIconShader.begin();
 
         image(icon, x, y, scale, tint);
