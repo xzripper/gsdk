@@ -8,6 +8,8 @@ import org.bytedeco.javacpp.FloatPointer;
 
 import vsdk.source.vrender.Texture;
 
+import vsdk.source.utils.VShader;
+
 import static vsdk.source.utils.Range.inRange;
 
 import static vsdk.source.utils.VMath.clamp;
@@ -44,11 +46,13 @@ public class VUI {
 
     private static float strSliderLeftButtonWidth;
 
-    private static Raylib.Shader texelBleedingFixShader, loadingIconShader = null;
+    private static Raylib.Shader texelBleedingFixShader = null;
 
-    private static int loadingIconProgressLoc, loadingIconTintLoc;
+    private static VShader loadingIconShader = null;
 
     private static float prevLoadingIconProgress, loadingIconTint;
+
+    public static final int TOP = 1, VERTICAL = 2, PIE = 3;
 
     /**
      * Load texel bleeding fix shader.
@@ -79,11 +83,9 @@ public class VUI {
     public static void newVuiCtx(VUIStyle style) {
         VUIIO.newCtx(style);
 
-        loadingIconShader = Raylib.LoadShader(null, resolvePath("vsdk/shaders/loading_icon2d.fs"));
+        loadingIconShader = new VShader(null, resolvePath("vsdk/shaders/loading_icon2d.fs"), VShader.FILE);
 
-        loadingIconTintLoc = Raylib.GetShaderLocation(loadingIconShader, "tint");
-
-        loadingIconProgressLoc = Raylib.GetShaderLocation(loadingIconShader, "progress");
+        setLoadingIconMode(TOP);
 
         setLoadingIconTint(0.3f);
 
@@ -110,9 +112,7 @@ public class VUI {
     public static void setLoadingIconTint(float tint) {
         loadingIconTint = (float) clamp(0.0, 1.0, tint);
 
-        assert_t(loadingIconTintLoc == -1, "loadingIconTintLoc == -1: maybe call VUI::newVuiCtx?");
-
-        Raylib.SetShaderValue(loadingIconShader, loadingIconTintLoc, new FloatPointer(loadingIconTint), Raylib.SHADER_UNIFORM_FLOAT);
+        loadingIconShader.setUniformFloat("tint", loadingIconTint);
     }
 
     /**
@@ -123,12 +123,25 @@ public class VUI {
     }
 
     /**
+     * Set loading icon mode.
+     * 
+     * @param mode Mode (Top/Vertical/Pie).
+     */
+    public static void setLoadingIconMode(int mode) {
+        loadingIconShader.rmFragPreProcDefs();
+
+        loadingIconShader.preProcDefsFrag(330, mode == TOP ? "top" : (mode == VERTICAL ? "vertical" : "pie"));
+
+        loadingIconShader.setUniformFloat("tint", loadingIconTint);
+    }
+
+    /**
      * Unload resources (shaders) required by IVUI.
      */
     public static void unloadResources() {
         if(texelBleedingFixAvailable()) unloadTexelBleedingFixShader();
 
-        Raylib.UnloadShader(loadingIconShader);
+        loadingIconShader.unload();
     }
 
     /**
@@ -935,16 +948,18 @@ public class VUI {
         float progress = (float) clamp(0.0, 1.0, pRef.get() == null ? 0.0 : pRef.get());
 
         if(prevLoadingIconProgress != progress) {
-            Raylib.SetShaderValue(loadingIconShader, loadingIconProgressLoc, new FloatPointer(progress), Raylib.SHADER_UNIFORM_FLOAT);
+            loadingIconShader.setUniformFloat("progress", progress);
 
             prevLoadingIconProgress = progress;
         }
 
-        Raylib.BeginShaderMode(loadingIconShader);
+        // setLoadingIconTint(loadingIconTint);
+
+        loadingIconShader.begin();
 
         image(icon, x, y, scale, tint);
 
-        Raylib.EndShaderMode();
+        loadingIconShader.end();
     }
 
     /**
