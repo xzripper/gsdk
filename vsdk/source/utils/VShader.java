@@ -27,6 +27,8 @@ public class VShader {
 
     private String vertexSrc, fragmentSrc;
 
+    private String vertPreProcDefs, fragPreProcDefs;
+
     private int loadType;
 
     public static final int FILE = 1;
@@ -84,48 +86,18 @@ public class VShader {
 
         assert_f(loadFlag == FILE || loadFlag == MEMORY, "expected file or memory shader");
 
-        String vertSrcStr, fragSrcStr;
+        String vertSrcStr = loadFlag == FILE ? (vertex != null ? read(vertex) : null) : vertex;
+        String fragSrcStr = loadFlag == FILE ? (fragment != null ? read(fragment) : null) : fragment;
 
-        if(loadFlag == FILE) {
-            vertSrcStr = vertex != null ? read(vertex) : null;
-            fragSrcStr = fragment != null ? read(fragment) : null;
-        } else {
-            vertSrcStr = vertex;
-            fragSrcStr = fragment;
-        }
-
-        StringBuilder outVert = new StringBuilder();
-        StringBuilder outFrag = new StringBuilder();
-
-        String version = "#version %d\n".formatted(glslVersion);
-
-        if(vertSrcStr != null) outVert.append(version + '\n');
-        if(fragSrcStr != null) outFrag.append(version + '\n');
-
-        if(vertSrcStr != null && ppDefsVert != null) {
-            for(String ppName : ppDefsVert) {
-                outVert.append("#define %s\n".formatted(ppName));
-            }
-        }
-
-        if(fragSrcStr != null && ppDefsFrag != null) {
-            for(String ppName : ppDefsFrag) {
-                outFrag.append("#define %s\n".formatted(ppName));
-            }
-        }
-
-        if(vertSrcStr != null) outVert.append(vertSrcStr.replace(version, ""));
-        if(fragSrcStr != null) outFrag.append(fragSrcStr.replace(version, ""));
-
-        vertexSrc = outVert.toString().replace("\n\n\n", "\n\n");
-        fragmentSrc = outFrag.toString().replace("\n\n\n", "\n\n");
+        vertexSrc = vertSrcStr != null ? applyPreProcDefs(vertSrcStr, glslVersion, ppDefsVert, true) : null;
+        fragmentSrc = fragSrcStr != null ? applyPreProcDefs(fragSrcStr, glslVersion, ppDefsFrag, false) : null;
 
         loadType = loadFlag;
 
         if(load) {
             shader = Raylib.LoadShaderFromMemory(
-                vertexSrc.isEmpty() ? null : vertexSrc,
-                fragmentSrc.isEmpty() ? null : fragmentSrc
+                vertexSrc != null && vertexSrc.isEmpty() ? null : vertexSrc,
+                fragmentSrc != null && fragmentSrc.isEmpty() ? null : fragmentSrc
             );
         }
 
@@ -213,10 +185,55 @@ public class VShader {
         shader = loadFlag == FILE ?
                 Raylib.LoadShader(vertexSrc, fragmentSrc) :
                 Raylib.LoadShaderFromMemory(
-                    vertexSrc.isEmpty() ? null : vertexSrc,
-                    fragmentSrc.isEmpty() ? null : fragmentSrc
+                    vertexSrc != null && vertexSrc.isEmpty() ? null : vertexSrc,
+                    fragmentSrc != null && fragmentSrc.isEmpty() ? null : fragmentSrc
                 );
+
+        refreshLocations();
     }
+
+    /**
+     * Remove LAST preprocessor definitions from vertex.
+     */
+    public void rmVertPreProcDefs() {
+        if(vertPreProcDefs != null && vertexSrc != null) vertexSrc = vertexSrc.replace(vertPreProcDefs, "");
+    }
+
+    /**
+     * Remove LAST preprocessor definitions from fragment.
+     */
+    public void rmFragPreProcDefs() {
+        if(fragPreProcDefs != null && fragmentSrc != null) fragmentSrc = fragmentSrc.replace(fragPreProcDefs, "");
+    }
+
+    /**
+     * Apply preprocessor definitions on vertex shader.
+     * 
+     * @param glslVersion GLSL Version.
+     * @param vertPreProcDefs Vertex preprocessor definitions.
+     */
+    public void preProcDefsVert(int glslVersion, String ...vertPreProcDefs) {
+        assert_t(vertexSrc == null, "can't apply pre-proc definitions on null vertex shader");
+
+        vertexSrc = applyPreProcDefs(vertexSrc, glslVersion, vertPreProcDefs, true);
+
+        reload(MEMORY);
+    }
+
+    /**
+     * Apply preprocessor definitions on fragment shader.
+     * 
+     * @param glslVersion GLSL Version.
+     * @param fragPreProcDefs Fragment preprocessor definitions.
+     */
+    public void preProcDefsFrag(int glslVersion, String ...fragPreProcDefs) {
+        assert_t(fragmentSrc == null, "can't apply pre-proc definitions on null fragment shader");
+
+        fragmentSrc = applyPreProcDefs(fragmentSrc, glslVersion, fragPreProcDefs, false);
+
+        reload(MEMORY);
+    }
+
 
     /**
      * Combine current vertex shader with specified vertex shader(s).
@@ -294,7 +311,7 @@ public class VShader {
      * @param name Uniform name.
      */
     public int getLocation(String name) {
-        if(!locations.containsKey(name)) {
+        if(!locationKnown(name)) {
             locations.put(name, Raylib.GetShaderLocation(shader, name));
         }
 
@@ -419,6 +436,27 @@ public class VShader {
      */
     public void unload() {
         Raylib.UnloadShader(shader);
+    }
+
+    private String applyPreProcDefs(String shader, int glslVersion, String[] shaderPreProcDefs, boolean vert) {
+        StringBuilder appliedPreProc = new StringBuilder();
+
+        String version = "#version %d\n".formatted(glslVersion);
+
+        appliedPreProc.append(version + '\n');
+
+        for(String ppName : shaderPreProcDefs) {
+            appliedPreProc.append("#define %s\n".formatted(ppName));
+        }
+
+        String append = shader.replace(version, "");
+
+        if(vert) vertPreProcDefs = appliedPreProc.toString();
+        else fragPreProcDefs = appliedPreProc.toString();
+ 
+        appliedPreProc.append(append);
+
+        return appliedPreProc.toString().replace("\n\n\n", "\n\n");
     }
 
     private static String combineShaders(String original, String target) {
