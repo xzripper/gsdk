@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import vsdk.source.vectors.Vector2Di;
 
-import vsdk.source.utils.VPolygon2D;
+import static vsdk.source.utils.VPolygon2D.Polygon;;
 
 /**
  * Pixel Collider Container.
@@ -115,25 +115,7 @@ public class PixelColliderContainer {
     }
 
     /**
-     * Rotate point.
-     *
-     * @param x X.
-     * @param y Y.
-     * @param originX Origin X.
-     * @param originY Origin Y.
-     * @param angle Angle.
-     */
-    public static int[] rotatePoint(int x, int y, int originX, int originY, double angle) {
-        double radians = Math.toRadians(angle);
-
-        return new int[] {
-            (int) ((x - originX) * Math.cos(radians) - (y - originY) * Math.sin(radians)),
-            (int) ((x - originX) * Math.sin(radians) + (y - originY) * Math.cos(radians))
-        };
-    }
-
-    /**
-     * Generate rectangle as points array.
+     * Generate a rectangle as an array of points.
      *
      * @param width Rectangle width.
      * @param height Rectangle height.
@@ -151,7 +133,7 @@ public class PixelColliderContainer {
     }
 
     /**
-     * Generate rectangle as points array.
+     * Generate a circle as an array of points.
      *
      * @param radius Circle radius.
      */
@@ -170,7 +152,30 @@ public class PixelColliderContainer {
     }
 
     /**
-     * Generate line as points array.
+     * Generate an ellipse as an array of points.
+     *
+     * @param width  Ellipse width.
+     * @param height Ellipse height.
+     */
+    public static PixelColliderContainer ellipse(int width, int height) {
+        ArrayList<int[]> points = new ArrayList<>();
+
+        double rx = width / 2.0;
+        double ry = height / 2.0;
+
+        for(int y = -height / 2; y <= height / 2; y++) {
+            for(int x = -width / 2; x <= width / 2; x++) {
+                if((x * x) / (rx * rx) + (y * y) / (ry * ry) <= 1) {
+                    points.add(new int[]{x + width / 2, y + height / 2});
+                }
+            }
+        }
+
+        return _createContainer(points);
+    }
+
+    /**
+     * Generate a line as a point array.
      * 
      * @param startX Line start X.
      * @param startY Line start Y.
@@ -210,11 +215,11 @@ public class PixelColliderContainer {
     }
 
     /**
-     * Generate polygon as points array.
+     * Generate polygon as array of points.
      * 
      * @param polygon Polygon.
      */
-    public static PixelColliderContainer polygon(VPolygon2D.Polygon polygon) {
+    public static PixelColliderContainer polygon(Polygon polygon) {
         ArrayList<int[]> points = new ArrayList<>();
 
         for(int v=0; v < polygon.getLength(); v++) {
@@ -229,6 +234,15 @@ public class PixelColliderContainer {
         }
 
         return _createContainer(points);
+    }
+
+    protected static int[] rotatePoint(int x, int y, int originX, int originY, double angle) {
+        double radians = Math.toRadians(angle);
+
+        return new int[] {
+            (int) ((x - originX) * Math.cos(radians) - (y - originY) * Math.sin(radians)),
+            (int) ((x - originX) * Math.sin(radians) + (y - originY) * Math.cos(radians))
+        };
     }
 
     private static PixelColliderContainer _createContainer(ArrayList<int[]> points) {
