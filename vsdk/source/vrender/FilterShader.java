@@ -4,13 +4,15 @@ import com.raylib.Raylib;
 
 import static com.raylib.Jaylib.WHITE;
 
+import vsdk.source.utils.VShader;
+
 /**
  * Filter Shader or Post Processing Shader simplified.
  */
 public class FilterShader {
     private final Raylib.RenderTexture filterTex;
 
-    private final Raylib.Shader filterShader;
+    private final VShader filterShader;
 
     /**
      * Initialize filter.
@@ -19,7 +21,7 @@ public class FilterShader {
      * @param areaH Filter area height.
      * @param filterShader_ Filter shader.
      */
-    public FilterShader(int areaW, int areaH, Raylib.Shader filterShader_) {
+    public FilterShader(int areaW, int areaH, VShader filterShader_) {
         filterTex = Raylib.LoadRenderTexture(areaW, areaH);
 
         filterShader = filterShader_;
@@ -35,7 +37,7 @@ public class FilterShader {
     /**
      * Get filter shader.
      */
-    public Raylib.Shader getFilterShader() {
+    public VShader getFilterShader() {
         return filterShader;
     }
 
@@ -57,7 +59,7 @@ public class FilterShader {
      * Render filter and all content in it.
      */
     public void renderFilter() {
-        Raylib.BeginShaderMode(filterShader);
+        filterShader.begin();
 
         Raylib.DrawTextureRec(
             filterTex.texture(), new Raylib.Rectangle()
@@ -65,7 +67,7 @@ public class FilterShader {
                 .width((float) filterTex.texture().width()).height((float) -filterTex.texture().height()),
             new Raylib.Vector2().x(0).y(0), WHITE);
 
-        Raylib.EndShaderMode();
+        filterShader.end();
     }
 
     /**
@@ -74,6 +76,6 @@ public class FilterShader {
     public void unloadFilter() {
         Raylib.UnloadRenderTexture(filterTex);
 
-        Raylib.UnloadShader(filterShader);
+        filterShader.unload();
     }
 }
