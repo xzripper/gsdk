@@ -1,4 +1,4 @@
-package gsdk.source.utils;
+package gsdk.source.generic;
 
 import com.raylib.Raylib;
 

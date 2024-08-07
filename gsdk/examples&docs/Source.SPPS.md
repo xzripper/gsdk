@@ -5,7 +5,7 @@ import com.raylib.Raylib;
 import gsdk.source.spps.PixelColliderContainer;
 import gsdk.source.spps.SPCData;
 import gsdk.source.spps.SpritePixelCollider;
-import gsdk.source.utils.VPolygon2D;
+import gsdk.source.generic.VPolygon2D;
 import gsdk.source.vectors.Vector2Di;
 
 import static com.raylib.Jaylib.BLACK;

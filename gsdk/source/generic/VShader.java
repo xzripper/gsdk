@@ -1,4 +1,4 @@
-package gsdk.source.utils;
+package gsdk.source.generic;
 
 import com.raylib.Raylib;
 
@@ -10,8 +10,8 @@ import org.bytedeco.javacpp.FloatPointer;
 
 import static gsdk.vlib.futils.FReadUtil.read;
 
-import static gsdk.source.utils.Assert.assert_t;
-import static gsdk.source.utils.Assert.assert_f;
+import static gsdk.source.generic.Assert.assert_t;
+import static gsdk.source.generic.Assert.assert_f;
 
 /**
  * VShader is a high-level abstraction level for shaders in Raylib.

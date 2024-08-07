@@ -7,7 +7,7 @@ import com.raylib.Raylib;
 
 import gsdk.source.vrender.Texture;
 
-import gsdk.source.utils.VMath;
+import gsdk.source.generic.VMath;
 
 import gsdk.source.vectors.Vector2Df;
 

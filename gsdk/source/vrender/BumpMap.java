@@ -4,7 +4,7 @@ import com.raylib.Raylib;
 
 import org.bytedeco.javacpp.FloatPointer;
 
-import static gsdk.source.utils.Assert.assert_f;
+import static gsdk.source.generic.Assert.assert_f;
 
 import static gsdk.r_utilities.PathResolver.resolvePath;
 

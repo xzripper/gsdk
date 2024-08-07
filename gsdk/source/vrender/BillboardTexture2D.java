@@ -8,7 +8,7 @@ import static com.raylib.Jaylib.BLANK;
 
 import gsdk.source.vectors.Vector3Df;
 
-import static gsdk.source.utils.Assert.assert_f;
+import static gsdk.source.generic.Assert.assert_f;
 
 /**
  * Makes any Raylib drawable object turn into billboard.

@@ -15,7 +15,7 @@ It allows you to read or write XML easier and faster.
 ```java
 import gsdk.vlib.ezxml.EzXML;
 
-import static gsdk.source.utils.Assert.assert_t;
+import static gsdk.source.generic.Assert.assert_t;
 
 public class Main {
     public static void main(String[] args) {
@@ -46,7 +46,7 @@ import org.w3c.dom.Element;
 
 import gsdk.vlib.ezxml.EzXML;
 
-import static gsdk.source.utils.Assert.assert_t;
+import static gsdk.source.generic.Assert.assert_t;
 
 public class Main {
     public static void main(String[] args) {

@@ -6,9 +6,9 @@ import static com.raylib.Jaylib.WHITE;
 
 import gsdk.source.vectors.Vector2Di;
 
-import static gsdk.source.utils.Range.inRange;
+import static gsdk.source.generic.Range.inRange;
 
-import static gsdk.source.utils.Assert.assert_f;
+import static gsdk.source.generic.Assert.assert_f;
 
 /**
  * Helper class for Raylib.Texture.

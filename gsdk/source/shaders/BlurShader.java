@@ -2,13 +2,13 @@ package gsdk.source.shaders;
 
 import gsdk.source.vectors.Vector2Di;
 
-import gsdk.source.utils.VShader;
+import gsdk.source.generic.VShader;
 
-import static gsdk.source.utils.VLogger.warning;
+import static gsdk.source.generic.VLogger.warning;
 
 import static gsdk.r_utilities.PathResolver.resolvePath;
 
-import static gsdk.source.utils.Assert.assert_t;
+import static gsdk.source.generic.Assert.assert_t;
 
 /**
  * Utility class for using blur shader.

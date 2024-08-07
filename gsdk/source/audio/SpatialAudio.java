@@ -2,11 +2,11 @@ package gsdk.source.audio;
 
 import com.raylib.Raylib;
 
-import gsdk.source.utils.VMath;
+import gsdk.source.generic.VMath;
 
 import gsdk.source.vectors.Vector3Df;
 
-import static gsdk.source.utils.Assert.assert_f;
+import static gsdk.source.generic.Assert.assert_f;
 
 /**
  * Spatial audio implementation (ALPHA): https://github.com/orgs/violent-studio/projects/1/views/1?pane=issue&itemId=63421011 (Reworked some things).

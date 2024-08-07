@@ -1,10 +1,10 @@
-package gsdk.source.utils;
+package gsdk.source.generic;
 
 import java.util.function.Consumer;
 
-import static gsdk.source.utils.Range.inRange;
+import static gsdk.source.generic.Range.inRange;
 
-import static gsdk.source.utils.Assert.assert_f;
+import static gsdk.source.generic.Assert.assert_f;
 
 /**
  * Scene manager utility.

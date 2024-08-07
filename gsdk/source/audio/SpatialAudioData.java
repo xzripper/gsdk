@@ -4,9 +4,9 @@ import com.raylib.Raylib;
 
 import gsdk.source.vectors.Vector3Df;
 
-import static gsdk.source.utils.Range.inRange;
+import static gsdk.source.generic.Range.inRange;
 
-import static gsdk.source.utils.Assert.assert_t;
+import static gsdk.source.generic.Assert.assert_t;
 
 /**
  * Spatial Audio Data Class.

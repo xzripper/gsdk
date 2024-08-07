@@ -8,16 +8,16 @@ import org.bytedeco.javacpp.FloatPointer;
 
 import gsdk.source.vrender.Texture;
 
-import gsdk.source.utils.VShader;
+import gsdk.source.generic.VShader;
 
-import static gsdk.source.utils.Range.inRange;
+import static gsdk.source.generic.Range.inRange;
 
-import static gsdk.source.utils.VMath.clamp;
-import static gsdk.source.utils.VMath.scale;
+import static gsdk.source.generic.VMath.clamp;
+import static gsdk.source.generic.VMath.scale;
 
 import static gsdk.r_utilities.PathResolver.resolvePath;
 
-import static gsdk.source.utils.Assert.assert_t;
+import static gsdk.source.generic.Assert.assert_t;
 
 /**
  * Main Violent User Interface Class.

@@ -2,7 +2,7 @@ package gsdk.source.ivui;
 
 import com.raylib.Raylib;
 
-import static gsdk.source.utils.Assert.assert_f;
+import static gsdk.source.generic.Assert.assert_f;
 
 /**
  * VUI Font.

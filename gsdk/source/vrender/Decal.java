@@ -4,9 +4,9 @@ import com.raylib.Raylib;
 
 import gsdk.source.vectors.Vector3Df;
 
-import static gsdk.source.utils.VMath.PI;
+import static gsdk.source.generic.VMath.PI;
 
-import static gsdk.source.utils.Assert.assert_f;
+import static gsdk.source.generic.Assert.assert_f;
 
 /**
  * 3D Plane Decal.

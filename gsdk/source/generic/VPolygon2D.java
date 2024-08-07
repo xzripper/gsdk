@@ -1,10 +1,10 @@
-package gsdk.source.utils;
+package gsdk.source.generic;
 
 import com.raylib.Raylib;
 
 import gsdk.source.vectors.Vector2Di;
 
-import static gsdk.source.utils.Assert.assert_t;
+import static gsdk.source.generic.Assert.assert_t;
 
 /**
  * Utility class for working with polygons.

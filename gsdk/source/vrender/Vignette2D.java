@@ -8,14 +8,14 @@ import org.bytedeco.javacpp.FloatPointer;
 
 import gsdk.source.vectors.Vector3Df;
 
-import static gsdk.source.utils.Range.inRange;
+import static gsdk.source.generic.Range.inRange;
 
-import static gsdk.source.utils.VLogger.warning;
+import static gsdk.source.generic.VLogger.warning;
 
-import static gsdk.source.utils.VMath.clamp;
+import static gsdk.source.generic.VMath.clamp;
 
-import static gsdk.source.utils.Assert.assert_t;
-import static gsdk.source.utils.Assert.assert_f;
+import static gsdk.source.generic.Assert.assert_t;
+import static gsdk.source.generic.Assert.assert_f;
 
 import static gsdk.r_utilities.PathResolver.resolvePath;
 

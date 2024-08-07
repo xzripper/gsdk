@@ -4,7 +4,7 @@ import com.raylib.Raylib;
 
 import static com.raylib.Jaylib.WHITE;
 
-import gsdk.source.utils.VShader;
+import gsdk.source.generic.VShader;
 
 /**
  * Filter Shader or Post Processing Shader simplified.

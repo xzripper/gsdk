@@ -37,13 +37,13 @@ import gsdk.source.vectors.Vector4Di;
 import gsdk.source.vectors.Vector3Df;
 import gsdk.source.vectors.Vector2Df;
 
-import static gsdk.source.utils.ImagePixelsFilter.filterPixels;
+import static gsdk.source.generic.ImagePixelsFilter.filterPixels;
 
-import static gsdk.source.utils.VMath.clamp;
+import static gsdk.source.generic.VMath.clamp;
 
-import static gsdk.source.utils.VLogger.warning;
+import static gsdk.source.generic.VLogger.warning;
 
-import static gsdk.source.utils.Assert.assert_t;
+import static gsdk.source.generic.Assert.assert_t;
 
 import static gsdk.r_utilities.PathResolver.resolvePath;
 
