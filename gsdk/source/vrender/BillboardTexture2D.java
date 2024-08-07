@@ -1,4 +1,4 @@
-package vsdk.source.vrender;
+package gsdk.source.vrender;
 
 import com.raylib.Raylib;
 
@@ -6,9 +6,9 @@ import static com.raylib.Jaylib.WHITE;
 
 import static com.raylib.Jaylib.BLANK;
 
-import vsdk.source.vectors.Vector3Df;
+import gsdk.source.vectors.Vector3Df;
 
-import static vsdk.source.utils.Assert.assert_f;
+import static gsdk.source.utils.Assert.assert_f;
 
 /**
  * Makes any Raylib drawable object turn into billboard.

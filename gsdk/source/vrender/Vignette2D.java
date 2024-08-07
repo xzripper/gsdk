@@ -1,4 +1,4 @@
-package vsdk.source.vrender;
+package gsdk.source.vrender;
 
 import com.raylib.Raylib;
 
@@ -6,18 +6,18 @@ import static com.raylib.Jaylib.BLANK;
 
 import org.bytedeco.javacpp.FloatPointer;
 
-import vsdk.source.vectors.Vector3Df;
+import gsdk.source.vectors.Vector3Df;
 
-import static vsdk.source.utils.Range.inRange;
+import static gsdk.source.utils.Range.inRange;
 
-import static vsdk.source.utils.VLogger.warning;
+import static gsdk.source.utils.VLogger.warning;
 
-import static vsdk.source.utils.VMath.clamp;
+import static gsdk.source.utils.VMath.clamp;
 
-import static vsdk.source.utils.Assert.assert_t;
-import static vsdk.source.utils.Assert.assert_f;
+import static gsdk.source.utils.Assert.assert_t;
+import static gsdk.source.utils.Assert.assert_f;
 
-import static vsdk.r_utilities.PathResolver.resolvePath;
+import static gsdk.r_utilities.PathResolver.resolvePath;
 
 /**
  * 2D Vignette.
@@ -64,7 +64,7 @@ public class Vignette2D {
         vPosX = vPosX_;
         vPosY = vPosY_;
 
-        vShader = Raylib.LoadShader(null, resolvePath("vsdk/shaders/vignette2d.fs"));
+        vShader = Raylib.LoadShader(null, resolvePath("gsdk/shaders/vignette2d.fs"));
 
         assert_f(Raylib.IsShaderReady(vShader), "vShader != valid");
 

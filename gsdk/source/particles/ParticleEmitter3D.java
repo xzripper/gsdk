@@ -22,7 +22,7 @@
  * - Improve code quality (generic).
  */
 
-package vsdk.source.particles;
+package gsdk.source.particles;
 
 import com.raylib.Raylib;
 
@@ -30,22 +30,22 @@ import java.util.Random;
 
 import org.bytedeco.javacpp.FloatPointer;
 
-import vsdk.source.vrender.Texture;
+import gsdk.source.vrender.Texture;
 
-import vsdk.source.vectors.Vector4Df;
-import vsdk.source.vectors.Vector4Di;
-import vsdk.source.vectors.Vector3Df;
-import vsdk.source.vectors.Vector2Df;
+import gsdk.source.vectors.Vector4Df;
+import gsdk.source.vectors.Vector4Di;
+import gsdk.source.vectors.Vector3Df;
+import gsdk.source.vectors.Vector2Df;
 
-import static vsdk.source.utils.ImagePixelsFilter.filterPixels;
+import static gsdk.source.utils.ImagePixelsFilter.filterPixels;
 
-import static vsdk.source.utils.VMath.clamp;
+import static gsdk.source.utils.VMath.clamp;
 
-import static vsdk.source.utils.VLogger.warning;
+import static gsdk.source.utils.VLogger.warning;
 
-import static vsdk.source.utils.Assert.assert_t;
+import static gsdk.source.utils.Assert.assert_t;
 
-import static vsdk.r_utilities.PathResolver.resolvePath;
+import static gsdk.r_utilities.PathResolver.resolvePath;
 
 /**
  * 3D particle emitter for the VSDK project: VFlux.
@@ -80,7 +80,7 @@ public class ParticleEmitter3D {
 
         particleContainer = new Particle[emitterConfig.getMaxParticles()];
 
-        pixelsFormatShader = Raylib.LoadShader(null, resolvePath("vsdk/shaders/pe3d_ppfilter.fs"));
+        pixelsFormatShader = Raylib.LoadShader(null, resolvePath("gsdk/shaders/pe3d_ppfilter.fs"));
 
         pixelsFormatShaderThresholdLoc = Raylib.GetShaderLocation(pixelsFormatShader, "threshold");
 

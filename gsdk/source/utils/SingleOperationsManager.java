@@ -1,4 +1,4 @@
-package vsdk.source.utils;
+package gsdk.source.utils;
 
 import java.util.ArrayList;
 

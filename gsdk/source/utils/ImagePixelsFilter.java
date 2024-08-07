@@ -1,12 +1,12 @@
-package vsdk.source.utils;
+package gsdk.source.utils;
 
 import com.raylib.Raylib;
 
 import static com.raylib.Jaylib.BLANK;
 
-import vsdk.source.vectors.Vector4Di;
+import gsdk.source.vectors.Vector4Di;
 
-import static vsdk.source.utils.VMath.tolerance;
+import static gsdk.source.utils.VMath.tolerance;
 
 /**
  * Utility class for filtering image pixels.

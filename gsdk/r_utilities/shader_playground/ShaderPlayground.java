@@ -1,4 +1,4 @@
-package vsdk.r_utilities.shader_playground;
+package gsdk.r_utilities.shader_playground;
 
 import com.raylib.Raylib;
 
@@ -26,20 +26,20 @@ import org.bytedeco.javacpp.IntPointer;
 
 import org.bytedeco.javacpp.FloatPointer;
 
-import vsdk.sdk_vendor.jlImGui.JaylibImGui;
+import gsdk.sdk_vendor.jlImGui.JaylibImGui;
 
-import static vsdk.source.utils.WindowUtilities.setWinIcon;
+import static gsdk.source.utils.WindowUtilities.setWinIcon;
 
-import static vsdk.source.imthemes.ImGuiDeepDarkTheme.updateTheme;
+import static gsdk.source.imthemes.ImGuiDeepDarkTheme.updateTheme;
 
-import static vsdk.r_utilities.PathResolver.resolvePath;
+import static gsdk.r_utilities.PathResolver.resolvePath;
 
-import static vsdk.r_utilities.PathResolver.getLastPathFile;
+import static gsdk.r_utilities.PathResolver.getLastPathFile;
 
 public class ShaderPlayground {
     public static final String WINDOW_TITLE = "VSDK | Shader Playground.";
 
-    public static final String WINDOW_IMGUI_FONT = "vsdk/resources/Lato-Regular.ttf";
+    public static final String WINDOW_IMGUI_FONT = "gsdk/resources/Lato-Regular.ttf";
 
     public static final int WINDOW_IMGUI_FONT_SIZE = 16;
 
@@ -58,7 +58,7 @@ public class ShaderPlayground {
 
         Raylib.InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
 
-        setWinIcon("vsdk/resources/vicon.png", true);
+        setWinIcon("gsdk/resources/vicon.png", true);
 
         Raylib.SetWindowMinSize(WINDOW_WIDTH - 15, WINDOW_HEIGHT - 15);
 
@@ -95,11 +95,11 @@ public class ShaderPlayground {
         float[] cMeshCol = new float[] {1.0f, 1.0f, 1.0f, 1.0f};
 
         // Shader setup.
-        final String defFragShader = resolvePath("vsdk/r_utilities/shader_playground/shaders/deffrag.fs");
-        final String defVertShader = resolvePath("vsdk/r_utilities/shader_playground/shaders/defvert.vs");
+        final String defFragShader = resolvePath("gsdk/r_utilities/shader_playground/shaders/deffrag.fs");
+        final String defVertShader = resolvePath("gsdk/r_utilities/shader_playground/shaders/defvert.vs");
 
-        final String waveFShaderPath = resolvePath("vsdk/r_utilities/shader_playground/shaders/wave.fs");
-        final String waveVShaderPath = resolvePath("vsdk/r_utilities/shader_playground/shaders/wave.vs");
+        final String waveFShaderPath = resolvePath("gsdk/r_utilities/shader_playground/shaders/wave.fs");
+        final String waveVShaderPath = resolvePath("gsdk/r_utilities/shader_playground/shaders/wave.vs");
 
         final Raylib.Shader defShader = Raylib.LoadShader(defVertShader, defFragShader);
 
@@ -121,7 +121,7 @@ public class ShaderPlayground {
         ImBoolean rCTexState = new ImBoolean(true);
 
         // Texture setup.
-        Raylib.Texture cTexture = Raylib.LoadTexture(resolvePath("vsdk/r_utilities/shader_playground/resources/ctex_prot.png"));
+        Raylib.Texture cTexture = Raylib.LoadTexture(resolvePath("gsdk/r_utilities/shader_playground/resources/ctex_prot.png"));
 
         String cTextureRepr = "ctex_prot";
 

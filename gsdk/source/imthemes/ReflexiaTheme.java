@@ -1,4 +1,4 @@
-package vsdk.source.imthemes;
+package gsdk.source.imthemes;
 
 import imgui.ImGui;
 

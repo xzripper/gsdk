@@ -1,4 +1,4 @@
-package vsdk.source.utils;
+package gsdk.source.utils;
 
 /**
  * Violent Unit (VU) (N: 10, VU: 72.5 [* 7.25]).

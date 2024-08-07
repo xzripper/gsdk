@@ -1,11 +1,11 @@
-package vsdk.source.vrender;
+package gsdk.source.vrender;
 
 import com.raylib.Raylib;
 
 import static com.raylib.Jaylib.BLACK;
 
-import vsdk.sdk_vendor.org.apfelstrudel.tech.dynstatj.DynStat;
-import vsdk.sdk_vendor.org.apfelstrudel.tech.dynstatj.DynStatEffect;
+import gsdk.sdk_vendor.org.apfelstrudel.tech.dynstatj.DynStat;
+import gsdk.sdk_vendor.org.apfelstrudel.tech.dynstatj.DynStatEffect;
 
 /**
  * Utility for screen fading.

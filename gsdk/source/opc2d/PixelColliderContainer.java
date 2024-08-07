@@ -1,10 +1,10 @@
-package vsdk.source.opc2d;
+package gsdk.source.opc2d;
 
 import java.util.ArrayList;
 
-import vsdk.source.vectors.Vector2Di;
+import gsdk.source.vectors.Vector2Di;
 
-import static vsdk.source.utils.VPolygon2D.Polygon;;
+import static gsdk.source.utils.VPolygon2D.Polygon;;
 
 /**
  * Pixel Collider Container.

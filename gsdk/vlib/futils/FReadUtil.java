@@ -1,4 +1,4 @@
-package vsdk.vlib.futils;
+package gsdk.vlib.futils;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

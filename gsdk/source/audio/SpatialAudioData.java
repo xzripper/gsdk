@@ -1,12 +1,12 @@
-package vsdk.source.audio;
+package gsdk.source.audio;
 
 import com.raylib.Raylib;
 
-import vsdk.source.vectors.Vector3Df;
+import gsdk.source.vectors.Vector3Df;
 
-import static vsdk.source.utils.Range.inRange;
+import static gsdk.source.utils.Range.inRange;
 
-import static vsdk.source.utils.Assert.assert_t;
+import static gsdk.source.utils.Assert.assert_t;
 
 /**
  * Spatial Audio Data Class.

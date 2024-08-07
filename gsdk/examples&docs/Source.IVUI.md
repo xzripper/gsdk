@@ -5,13 +5,13 @@ IVUI is an immediate mode graphical user interface designed for simple, fast, cu
 ```java
 import com.raylib.Raylib;
 
-import vsdk.source.vrender.Texture;
+import gsdk.source.vrender.Texture;
 
-import vsdk.source.utils.VMath;
+import gsdk.source.utils.VMath;
 
-import vsdk.source.vectors.Vector2Df;
+import gsdk.source.vectors.Vector2Df;
 
-import vsdk.source.ivui.*;
+import gsdk.source.ivui.*;
 
 public class Main {
     public static void main(String[] args) {

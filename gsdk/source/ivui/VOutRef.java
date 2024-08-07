@@ -1,4 +1,4 @@
-package vsdk.source.ivui;
+package gsdk.source.ivui;
 
 /**
  * Reference (getter/setter) for editable objects.

@@ -1,9 +1,9 @@
-package vsdk.source.vrender;
+package gsdk.source.vrender;
 
-import vsdk.source.vectors.Vector3Df;
-import vsdk.source.vectors.Vector2Df;
+import gsdk.source.vectors.Vector3Df;
+import gsdk.source.vectors.Vector2Df;
 
-import static vsdk.source.vectors.Vector3Df.vec3df;
+import static gsdk.source.vectors.Vector3Df.vec3df;
 
 import com.raylib.Raylib;
 

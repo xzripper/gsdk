@@ -1,4 +1,4 @@
-package vsdk.r_utilities.shader_playground;
+package gsdk.r_utilities.shader_playground;
 
 public class ShaderUniform<T> {
     private final String uName;

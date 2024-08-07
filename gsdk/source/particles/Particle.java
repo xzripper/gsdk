@@ -1,4 +1,4 @@
-package vsdk.source.particles;
+package gsdk.source.particles;
 
 // Particle structure.
 class Particle {

@@ -1,4 +1,4 @@
-package vsdk.source.structures;
+package gsdk.source.structures;
 
 import java.util.ArrayList;
 

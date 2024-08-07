@@ -1,4 +1,4 @@
-package vsdk.source.ivui;
+package gsdk.source.ivui;
 
 import com.raylib.Raylib;
 
@@ -6,18 +6,18 @@ import java.util.ArrayList;
 
 import org.bytedeco.javacpp.FloatPointer;
 
-import vsdk.source.vrender.Texture;
+import gsdk.source.vrender.Texture;
 
-import vsdk.source.utils.VShader;
+import gsdk.source.utils.VShader;
 
-import static vsdk.source.utils.Range.inRange;
+import static gsdk.source.utils.Range.inRange;
 
-import static vsdk.source.utils.VMath.clamp;
-import static vsdk.source.utils.VMath.scale;
+import static gsdk.source.utils.VMath.clamp;
+import static gsdk.source.utils.VMath.scale;
 
-import static vsdk.r_utilities.PathResolver.resolvePath;
+import static gsdk.r_utilities.PathResolver.resolvePath;
 
-import static vsdk.source.utils.Assert.assert_t;
+import static gsdk.source.utils.Assert.assert_t;
 
 /**
  * Main Violent User Interface Class.
@@ -58,7 +58,7 @@ public class VUI {
      * Load texel bleeding fix shader.
      */
     public static void loadTexelBleedingFixShader() {
-        texelBleedingFixShader = Raylib.LoadShader(null, resolvePath("vsdk/shaders/texel_bleeding_fix2d.fs"));
+        texelBleedingFixShader = Raylib.LoadShader(null, resolvePath("gsdk/shaders/texel_bleeding_fix2d.fs"));
     }
 
     /**
@@ -83,7 +83,7 @@ public class VUI {
     public static void newVuiCtx(VUIStyle style) {
         VUIIO.newCtx(style);
 
-        loadingIconShader = new VShader(null, resolvePath("vsdk/shaders/loading_icon2d.fs"), VShader.FILE);
+        loadingIconShader = new VShader(null, resolvePath("gsdk/shaders/loading_icon2d.fs"), VShader.FILE);
 
         setLoadingIconMode(TOP);
 

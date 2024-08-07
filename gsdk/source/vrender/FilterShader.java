@@ -1,10 +1,10 @@
-package vsdk.source.vrender;
+package gsdk.source.vrender;
 
 import com.raylib.Raylib;
 
 import static com.raylib.Jaylib.WHITE;
 
-import vsdk.source.utils.VShader;
+import gsdk.source.utils.VShader;
 
 /**
  * Filter Shader or Post Processing Shader simplified.

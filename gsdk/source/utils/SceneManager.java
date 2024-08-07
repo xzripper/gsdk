@@ -1,10 +1,10 @@
-package vsdk.source.utils;
+package gsdk.source.utils;
 
 import java.util.function.Consumer;
 
-import static vsdk.source.utils.Range.inRange;
+import static gsdk.source.utils.Range.inRange;
 
-import static vsdk.source.utils.Assert.assert_f;
+import static gsdk.source.utils.Assert.assert_f;
 
 /**
  * Scene manager utility.

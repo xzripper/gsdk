@@ -1,12 +1,12 @@
-package vsdk.source.vrender;
+package gsdk.source.vrender;
 
 import com.raylib.Raylib;
 
-import vsdk.source.vectors.Vector3Df;
+import gsdk.source.vectors.Vector3Df;
 
-import static vsdk.source.utils.VMath.PI;
+import static gsdk.source.utils.VMath.PI;
 
-import static vsdk.source.utils.Assert.assert_f;
+import static gsdk.source.utils.Assert.assert_f;
 
 /**
  * 3D Plane Decal.

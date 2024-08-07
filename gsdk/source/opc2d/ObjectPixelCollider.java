@@ -12,10 +12,10 @@
  * To integrate OPC2D into your project, simply move the files written above to your project directory.
  *
  * Violent Studio :: VSDK 2024
- * https://github.com/violent-studio/vsdk
+ * https://github.com/violent-studio/gsdk
  */
 
-package vsdk.source.opc2d;
+package gsdk.source.opc2d;
 
 import com.raylib.Raylib;
 
@@ -27,11 +27,11 @@ import java.util.HashSet;
 
 import static java.util.Objects.hash;
 
-import vsdk.source.vectors.Vector2Di;
+import gsdk.source.vectors.Vector2Di;
 
-import vsdk.source.structures.QuadTree;
+import gsdk.source.structures.QuadTree;
 
-import static vsdk.source.utils.Assert.assert_f;
+import static gsdk.source.utils.Assert.assert_f;
 
 class CollisionPoint {
     int x, y;

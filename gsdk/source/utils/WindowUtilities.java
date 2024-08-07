@@ -1,8 +1,8 @@
-package vsdk.source.utils;
+package gsdk.source.utils;
 
 import com.raylib.Raylib;
 
-import static vsdk.r_utilities.PathResolver.resolvePath;
+import static gsdk.r_utilities.PathResolver.resolvePath;
 
 /**
  * Class for window utilities.

@@ -1,4 +1,4 @@
-package vsdk.r_utilities.shader_playground;
+package gsdk.r_utilities.shader_playground;
 
 import java.util.ArrayList;
 

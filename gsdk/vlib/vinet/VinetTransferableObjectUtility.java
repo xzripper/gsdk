@@ -1,4 +1,4 @@
-package vsdk.vlib.vinet;
+package gsdk.vlib.vinet;
 
 import static java.util.Arrays.stream;
 

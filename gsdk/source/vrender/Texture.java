@@ -1,14 +1,14 @@
-package vsdk.source.vrender;
+package gsdk.source.vrender;
 
 import com.raylib.Raylib;
 
 import static com.raylib.Jaylib.WHITE;
 
-import vsdk.source.vectors.Vector2Di;
+import gsdk.source.vectors.Vector2Di;
 
-import static vsdk.source.utils.Range.inRange;
+import static gsdk.source.utils.Range.inRange;
 
-import static vsdk.source.utils.Assert.assert_f;
+import static gsdk.source.utils.Assert.assert_f;
 
 /**
  * Helper class for Raylib.Texture.

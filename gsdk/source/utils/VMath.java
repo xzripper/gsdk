@@ -1,9 +1,9 @@
-package vsdk.source.utils;
+package gsdk.source.utils;
 
 import java.util.Arrays;
 
-import vsdk.source.vectors.Vector2Df;
-import vsdk.source.vectors.Vector3Df;
+import gsdk.source.vectors.Vector2Df;
+import gsdk.source.vectors.Vector3Df;
 
 /**
  * VMath: VSDK Math has useful functions & constants for development math.

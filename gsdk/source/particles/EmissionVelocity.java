@@ -1,4 +1,4 @@
-package vsdk.source.particles;
+package gsdk.source.particles;
 
 /**
  * Class-utility for saving/calculating velocities.

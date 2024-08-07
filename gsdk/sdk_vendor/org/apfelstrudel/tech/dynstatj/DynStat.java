@@ -1,6 +1,6 @@
 // Apfelstrudel Technologien Dynamic States System.
 
-package vsdk.sdk_vendor.org.apfelstrudel.tech.dynstatj;
+package gsdk.sdk_vendor.org.apfelstrudel.tech.dynstatj;
 
 import java.util.ArrayList;
 

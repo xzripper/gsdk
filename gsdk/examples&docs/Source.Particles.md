@@ -3,13 +3,13 @@
 import com.raylib.Raylib;
 
 import com.raylib.Jaylib.Vector3;
-import vsdk.source.particles.*;
-import vsdk.source.vectors.Vector3Df;
-import vsdk.source.vectors.Vector3Di;
-import vsdk.source.vrender.Texture;
+import gsdk.source.particles.*;
+import gsdk.source.vectors.Vector3Df;
+import gsdk.source.vectors.Vector3Di;
+import gsdk.source.vrender.Texture;
 
 import static com.raylib.Jaylib.BLACK;
-import static vsdk.source.vectors.Vector3Df.vec3df;
+import static gsdk.source.vectors.Vector3Df.vec3df;
 
 
 // in development

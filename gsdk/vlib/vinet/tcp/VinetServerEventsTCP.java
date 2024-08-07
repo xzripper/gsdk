@@ -1,4 +1,4 @@
-package vsdk.vlib.vinet.tcp;
+package gsdk.vlib.vinet.tcp;
 
 /**
  * Networking server events.

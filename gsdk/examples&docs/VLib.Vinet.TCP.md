@@ -2,11 +2,11 @@ Example of creating simple TCP chat.
 
 Client:
 ```java
-import vsdk.vlib.vinet.tcp.VinetClientTCP;
-import vsdk.vlib.vinet.tcp.VinetClientEventsTCP;
-import vsdk.vlib.vinet.tcp.VinetClientServer;
+import gsdk.vlib.vinet.tcp.VinetClientTCP;
+import gsdk.vlib.vinet.tcp.VinetClientEventsTCP;
+import gsdk.vlib.vinet.tcp.VinetClientServer;
 
-import vsdk.vlib.vinet.VinetTransferableObjectUtility;
+import gsdk.vlib.vinet.VinetTransferableObjectUtility;
 
 import java.util.Scanner;
 
@@ -91,11 +91,11 @@ public class ClientTest {
 
 Server:
 ```java
-import vsdk.vlib.vinet.VinetServerTCP;
-import vsdk.vlib.vinet.VinetServerClient;
-import vsdk.vlib.vinet.VinetServerEventsTCP;
+import gsdk.vlib.vinet.VinetServerTCP;
+import gsdk.vlib.vinet.VinetServerClient;
+import gsdk.vlib.vinet.VinetServerEventsTCP;
 
-import vsdk.vlib.vinet.VinetTransferableObjectUtility;
+import gsdk.vlib.vinet.VinetTransferableObjectUtility;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package vsdk.source.vectors;
+package gsdk.source.vectors;
 
 import com.raylib.Raylib;
 

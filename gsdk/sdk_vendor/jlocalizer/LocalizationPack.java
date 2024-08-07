@@ -1,6 +1,6 @@
 // JLocalizer by Violent Studio.
 
-package vsdk.sdk_vendor.jlocalizer;
+package gsdk.sdk_vendor.jlocalizer;
 
 import java.io.BufferedReader;
 

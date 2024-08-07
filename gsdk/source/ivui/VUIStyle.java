@@ -1,6 +1,6 @@
-package vsdk.source.ivui;
+package gsdk.source.ivui;
 
-import static vsdk.r_utilities.PathResolver.resolvePath;
+import static gsdk.r_utilities.PathResolver.resolvePath;
 
 /**
  * VUI Style Configuration.
@@ -75,7 +75,7 @@ public class VUIStyle {
 
         textSize = 16;
         textSpacing = 0.5f;
-        textFont = new VUIFont(resolvePath("vsdk/resources/Lato-Regular.ttf"), true, true);
+        textFont = new VUIFont(resolvePath("gsdk/resources/Lato-Regular.ttf"), true, true);
         textAnchor = TEXT_ANCHOR_CENTER;
         textCol = new VUIColor(248, 248, 248, 255);
     }

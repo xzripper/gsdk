@@ -1,4 +1,4 @@
-package vsdk.source.utils;
+package gsdk.source.utils;
 
 class GPU_RLObj<RLObj> {
     protected final RLObj rlObj;

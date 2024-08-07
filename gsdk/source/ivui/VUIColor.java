@@ -1,4 +1,4 @@
-package vsdk.source.ivui;
+package gsdk.source.ivui;
 
 import com.raylib.Jaylib;
 

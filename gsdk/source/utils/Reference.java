@@ -1,4 +1,4 @@
-package vsdk.source.utils;
+package gsdk.source.utils;
 
 /**
  * Reference (getter/setter).

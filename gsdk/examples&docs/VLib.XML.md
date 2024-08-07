@@ -13,9 +13,9 @@ It allows you to read or write XML easier and faster.
 ```
 
 ```java
-import vsdk.vlib.ezxml.EzXML;
+import gsdk.vlib.ezxml.EzXML;
 
-import static vsdk.source.utils.Assert.assert_t;
+import static gsdk.source.utils.Assert.assert_t;
 
 public class Main {
     public static void main(String[] args) {
@@ -44,9 +44,9 @@ Output:
 ```java
 import org.w3c.dom.Element;
 
-import vsdk.vlib.ezxml.EzXML;
+import gsdk.vlib.ezxml.EzXML;
 
-import static vsdk.source.utils.Assert.assert_t;
+import static gsdk.source.utils.Assert.assert_t;
 
 public class Main {
     public static void main(String[] args) {

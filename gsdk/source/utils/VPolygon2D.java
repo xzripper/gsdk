@@ -1,10 +1,10 @@
-package vsdk.source.utils;
+package gsdk.source.utils;
 
 import com.raylib.Raylib;
 
-import vsdk.source.vectors.Vector2Di;
+import gsdk.source.vectors.Vector2Di;
 
-import static vsdk.source.utils.Assert.assert_t;
+import static gsdk.source.utils.Assert.assert_t;
 
 /**
  * Utility class for working with polygons.

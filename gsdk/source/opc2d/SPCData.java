@@ -1,4 +1,4 @@
-package vsdk.source.opc2d;
+package gsdk.source.opc2d;
 
 import com.raylib.Raylib;
 

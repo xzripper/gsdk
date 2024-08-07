@@ -1,6 +1,6 @@
 // JGMSFX Download Result. JGMSFX: Subproject of GMSFX3.
 
-package vsdk.sdk_vendor.jgmsfx;
+package gsdk.sdk_vendor.jgmsfx;
 
 /**
  * Download result.

@@ -1,6 +1,6 @@
 // JGMSFX: Subproject of GMSFX3.
 
-package vsdk.sdk_vendor.jgmsfx;
+package gsdk.sdk_vendor.jgmsfx;
 
 import java.net.URL;
 

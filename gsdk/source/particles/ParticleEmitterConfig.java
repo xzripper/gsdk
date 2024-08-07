@@ -1,6 +1,6 @@
-package vsdk.source.particles;
+package gsdk.source.particles;
 
-import vsdk.source.vectors.Vector3Di;
+import gsdk.source.vectors.Vector3Di;
 
 /**
  * Particle emitter config.

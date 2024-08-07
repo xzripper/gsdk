@@ -1,4 +1,4 @@
-package vsdk.vlib.ezxml;
+package gsdk.vlib.ezxml;
 
 import org.xml.sax.SAXException;
 

@@ -1,12 +1,12 @@
-package vsdk.source.vrender;
+package gsdk.source.vrender;
 
 import com.raylib.Raylib;
 
 import org.bytedeco.javacpp.FloatPointer;
 
-import static vsdk.source.utils.Assert.assert_f;
+import static gsdk.source.utils.Assert.assert_f;
 
-import static vsdk.r_utilities.PathResolver.resolvePath;
+import static gsdk.r_utilities.PathResolver.resolvePath;
 
 /**
  * Raylib Bump Map (ALPHA).
@@ -17,7 +17,7 @@ public class BumpMap {
 
     private final Raylib.Material bumpMaterial = Raylib.LoadMaterialDefault();
 
-    private final Raylib.Shader bumpShader = Raylib.LoadShader(resolvePath("vsdk/shaders/vbump.vs"), resolvePath("vsdk/shaders/fbump.fs"));
+    private final Raylib.Shader bumpShader = Raylib.LoadShader(resolvePath("gsdk/shaders/vbump.vs"), resolvePath("gsdk/shaders/fbump.fs"));
 
     private int bumpShaderLightPosLoc;
     private int bumpShaderViewPosLoc;

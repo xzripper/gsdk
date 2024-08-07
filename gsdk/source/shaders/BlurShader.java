@@ -1,21 +1,21 @@
-package vsdk.source.shaders;
+package gsdk.source.shaders;
 
-import vsdk.source.vectors.Vector2Di;
+import gsdk.source.vectors.Vector2Di;
 
-import vsdk.source.utils.VShader;
+import gsdk.source.utils.VShader;
 
-import static vsdk.source.utils.VLogger.warning;
+import static gsdk.source.utils.VLogger.warning;
 
-import static vsdk.r_utilities.PathResolver.resolvePath;
+import static gsdk.r_utilities.PathResolver.resolvePath;
 
-import static vsdk.source.utils.Assert.assert_t;
+import static gsdk.source.utils.Assert.assert_t;
 
 /**
  * Utility class for using blur shader.
  */
 public class BlurShader {
-    private static final String BLUR_SHADER_VERT_PATH = resolvePath("vsdk/shaders/blur.vs");
-    private static final String BLUR_SHADER_FRAG_PATH = resolvePath("vsdk/shaders/blur.fs");
+    private static final String BLUR_SHADER_VERT_PATH = resolvePath("gsdk/shaders/blur.vs");
+    private static final String BLUR_SHADER_FRAG_PATH = resolvePath("gsdk/shaders/blur.fs");
 
     private static VShader blurShader;
 
