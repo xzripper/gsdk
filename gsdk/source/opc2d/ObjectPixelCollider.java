@@ -479,4 +479,3 @@
          return spriteImage;
      }
  }
- 
