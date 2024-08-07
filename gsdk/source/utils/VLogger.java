@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * VSDK Logger class.
+ * GSDK Logger class.
  */
 public class VLogger {
     private static boolean LOG_TO_FILES = false;

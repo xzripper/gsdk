@@ -6,7 +6,7 @@ import gsdk.source.vectors.Vector2Df;
 import gsdk.source.vectors.Vector3Df;
 
 /**
- * VMath: VSDK Math has useful functions & constants for development math.
+ * VMath: GSDK Math has useful functions & constants for development math.
  */
 public class VMath {
     /**

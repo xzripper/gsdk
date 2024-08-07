@@ -1,2 +1,2 @@
-# VSDK Examples & Documentation.
+# GSDK Examples & Documentation.
 In development...

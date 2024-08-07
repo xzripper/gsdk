@@ -1,4 +1,4 @@
-// VSDK Blur Vertex Shader.
+// GSDK Blur Vertex Shader.
 
 #version 330
 

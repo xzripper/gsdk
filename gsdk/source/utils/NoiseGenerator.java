@@ -92,7 +92,7 @@ class Simplex {
         return total / maxValue;}}
 
 /**
- * VSDK Noise generator.
+ * GSDK Noise generator.
  */
 public class NoiseGenerator {
     /**

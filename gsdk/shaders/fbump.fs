@@ -1,4 +1,4 @@
-// VSDK Bump Map Fragment Shader.
+// GSDK Bump Map Fragment Shader.
 
 #version 330
 

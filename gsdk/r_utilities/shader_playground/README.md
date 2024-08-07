@@ -1,4 +1,4 @@
-# VSDK Runnable Utility: Shader Playground V1.0.0
+# GSDK Runnable Utility: Shader Playground V1.0.0
 <img src="utility.png">
 
 Simple shader playground with shader preview, hot reloading, uniform hot editing, camera settings, environment customizing, ETC.

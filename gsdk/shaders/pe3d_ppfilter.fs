@@ -1,4 +1,4 @@
-// VSDK Fragment Shader for Particle Emitter 3D for pixels filtering.
+// GSDK Fragment Shader for Particle Emitter 3D for pixels filtering.
 
 #version 330
 

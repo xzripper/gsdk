@@ -1,4 +1,4 @@
-// VSDK 2D Vignette Fragment Shader (Created by Apfelstrudel Technologien).
+// GSDK 2D Vignette Fragment Shader (Created by Apfelstrudel Technologien).
 
 #version 330
 

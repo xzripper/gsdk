@@ -1,4 +1,4 @@
-// VSDK Shader to fix texture bleeding in Raylib: https://github.com/raysan5/raylib/issues/3247
+// GSDK Shader to fix texture bleeding in Raylib: https://github.com/raysan5/raylib/issues/3247
 
 #version 330
 

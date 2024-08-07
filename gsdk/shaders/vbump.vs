@@ -1,4 +1,4 @@
-// VSDK Bump Map Vertex Shader.
+// GSDK Bump Map Vertex Shader.
 
 #version 330
 

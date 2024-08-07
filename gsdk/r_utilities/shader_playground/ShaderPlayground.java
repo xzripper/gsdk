@@ -37,7 +37,7 @@ import static gsdk.r_utilities.PathResolver.resolvePath;
 import static gsdk.r_utilities.PathResolver.getLastPathFile;
 
 public class ShaderPlayground {
-    public static final String WINDOW_TITLE = "VSDK | Shader Playground.";
+    public static final String WINDOW_TITLE = "GSDK | Shader Playground.";
 
     public static final String WINDOW_IMGUI_FONT = "gsdk/resources/Lato-Regular.ttf";
 

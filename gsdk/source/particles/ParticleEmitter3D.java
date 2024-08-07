@@ -1,5 +1,5 @@
 /**
- * 3D Particles' implementation by Violent Studio in the VSDK project: VFlux.
+ * 3D Particles' implementation by Violent Studio in the GSDK project: VFlux.
  * VFlux is currently in an unstable state and under active development.
  * Known issues:
  * - Particles have invalid rotation origin (only if rotation is used).
@@ -48,7 +48,7 @@ import static gsdk.source.utils.Assert.assert_t;
 import static gsdk.r_utilities.PathResolver.resolvePath;
 
 /**
- * 3D particle emitter for the VSDK project: VFlux.
+ * 3D particle emitter for the GSDK project: VFlux.
  * Handles the creation, simulation, and rendering of particles in a 3D environment.
 **/
 public class ParticleEmitter3D {
