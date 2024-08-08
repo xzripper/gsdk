@@ -1,5 +1,5 @@
 /**
- * OPC2D is advanced intersection (collision) check technique for 2D sprites implemented by Violent Studio in GSDK project.
+ * OPC2D is advanced intersection (collision) check technique for 2D sprites implemented by XZRipper in GSDK project.
  * Since this system is quite versatile you can use this technique in your project.
  * But you should remember that the following files are licensed:
  *      opc2d::ObjectPixelCollider.java (must-have when integrating OPC2D),
@@ -11,7 +11,7 @@
  * This means that you also have to fulfil the licence requirements without having to plug the whole SDK into your project.
  * To integrate OPC2D into your project, simply move the files written above to your project directory.
  *
- * Violent Studio :: GSDK 2024
+ * XZRipper (Ivan) :: GSDK 2024
  * https://github.com/xzripper/gsdk
  */
 

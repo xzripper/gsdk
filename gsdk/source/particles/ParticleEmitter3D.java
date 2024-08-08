@@ -1,5 +1,5 @@
 /**
- * 3D Particles' implementation by Violent Studio in the GSDK project: VFlux.
+ * 3D Particles' implementation by XZRipper in the GSDK project: VFlux.
  * VFlux is currently in an unstable state and under active development.
  * Known issues:
  * - Particles have invalid rotation origin (only if rotation is used).
