@@ -135,7 +135,7 @@ void main() {
 
 <h3 align="center">GSDK Bump Mapping (Youtube).</h3>
 <p align="center"><a href="https://www.youtube.com/watch?v=HUJ3RxE8DhQ"><img src="http://markdown-videos-api.jorgenkh.no/youtube/HUJ3RxE8DhQ.gif?width=450&height=250&duration=1000" alt="Bump Mapping ALPHA" title="Bump Mapping ALPHA"/></a></p>
-<h3 align="center"><a href="https://github.com/violent-studio/vsdk/blob/main/vsdk/examples%26docs/VLib.Ginet.TCP.md">GSDK Chat implementation via Ginet (Game Immediate mode Networking library).</a></h3>
+<h3 align="center"><a href="https://github.com/violent-studio/vsdk/blob/main/vsdk/examples%26docs/GLib.Ginet.TCP.md">GSDK Chat implementation via Ginet (Game Immediate mode Networking library).</a></h3>
 
 <h3 align="center">GSDK Noise Generator.</h3>
 
