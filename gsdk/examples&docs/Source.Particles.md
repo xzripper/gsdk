@@ -6,7 +6,7 @@ import com.raylib.Jaylib.Vector3;
 import gsdk.source.particles.*;
 import gsdk.source.vectors.Vector3Df;
 import gsdk.source.vectors.Vector3Di;
-import gsdk.source.vrender.Texture;
+import gsdk.source.grender.Texture;
 
 import static com.raylib.Jaylib.BLACK;
 import static gsdk.source.vectors.Vector3Df.vec3df;

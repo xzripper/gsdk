@@ -4,7 +4,7 @@ import com.raylib.Raylib;
 
 import java.util.ArrayList;
 
-import gsdk.source.vrender.Texture;
+import gsdk.source.grender.Texture;
 
 import gsdk.source.generic.VShader;
 

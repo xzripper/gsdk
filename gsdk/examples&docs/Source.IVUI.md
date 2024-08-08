@@ -5,7 +5,7 @@ IVUI is an immediate mode graphical user interface designed for simple, fast, cu
 ```java
 import com.raylib.Raylib;
 
-import gsdk.source.vrender.Texture;
+import gsdk.source.grender.Texture;
 
 import gsdk.source.generic.VMath;
 

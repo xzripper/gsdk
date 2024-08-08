@@ -1,4 +1,4 @@
-package gsdk.source.vrender;
+package gsdk.source.grender;
 
 import com.raylib.Raylib;
 

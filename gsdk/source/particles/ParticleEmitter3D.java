@@ -30,7 +30,7 @@ import java.util.Random;
 
 import org.bytedeco.javacpp.FloatPointer;
 
-import gsdk.source.vrender.Texture;
+import gsdk.source.grender.Texture;
 
 import gsdk.source.vectors.Vector4Df;
 import gsdk.source.vectors.Vector4Di;
