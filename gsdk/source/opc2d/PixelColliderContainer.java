@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import gsdk.source.vectors.Vector2Di;
 
-import static gsdk.source.generic.GPolygon2D.Polygon;;
+import static gsdk.source.generic.GPolygon2D.Polygon;
 
 /**
  * Pixel Collider Container.
@@ -166,7 +166,7 @@ public class PixelColliderContainer {
         for(int y = -height / 2; y <= height / 2; y++) {
             for(int x = -width / 2; x <= width / 2; x++) {
                 if((x * x) / (rx * rx) + (y * y) / (ry * ry) <= 1) {
-                    points.add(new int[]{x + width / 2, y + height / 2});
+                    points.add(new int[] {x + width / 2, y + height / 2});
                 }
             }
         }
