@@ -1,22 +1,22 @@
-package gsdk.source.ivui;
+package gsdk.source.igui;
 
 import com.raylib.Jaylib;
 
 /**
- * VUI Color.
+ * GUI Color.
  */
-public class VUIColor {
+public class GUIColor {
     private int r, g, b, a;
 
     /**
-     * Create new VUI color.
+     * Create new GUI color.
      *
      * @param r_ Red.
      * @param g_ Green.
      * @param b_ Blue.
      * @param a_ Alpha.
      */
-    public VUIColor(int r_, int g_, int b_, int a_) {
+    public GUIColor(int r_, int g_, int b_, int a_) {
         r = r_;
         g = g_;
         b = b_;
@@ -24,7 +24,7 @@ public class VUIColor {
     }
 
     /**
-     * Get VUI color.
+     * Get GUI color.
      *
      * @param color Color (e.g 'r' / etc).
      */
@@ -39,7 +39,7 @@ public class VUIColor {
     }
 
     /**
-     * Set VUI color.
+     * Set GUI color.
      *
      * @param color Color (e.g 'r' / etc).
      * @param newCol New color.
@@ -54,7 +54,7 @@ public class VUIColor {
     }
 
     /**
-     * Cast VUIColor to Raylib Color.
+     * Cast GUIColor to Raylib Color.
      */
     public Jaylib.Color toRlCol() {
         return new Jaylib.Color(r, g, b, a);

@@ -1,9 +1,9 @@
-package gsdk.source.ivui;
+package gsdk.source.igui;
 
 /**
  * Reference (getter/setter) for editable objects.
  */
-public class VOutRef<T> {
+public class GOutRef<T> {
     private T out;
 
     /**
@@ -11,14 +11,14 @@ public class VOutRef<T> {
      *
      * @param out_ Out object.
      */
-    public VOutRef(T out_) {
+    public GOutRef(T out_) {
         out = out_;
     }
 
     /**
      * Initialize reference.
      */
-    public VOutRef() {
+    public GOutRef() {
         out = null;
     }
 

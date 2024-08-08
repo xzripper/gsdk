@@ -1,12 +1,12 @@
-package gsdk.source.ivui;
+package gsdk.source.igui;
 
 import com.raylib.Raylib;
 
 /**
- * VUI Shared data & utilities.
+ * GUI Shared data & utilities.
  */
-public class VUIIO {
-    protected static VUIStyle style;
+public class GUIIO {
+    protected static GUIStyle style;
 
     protected static boolean disabled = false;
 
@@ -15,8 +15,8 @@ public class VUIIO {
      *
      * @param style_ Style.
      */
-    public static void newCtx(VUIStyle style_) {
-        style = style_ == null ? new VUIStyle() : style_;
+    public static void newCtx(GUIStyle style_) {
+        style = style_ == null ? new GUIStyle() : style_;
     }
 
     /**
@@ -61,7 +61,7 @@ public class VUIIO {
     /**
      * Get style.
      */
-    public static VUIStyle getStyle() {
+    public static GUIStyle getStyle() {
         return style;
     }
 }

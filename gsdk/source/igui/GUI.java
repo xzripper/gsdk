@@ -1,4 +1,4 @@
-package gsdk.source.ivui;
+package gsdk.source.igui;
 
 import com.raylib.Raylib;
 
@@ -18,9 +18,9 @@ import static gsdk.r_utilities.PathResolver.resolvePath;
 import static gsdk.source.generic.Assert.assert_t;
 
 /**
- * Main Violent User Interface Class.
+ * Main Game User Interface Class.
  */
-public class VUI {
+public class GUI {
     private static final int RADIO_BUTTON_WIDTH = 5;
     private static final int RADIO_BUTTON_HEIGHT = 5;
 
@@ -38,9 +38,9 @@ public class VUI {
     private static final int DEFAULT_SLIDER_BUTTON_WIDTH = 15;
     private static final int DEFAULT_SLIDER_BUTTON_HEIGHT = 25;
 
-    private static VUIStyle finalStyle;
+    private static GUIStyle finalStyle;
 
-    private static VUIStyle strSliderButtonStyle;
+    private static GUIStyle strSliderButtonStyle;
 
     private static float strSliderLeftButtonWidth;
 
@@ -74,12 +74,12 @@ public class VUI {
     }
 
     /**
-     * Create new VUI context.
+     * Create new GUI context.
      *
      * @param style Style.
      */
-    public static void newVuiCtx(VUIStyle style) {
-        VUIIO.newCtx(style);
+    public static void newVuiCtx(GUIStyle style) {
+        GUIIO.newCtx(style);
 
         loadingIconShader = new VShader(null, resolvePath("gsdk/shaders/loading_icon2d.fs"), VShader.FILE);
 
@@ -87,16 +87,16 @@ public class VUI {
 
         setLoadingIconTint(0.3f);
 
-        finalStyle = VUIIO.style;
+        finalStyle = GUIIO.style;
 
-        VUIColor focused = finalStyle.getFocusedCol();
-        VUIColor pressed = finalStyle.getPressedCol();
+        GUIColor focused = finalStyle.getFocusedCol();
+        GUIColor pressed = finalStyle.getPressedCol();
 
-        strSliderButtonStyle = new VUIStyle(
-            new VUIColor(0, 0, 0, 0), new VUIColor(focused.get('r'), focused.get('g'), focused.get('b'), focused.get('a') / 2),
-            new VUIColor(pressed.get('r'), pressed.get('g'), pressed.get('b'), pressed.get('a') / 2),
-            new VUIColor(0, 0, 0, 148), 0, 0, null, 20, 0.1f, finalStyle.getTextFont(),
-            VUIStyle.TEXT_ANCHOR_CENTER, new VUIColor(255, 255, 255, 255)
+        strSliderButtonStyle = new GUIStyle(
+            new GUIColor(0, 0, 0, 0), new GUIColor(focused.get('r'), focused.get('g'), focused.get('b'), focused.get('a') / 2),
+            new GUIColor(pressed.get('r'), pressed.get('g'), pressed.get('b'), pressed.get('a') / 2),
+            new GUIColor(0, 0, 0, 148), 0, 0, null, 20, 0.1f, finalStyle.getTextFont(),
+            GUIStyle.TEXT_ANCHOR_CENTER, new GUIColor(255, 255, 255, 255)
         );
 
         strSliderLeftButtonWidth = Raylib.MeasureTextEx(finalStyle.getTextFont().getFont(), "<", 20.0f, 0.1f).x();
@@ -146,14 +146,14 @@ public class VUI {
      * Disable next objects.
      */
     public static void disableNext() {
-        VUIIO.beginDisabled();
+        GUIIO.beginDisabled();
     }
 
     /**
      * Do not disable next objects.
      */
     public static void enableNext() {
-        VUIIO.endDisabled();
+        GUIIO.endDisabled();
     }
 
     /**
@@ -161,15 +161,15 @@ public class VUI {
      *
      * @param style Style.
      */
-    public static void beginStyle(VUIStyle style) {
-        VUIIO.style = style;
+    public static void beginStyle(GUIStyle style) {
+        GUIIO.style = style;
     }
 
     /**
      * Stop drawing next objects with specified style.
      */
     public static void endStyle() {
-        VUIIO.style = finalStyle;
+        GUIIO.style = finalStyle;
     }
 
     /**
@@ -178,26 +178,26 @@ public class VUI {
      * @param alpha Alpha (opacity 0->255).
      */
     public static void beginAlpha(int alpha) {
-        VUIIO.style.getDefaultCol().set('a', alpha);
-        VUIIO.style.getFocusedCol().set('a', alpha);
-        VUIIO.style.getPressedCol().set('a', alpha);
+        GUIIO.style.getDefaultCol().set('a', alpha);
+        GUIIO.style.getFocusedCol().set('a', alpha);
+        GUIIO.style.getPressedCol().set('a', alpha);
 
-        VUIIO.style.getBorderColor().set('a', alpha);
+        GUIIO.style.getBorderColor().set('a', alpha);
 
-        VUIIO.style.getTextCol().set('a', alpha);
+        GUIIO.style.getTextCol().set('a', alpha);
     }
 
     /**
      * Restore style alpha.
      */
     public static void endAlpha() {
-        VUIIO.style.getDefaultCol().set('a', finalStyle.getDefaultCol().get('a'));
-        VUIIO.style.getFocusedCol().set('a', finalStyle.getFocusedCol().get('a'));
-        VUIIO.style.getPressedCol().set('a', finalStyle.getPressedCol().get('a'));
+        GUIIO.style.getDefaultCol().set('a', finalStyle.getDefaultCol().get('a'));
+        GUIIO.style.getFocusedCol().set('a', finalStyle.getFocusedCol().get('a'));
+        GUIIO.style.getPressedCol().set('a', finalStyle.getPressedCol().get('a'));
 
-        VUIIO.style.getBorderColor().set('a', finalStyle.getBorderColor().get('a'));
+        GUIIO.style.getBorderColor().set('a', finalStyle.getBorderColor().get('a'));
 
-        VUIIO.style.getTextCol().set('a', finalStyle.getTextCol().get('a'));
+        GUIIO.style.getTextCol().set('a', finalStyle.getTextCol().get('a'));
     }
 
     /**
@@ -211,10 +211,10 @@ public class VUI {
      * @param retHoverEv Return true if rectangle hovered?
      * @return Is rectangle clicked or hovered.
      */
-    public static boolean rectangle(int x, int y, int w, int h, VUIColor color, boolean retHoverEv) {
+    public static boolean rectangle(int x, int y, int w, int h, GUIColor color, boolean retHoverEv) {
         Raylib.DrawRectangle(x, y, w, h, color.toRlCol());
 
-        return retHoverEv ? (!VUIIO.disabled && VUIIO.mouseHovers(x, y, w, h)) : !VUIIO.disabled && VUIIO.mouseHovers(x, y, w, h) && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
+        return retHoverEv ? (!GUIIO.disabled && GUIIO.mouseHovers(x, y, w, h)) : !GUIIO.disabled && GUIIO.mouseHovers(x, y, w, h) && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
     }
 
     /**
@@ -227,7 +227,7 @@ public class VUI {
      * @param color Rectangle color.
      * @return Is rectangle clicked.
      */
-    public static boolean rectangle(int x, int y, int w, int h, VUIColor color) {
+    public static boolean rectangle(int x, int y, int w, int h, GUIColor color) {
         return rectangle(x, y, w, h, color, false);
     }
 
@@ -241,7 +241,7 @@ public class VUI {
      * @return Is rectangle clicked.
      */
     public static boolean rectangle(int x, int y, int w, int h) {
-        return rectangle(x, y, w, h, VUIIO.style.getDefaultCol(), false);
+        return rectangle(x, y, w, h, GUIIO.style.getDefaultCol(), false);
     }
 
     /**
@@ -255,22 +255,22 @@ public class VUI {
      * @return Is rectangle (hollow part also) clicked or hovered.
      */
     public static boolean hollowRectangle(int x, int y, int w, int h, boolean retHoverEv) {
-        if(VUIIO.style.getBorderThickness() > 0) {
-            if(VUIIO.style.getBorderRounding() > 0) {
+        if(GUIIO.style.getBorderThickness() > 0) {
+            if(GUIIO.style.getBorderRounding() > 0) {
                 Raylib.DrawRectangleRoundedLines(new Raylib.Rectangle().x(x).y(y).width(w).height(h),
-                    VUIIO.style.getBorderRounding(), 16,
-                    VUIIO.style.getBorderThickness(),
-                    VUIIO.style.getBorderColor().toRlCol()
+                    GUIIO.style.getBorderRounding(), 16,
+                    GUIIO.style.getBorderThickness(),
+                    GUIIO.style.getBorderColor().toRlCol()
                 );
             } else {
                 Raylib.DrawRectangleLinesEx(new Raylib.Rectangle().x(x).y(y).width(w).height(h),
-                    VUIIO.style.getBorderThickness(),
-                    VUIIO.style.getBorderColor().toRlCol()
+                    GUIIO.style.getBorderThickness(),
+                    GUIIO.style.getBorderColor().toRlCol()
                 );
             }
         }
 
-        return retHoverEv ? (!VUIIO.disabled && VUIIO.mouseHovers(x, y, w, h)) : !VUIIO.disabled && VUIIO.mouseHovers(x, y, w, h) && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
+        return retHoverEv ? (!GUIIO.disabled && GUIIO.mouseHovers(x, y, w, h)) : !GUIIO.disabled && GUIIO.mouseHovers(x, y, w, h) && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
     }
 
     /**
@@ -296,13 +296,13 @@ public class VUI {
      */
     public static boolean text(String content, int x, int y) {
         Raylib.DrawTextEx(
-            VUIIO.style.getTextFont().getFont(),
+            GUIIO.style.getTextFont().getFont(),
             content, new Raylib.Vector2().x(x).y(y),
-            VUIIO.style.getTextSize(), VUIIO.style.getTextSpacing(),
-            VUIIO.style.getTextCol().toRlCol()
+            GUIIO.style.getTextSize(), GUIIO.style.getTextSpacing(),
+            GUIIO.style.getTextCol().toRlCol()
         );
 
-        return !VUIIO.disabled && VUIIO.mouseHoversText(content, x, y) && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
+        return !GUIIO.disabled && GUIIO.mouseHoversText(content, x, y) && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
     }
 
     /**
@@ -320,8 +320,8 @@ public class VUI {
 
         float buttonWidth, buttonHeight;
 
-        textSize = Raylib.MeasureTextEx(VUIIO.style.getTextFont().getFont(),
-            content, VUIIO.style.getTextSize(), VUIIO.style.getTextSpacing());
+        textSize = Raylib.MeasureTextEx(GUIIO.style.getTextFont().getFont(),
+            content, GUIIO.style.getTextSize(), GUIIO.style.getTextSpacing());
 
         if(w == -1 && h == -1) {
             buttonWidth = textSize.x() + 10;
@@ -331,17 +331,17 @@ public class VUI {
             buttonHeight = h;
         }
 
-        VUIColor buttonColor = VUIIO.style.getDefaultCol();
+        GUIColor buttonColor = GUIIO.style.getDefaultCol();
 
-        if(!VUIIO.disabled && VUIIO.mouseHovers(x, y, buttonWidth, buttonHeight) && Raylib.IsMouseButtonDown(Raylib.MOUSE_BUTTON_LEFT)) {
-            buttonColor = VUIIO.style.getPressedCol();
-        } else if(!VUIIO.disabled && VUIIO.mouseHovers(x, y, buttonWidth, buttonHeight)) {
-            buttonColor = VUIIO.style.getFocusedCol();
-        } else if(VUIIO.disabled) {
-            buttonColor = VUIIO.style.getDisabledCol();
+        if(!GUIIO.disabled && GUIIO.mouseHovers(x, y, buttonWidth, buttonHeight) && Raylib.IsMouseButtonDown(Raylib.MOUSE_BUTTON_LEFT)) {
+            buttonColor = GUIIO.style.getPressedCol();
+        } else if(!GUIIO.disabled && GUIIO.mouseHovers(x, y, buttonWidth, buttonHeight)) {
+            buttonColor = GUIIO.style.getFocusedCol();
+        } else if(GUIIO.disabled) {
+            buttonColor = GUIIO.style.getDisabledCol();
         }
 
-        if(VUIIO.style.getBorderRounding() > 0) {
+        if(GUIIO.style.getBorderRounding() > 0) {
             if(texelBleedingFixAvailable()) {
                 Raylib.BeginShaderMode(texelBleedingFixShader);
             }
@@ -349,7 +349,7 @@ public class VUI {
             Raylib.DrawRectangleRounded(
                 new Raylib.Rectangle().x(x - 1).y(y - 1)
                     .width(buttonWidth + 1).height(buttonHeight + 1),
-                VUIIO.style.getBorderRounding(), 16, buttonColor.toRlCol()
+                GUIIO.style.getBorderRounding(), 16, buttonColor.toRlCol()
             );
 
             if(texelBleedingFixAvailable()) {
@@ -359,18 +359,18 @@ public class VUI {
             Raylib.DrawRectangle(x, y, (int) buttonWidth, (int) buttonHeight, buttonColor.toRlCol());
         }
 
-        if(VUIIO.style.getBorderThickness() > 0) {
-            if(VUIIO.style.getBorderRounding() > 0) {
+        if(GUIIO.style.getBorderThickness() > 0) {
+            if(GUIIO.style.getBorderRounding() > 0) {
                 Raylib.DrawRectangleRoundedLines(
                     new Raylib.Rectangle().x(x).y(y).width(buttonWidth).height(buttonHeight),
-                    VUIIO.style.getBorderRounding(), 16,
-                    VUIIO.style.getBorderThickness(), VUIIO.style.getBorderColor().toRlCol()
+                    GUIIO.style.getBorderRounding(), 16,
+                    GUIIO.style.getBorderThickness(), GUIIO.style.getBorderColor().toRlCol()
                 );
             } else {
                 Raylib.DrawRectangleLinesEx(
                     new Raylib.Rectangle().x(x).y(y).width(buttonWidth).height(buttonHeight),
-                    VUIIO.style.getBorderThickness(),
-                    VUIIO.style.getBorderColor().toRlCol()
+                    GUIIO.style.getBorderThickness(),
+                    GUIIO.style.getBorderColor().toRlCol()
                 );
             }
         }
@@ -378,13 +378,13 @@ public class VUI {
         Raylib.Vector2 textPos = new Raylib.Vector2().y(y + (buttonHeight - textSize.y()) / 2);
 
         if(w != -1 && h != -1) {
-            int textAnchor = VUIIO.style.getTextAnchor();
+            int textAnchor = GUIIO.style.getTextAnchor();
 
-            if(textAnchor == VUIStyle.TEXT_ANCHOR_RIGHT) {
+            if(textAnchor == GUIStyle.TEXT_ANCHOR_RIGHT) {
                 textPos.x(x + buttonWidth - textSize.x() - 5);
-            } else if(textAnchor == VUIStyle.TEXT_ANCHOR_CENTER) {
+            } else if(textAnchor == GUIStyle.TEXT_ANCHOR_CENTER) {
                 textPos.x(x + (buttonWidth - textSize.x()) / 2.0f);
-            } else if(textAnchor == VUIStyle.TEXT_ANCHOR_LEFT) {
+            } else if(textAnchor == GUIStyle.TEXT_ANCHOR_LEFT) {
                 textPos.x(x + 5);
             }
         } else {
@@ -392,12 +392,12 @@ public class VUI {
         }
 
         Raylib.DrawTextEx(
-            VUIIO.style.getTextFont().getFont(), content,
-            textPos, VUIIO.style.getTextSize(),
-            VUIIO.style.getTextSpacing(), VUIIO.style.getTextCol().toRlCol()
+            GUIIO.style.getTextFont().getFont(), content,
+            textPos, GUIIO.style.getTextSize(),
+            GUIIO.style.getTextSpacing(), GUIIO.style.getTextCol().toRlCol()
         );
 
-        return !VUIIO.disabled && VUIIO.mouseHovers(x, y, buttonWidth, buttonHeight) && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
+        return !GUIIO.disabled && GUIIO.mouseHovers(x, y, buttonWidth, buttonHeight) && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
     }
 
     /**
@@ -423,15 +423,15 @@ public class VUI {
      * @param h Button height.
      * @return Is selectable button clicked.
      */
-    public static boolean selectButton(VOutRef<Boolean> ref, String content, int x, int y, int w, int h) {
+    public static boolean selectButton(GOutRef<Boolean> ref, String content, int x, int y, int w, int h) {
         if(ref.get() == null) ref.set(false);
 
         Raylib.Vector2 textSize;
 
         float buttonWidth, buttonHeight;
 
-        textSize = Raylib.MeasureTextEx(VUIIO.style.getTextFont().getFont(),
-            content, VUIIO.style.getTextSize(), VUIIO.style.getTextSpacing());
+        textSize = Raylib.MeasureTextEx(GUIIO.style.getTextFont().getFont(),
+            content, GUIIO.style.getTextSize(), GUIIO.style.getTextSpacing());
 
         if(w == -1 && h == -1) {
             buttonWidth = textSize.x() + 10;
@@ -441,19 +441,19 @@ public class VUI {
             buttonHeight = h;
         }
 
-        VUIColor buttonColor = null;
+        GUIColor buttonColor = null;
 
-        if(!VUIIO.disabled && VUIIO.mouseHovers(x, y, buttonWidth, buttonHeight) && Raylib.IsMouseButtonDown(Raylib.MOUSE_BUTTON_LEFT) || ref.get()) {
-            buttonColor = VUIIO.style.getPressedCol();
-        } else if(!VUIIO.disabled && VUIIO.mouseHovers(x, y, buttonWidth, buttonHeight)) {
-            buttonColor = VUIIO.style.getFocusedCol();
-        } else if(VUIIO.disabled) {
-            buttonColor = VUIIO.style.getDisabledCol();
+        if(!GUIIO.disabled && GUIIO.mouseHovers(x, y, buttonWidth, buttonHeight) && Raylib.IsMouseButtonDown(Raylib.MOUSE_BUTTON_LEFT) || ref.get()) {
+            buttonColor = GUIIO.style.getPressedCol();
+        } else if(!GUIIO.disabled && GUIIO.mouseHovers(x, y, buttonWidth, buttonHeight)) {
+            buttonColor = GUIIO.style.getFocusedCol();
+        } else if(GUIIO.disabled) {
+            buttonColor = GUIIO.style.getDisabledCol();
         } else if(!ref.get()) {
-            buttonColor = VUIIO.style.getDefaultCol();
+            buttonColor = GUIIO.style.getDefaultCol();
         }
 
-        if(VUIIO.style.getBorderRounding() > 0) {
+        if(GUIIO.style.getBorderRounding() > 0) {
             if(texelBleedingFixAvailable()) {
                 Raylib.BeginShaderMode(texelBleedingFixShader);
             }
@@ -461,7 +461,7 @@ public class VUI {
             Raylib.DrawRectangleRounded(
                 new Raylib.Rectangle().x(x - 1).y(y - 1)
                     .width(buttonWidth + 1).height(buttonHeight + 1),
-                VUIIO.style.getBorderRounding(), 16, buttonColor.toRlCol()
+                GUIIO.style.getBorderRounding(), 16, buttonColor.toRlCol()
             );
 
             if(texelBleedingFixAvailable()) {
@@ -471,18 +471,18 @@ public class VUI {
             Raylib.DrawRectangle(x, y, (int) buttonWidth, (int) buttonHeight, buttonColor.toRlCol());
         }
 
-        if(VUIIO.style.getBorderThickness() > 0) {
-            if(VUIIO.style.getBorderRounding() > 0) {
+        if(GUIIO.style.getBorderThickness() > 0) {
+            if(GUIIO.style.getBorderRounding() > 0) {
                 Raylib.DrawRectangleRoundedLines(
                     new Raylib.Rectangle().x(x).y(y).width(buttonWidth).height(buttonHeight),
-                    VUIIO.style.getBorderRounding(), 16,
-                    VUIIO.style.getBorderThickness(), VUIIO.style.getBorderColor().toRlCol()
+                    GUIIO.style.getBorderRounding(), 16,
+                    GUIIO.style.getBorderThickness(), GUIIO.style.getBorderColor().toRlCol()
                 );
             } else {
                 Raylib.DrawRectangleLinesEx(
                     new Raylib.Rectangle().x(x).y(y).width(buttonWidth).height(buttonHeight),
-                    VUIIO.style.getBorderThickness(),
-                    VUIIO.style.getBorderColor().toRlCol()
+                    GUIIO.style.getBorderThickness(),
+                    GUIIO.style.getBorderColor().toRlCol()
                 );
             }
         }
@@ -490,13 +490,13 @@ public class VUI {
         Raylib.Vector2 textPos = new Raylib.Vector2().y(y + (buttonHeight - textSize.y()) / 2);
 
         if(w != -1 && h != -1) {
-            int textAnchor = VUIIO.style.getTextAnchor();
+            int textAnchor = GUIIO.style.getTextAnchor();
 
-            if(textAnchor == VUIStyle.TEXT_ANCHOR_RIGHT) {
+            if(textAnchor == GUIStyle.TEXT_ANCHOR_RIGHT) {
                 textPos.x(x + buttonWidth - textSize.x() - 5);
-            } else if(textAnchor == VUIStyle.TEXT_ANCHOR_CENTER) {
+            } else if(textAnchor == GUIStyle.TEXT_ANCHOR_CENTER) {
                 textPos.x(x + (buttonWidth - textSize.x()) / 2.0f);
-            } else if(textAnchor == VUIStyle.TEXT_ANCHOR_LEFT) {
+            } else if(textAnchor == GUIStyle.TEXT_ANCHOR_LEFT) {
                 textPos.x(x + 5);
             }
         } else {
@@ -504,12 +504,12 @@ public class VUI {
         }
 
         Raylib.DrawTextEx(
-            VUIIO.style.getTextFont().getFont(), content,
-            textPos, VUIIO.style.getTextSize(),
-            VUIIO.style.getTextSpacing(), VUIIO.style.getTextCol().toRlCol()
+            GUIIO.style.getTextFont().getFont(), content,
+            textPos, GUIIO.style.getTextSize(),
+            GUIIO.style.getTextSpacing(), GUIIO.style.getTextCol().toRlCol()
         );
 
-        boolean clicked = !VUIIO.disabled && VUIIO.mouseHovers(x, y, buttonWidth, buttonHeight) && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
+        boolean clicked = !GUIIO.disabled && GUIIO.mouseHovers(x, y, buttonWidth, buttonHeight) && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
 
         if(clicked) {
             ref.set(!ref.get());
@@ -527,7 +527,7 @@ public class VUI {
      * @param y Y Position.
      * @return Is selectable button clicked.
      */
-    public static boolean selectButton(VOutRef<Boolean> ref, String content, int x, int y) {
+    public static boolean selectButton(GOutRef<Boolean> ref, String content, int x, int y) {
         return selectButton(ref, content, x, y, -1, -1);
     }
 
@@ -542,14 +542,14 @@ public class VUI {
      * @param y Y Position.
      * @return Is radio button clicked.
      */
-    public static boolean buttonRadio(VOutRef<Boolean> ref, RadioButtonGroup rBGroup, int rId, String content, int x, int y) {
+    public static boolean buttonRadio(GOutRef<Boolean> ref, RadioButtonGroup rBGroup, int rId, String content, int x, int y) {
         assert_t(ref == null && rBGroup == null, "ref == null && rBGroup == null: expected reference or button group");
 
         if(rBGroup != null) {
             assert_t(!rBGroup.isIDValid(rId), "!rBGroup.isIDValid(rId): invalid rId");
         }
 
-        Raylib.Vector2 textSize = Raylib.MeasureTextEx(VUIIO.style.getTextFont().getFont(), content, VUIIO.style.getTextSize(), VUIIO.style.getTextSpacing());
+        Raylib.Vector2 textSize = Raylib.MeasureTextEx(GUIIO.style.getTextFont().getFont(), content, GUIIO.style.getTextSize(), GUIIO.style.getTextSpacing());
 
         float radioButtonX = x - RADIO_BUTTON_WIDTH * 2.0f;
         float radioButtonY = y + 1 - RADIO_BUTTON_HEIGHT - textSize.y() / 2.0f;
@@ -557,14 +557,14 @@ public class VUI {
         float radioButtonWidth = textSize.x() + RADIO_BUTTON_WIDTH + ((RADIO_BUTTON_RADIUS * 1.5f) - 1) * 2;
         float radioButtonHeight = textSize.y() + RADIO_BUTTON_HEIGHT;
 
-        VUIColor buttonColor = VUIIO.style.getDefaultCol();
+        GUIColor buttonColor = GUIIO.style.getDefaultCol();
 
-        if(!VUIIO.disabled && VUIIO.mouseHovers(radioButtonX, radioButtonY, radioButtonWidth, radioButtonHeight) && Raylib.IsMouseButtonDown(Raylib.MOUSE_BUTTON_LEFT)) {
-            buttonColor = VUIIO.style.getPressedCol();
-        } else if(!VUIIO.disabled && VUIIO.mouseHovers(radioButtonX, radioButtonY, radioButtonWidth, radioButtonHeight)) {
-            buttonColor = VUIIO.style.getFocusedCol();
-        } else if(VUIIO.disabled) {
-            buttonColor = VUIIO.style.getDisabledCol();
+        if(!GUIIO.disabled && GUIIO.mouseHovers(radioButtonX, radioButtonY, radioButtonWidth, radioButtonHeight) && Raylib.IsMouseButtonDown(Raylib.MOUSE_BUTTON_LEFT)) {
+            buttonColor = GUIIO.style.getPressedCol();
+        } else if(!GUIIO.disabled && GUIIO.mouseHovers(radioButtonX, radioButtonY, radioButtonWidth, radioButtonHeight)) {
+            buttonColor = GUIIO.style.getFocusedCol();
+        } else if(GUIIO.disabled) {
+            buttonColor = GUIIO.style.getDisabledCol();
         }
 
         if(ref == null ? rBGroup.isActive(rId) : (ref.get() != null && ref.get())) {
@@ -582,12 +582,12 @@ public class VUI {
         }
 
         Raylib.DrawTextEx(
-            VUIIO.style.getTextFont().getFont(), content, new Raylib.Vector2().x(x + (RADIO_BUTTON_RADIUS * 1.5f) + 1).y(y - 1 - textSize.y() / 2.0f),
-            VUIIO.style.getTextSize(), VUIIO.style.getTextSpacing(),
-            VUIIO.style.getTextCol().toRlCol()
+            GUIIO.style.getTextFont().getFont(), content, new Raylib.Vector2().x(x + (RADIO_BUTTON_RADIUS * 1.5f) + 1).y(y - 1 - textSize.y() / 2.0f),
+            GUIIO.style.getTextSize(), GUIIO.style.getTextSpacing(),
+            GUIIO.style.getTextCol().toRlCol()
         );
 
-        boolean clicked = !VUIIO.disabled && VUIIO.mouseHovers(radioButtonX, radioButtonY, radioButtonWidth, radioButtonHeight) && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
+        boolean clicked = !GUIIO.disabled && GUIIO.mouseHovers(radioButtonX, radioButtonY, radioButtonWidth, radioButtonHeight) && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
 
         if(clicked) {
             if(ref == null) {
@@ -623,10 +623,10 @@ public class VUI {
      * @param y Y Position.
      * @return Is checkbox clicked.
      */
-    public static boolean checkbox(VOutRef<Boolean> ref, String content, int x, int y) {
+    public static boolean checkbox(GOutRef<Boolean> ref, String content, int x, int y) {
         if(ref.get() == null) ref.set(false);
 
-        Raylib.Vector2 textSize = Raylib.MeasureTextEx(VUIIO.style.getTextFont().getFont(), content, VUIIO.style.getTextSize(), VUIIO.style.getTextSpacing());
+        Raylib.Vector2 textSize = Raylib.MeasureTextEx(GUIIO.style.getTextFont().getFont(), content, GUIIO.style.getTextSize(), GUIIO.style.getTextSpacing());
 
         float checkboxX = x - 2.0f;
         float checkboxY = y - 3.0f;
@@ -634,43 +634,43 @@ public class VUI {
         float checkboxWidth = textSize.x() + CHECKBOX_WIDTH * 2.0f;
         float checkboxHeight = textSize.y() + CHECKBOX_HEIGHT / 2.0f;
 
-        VUIColor buttonColor = VUIIO.style.getDefaultCol();
+        GUIColor buttonColor = GUIIO.style.getDefaultCol();
 
-        if(!VUIIO.disabled && VUIIO.mouseHovers(checkboxX, checkboxY, checkboxWidth, checkboxHeight) && Raylib.IsMouseButtonDown(Raylib.MOUSE_BUTTON_LEFT)) {
-            buttonColor = VUIIO.style.getPressedCol();
-        } else if(!VUIIO.disabled && VUIIO.mouseHovers(checkboxX, checkboxY, checkboxWidth, checkboxHeight)) {
-            buttonColor = VUIIO.style.getFocusedCol();
-        } else if(VUIIO.disabled) {
-            buttonColor = VUIIO.style.getDisabledCol();
+        if(!GUIIO.disabled && GUIIO.mouseHovers(checkboxX, checkboxY, checkboxWidth, checkboxHeight) && Raylib.IsMouseButtonDown(Raylib.MOUSE_BUTTON_LEFT)) {
+            buttonColor = GUIIO.style.getPressedCol();
+        } else if(!GUIIO.disabled && GUIIO.mouseHovers(checkboxX, checkboxY, checkboxWidth, checkboxHeight)) {
+            buttonColor = GUIIO.style.getFocusedCol();
+        } else if(GUIIO.disabled) {
+            buttonColor = GUIIO.style.getDisabledCol();
         }
 
         if(ref.get()) {
-            if(VUIIO.style.getBorderRounding() > 0) {
+            if(GUIIO.style.getBorderRounding() > 0) {
                 if(texelBleedingFixAvailable()) {
                     Raylib.BeginShaderMode(texelBleedingFixShader);
                 }
 
                 Raylib.DrawRectangleRounded(
                     new Raylib.Rectangle().x(x).y(y).width(CHECKBOX_WIDTH).height(CHECKBOX_HEIGHT),
-                    VUIIO.style.getBorderRounding(), 16, buttonColor.toRlCol()
+                    GUIIO.style.getBorderRounding(), 16, buttonColor.toRlCol()
                 );
 
                 if(texelBleedingFixAvailable()) {
                     Raylib.EndShaderMode();
                 }
             } else {
-                Raylib.DrawRectangle(x, y, CHECKBOX_WIDTH, CHECKBOX_HEIGHT, VUIIO.style.getBorderColor().toRlCol());
+                Raylib.DrawRectangle(x, y, CHECKBOX_WIDTH, CHECKBOX_HEIGHT, GUIIO.style.getBorderColor().toRlCol());
             }
         } else {
-            if(VUIIO.style.getBorderThickness() > 0) {
-                if(VUIIO.style.getBorderRounding() > 0) {
+            if(GUIIO.style.getBorderThickness() > 0) {
+                if(GUIIO.style.getBorderRounding() > 0) {
                     if(texelBleedingFixAvailable()) {
                         Raylib.BeginShaderMode(texelBleedingFixShader);
                     }
 
                     Raylib.DrawRectangleRoundedLines(
                         new Raylib.Rectangle().x(x).y(y).width(CHECKBOX_WIDTH).height(CHECKBOX_HEIGHT),
-                        VUIIO.style.getBorderRounding(), 16, VUIIO.style.getBorderThickness(), buttonColor.toRlCol()
+                        GUIIO.style.getBorderRounding(), 16, GUIIO.style.getBorderThickness(), buttonColor.toRlCol()
                     );
 
                     if(texelBleedingFixAvailable()) {
@@ -679,20 +679,20 @@ public class VUI {
                 } else {
                     Raylib.DrawRectangleLinesEx(
                         new Raylib.Rectangle().x(x).y(y).width(CHECKBOX_WIDTH).height(CHECKBOX_HEIGHT),
-                        VUIIO.style.getBorderThickness(), buttonColor.toRlCol()
+                        GUIIO.style.getBorderThickness(), buttonColor.toRlCol()
                     );
                 }
             }
         }
 
         Raylib.DrawTextEx(
-            VUIIO.style.getTextFont().getFont(), content,
+            GUIIO.style.getTextFont().getFont(), content,
             new Raylib.Vector2().x(x + (CHECKBOX_WIDTH * 1.5f)).y(y + (CHECKBOX_HEIGHT - textSize.y()) / 2.0f),
-            VUIIO.style.getTextSize(), VUIIO.style.getTextSpacing(),
-            VUIIO.style.getTextCol().toRlCol()
+            GUIIO.style.getTextSize(), GUIIO.style.getTextSpacing(),
+            GUIIO.style.getTextCol().toRlCol()
         );
 
-        boolean clicked = !VUIIO.disabled && VUIIO.mouseHovers(checkboxX, checkboxY, checkboxWidth, checkboxHeight) && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
+        boolean clicked = !GUIIO.disabled && GUIIO.mouseHovers(checkboxX, checkboxY, checkboxWidth, checkboxHeight) && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
 
         if(clicked) {
             ref.set(!ref.get());
@@ -710,7 +710,7 @@ public class VUI {
      * @param w Width.
      * @param h Height.
      */
-    public static void progressBar(VOutRef<Integer> pRef, int x, int y, int w, int h) {
+    public static void progressBar(GOutRef<Integer> pRef, int x, int y, int w, int h) {
         int progress = pRef.get() == null ? 0 : (int) clamp(0, 100, pRef.get());
 
         int barWidth = w == -1 ? DEFAULT_PROGRESS_BAR_WIDTH : w;
@@ -718,33 +718,33 @@ public class VUI {
 
         int barProgress = (int) scale(progress, barWidth, 100);
 
-        if(VUIIO.style.getBorderRounding() > 0) {
+        if(GUIIO.style.getBorderRounding() > 0) {
             if(texelBleedingFixAvailable()) {
                 Raylib.BeginShaderMode(texelBleedingFixShader);
             }
 
             Raylib.DrawRectangleRounded(
                 new Raylib.Rectangle().x(x - 1).y(y - 1).width(barProgress + 1).height(barHeight + 1),
-                VUIIO.style.getBorderRounding(), 16, VUIIO.style.getDefaultCol().toRlCol()
+                GUIIO.style.getBorderRounding(), 16, GUIIO.style.getDefaultCol().toRlCol()
             );
 
             if(texelBleedingFixAvailable()) {
                 Raylib.EndShaderMode();
             }
         } else {
-            Raylib.DrawRectangle(x, y, barProgress, barHeight, VUIIO.style.getDefaultCol().toRlCol());
+            Raylib.DrawRectangle(x, y, barProgress, barHeight, GUIIO.style.getDefaultCol().toRlCol());
         }
 
-        if(VUIIO.style.getBorderThickness() > 0) {
-            if(VUIIO.style.getBorderRounding() > 0) {
+        if(GUIIO.style.getBorderThickness() > 0) {
+            if(GUIIO.style.getBorderRounding() > 0) {
                 if(texelBleedingFixAvailable()) {
                     Raylib.BeginShaderMode(texelBleedingFixShader);
                 }
 
                 Raylib.DrawRectangleRoundedLines(
                     new Raylib.Rectangle().x(x).y(y).width(barWidth).height(barHeight),
-                    VUIIO.style.getBorderRounding(), 16,
-                    VUIIO.style.getBorderThickness(), VUIIO.style.getBorderColor().toRlCol()
+                    GUIIO.style.getBorderRounding(), 16,
+                    GUIIO.style.getBorderThickness(), GUIIO.style.getBorderColor().toRlCol()
                 );
 
                 if(texelBleedingFixAvailable()) {
@@ -753,7 +753,7 @@ public class VUI {
             } else {
                 Raylib.DrawRectangleLinesEx(
                     new Raylib.Rectangle().x(x).y(y).width(barWidth).height(barHeight),
-                    VUIIO.style.getBorderThickness(), VUIIO.style.getBorderColor().toRlCol()
+                    GUIIO.style.getBorderThickness(), GUIIO.style.getBorderColor().toRlCol()
                 );
             }
         }
@@ -766,7 +766,7 @@ public class VUI {
      * @param x Position X.
      * @param y Position Y.
      */
-    public static void progressBar(VOutRef<Integer> pRef, int x, int y) {
+    public static void progressBar(GOutRef<Integer> pRef, int x, int y) {
         progressBar(pRef, x, y, -1, -1);
     }
 
@@ -779,19 +779,19 @@ public class VUI {
      * @param y Y Position.
      * @return Is selected string changed.
      */
-    public static boolean stringSlider(VOutRef<Integer> indexRef, String[] array, int x, int y) {
+    public static boolean stringSlider(GOutRef<Integer> indexRef, String[] array, int x, int y) {
         assert_t(array.length <= 0, "stringSlider.array <= 0: no values to iterate");
 
         int arrayIndex = indexRef.get() == null ? 0 : indexRef.get();
 
-        Raylib.Vector2 textSize = Raylib.MeasureTextEx(VUIIO.style.getTextFont().getFont(),
-            array[arrayIndex], VUIIO.style.getTextSize(), VUIIO.style.getTextSpacing());
+        Raylib.Vector2 textSize = Raylib.MeasureTextEx(GUIIO.style.getTextFont().getFont(),
+            array[arrayIndex], GUIIO.style.getTextSize(), GUIIO.style.getTextSpacing());
 
         Raylib.DrawTextEx(
-            VUIIO.style.getTextFont().getFont(), array[arrayIndex],
+            GUIIO.style.getTextFont().getFont(), array[arrayIndex],
             new Raylib.Vector2().x(x + 1).y(y),
-            VUIIO.style.getTextSize(), VUIIO.style.getTextSpacing(),
-            VUIIO.style.getTextCol().toRlCol()
+            GUIIO.style.getTextSize(), GUIIO.style.getTextSpacing(),
+            GUIIO.style.getTextCol().toRlCol()
         );
 
         boolean backwardsChanged, forwardsChanged;
@@ -825,7 +825,7 @@ public class VUI {
      * @param y Y Position.
      * @return Is slider value changed?
      */
-    public static boolean floatSlider(VOutRef<Float> sliderVRef, float min, float max, int x, int y) {
+    public static boolean floatSlider(GOutRef<Float> sliderVRef, float min, float max, int x, int y) {
         float value = sliderVRef.get() == null ? 0 : (float) clamp(min, max, sliderVRef.get());
 
         float sliderValue = (float) scale(value, DEFAULT_SLIDER_WIDTH - DEFAULT_SLIDER_BUTTON_WIDTH, max);
@@ -839,19 +839,19 @@ public class VUI {
 
         boolean valueChanged = false;
 
-        Raylib.DrawLineEx(new Raylib.Vector2().x(x).y(y), new Raylib.Vector2().x(x + DEFAULT_SLIDER_WIDTH).y(y), 5, VUIIO.style.getDefaultCol().toRlCol());
+        Raylib.DrawLineEx(new Raylib.Vector2().x(x).y(y), new Raylib.Vector2().x(x + DEFAULT_SLIDER_WIDTH).y(y), 5, GUIIO.style.getDefaultCol().toRlCol());
 
-        VUIColor buttonColor = VUIIO.style.getDefaultCol();
+        GUIColor buttonColor = GUIIO.style.getDefaultCol();
 
-        if(!VUIIO.disabled && VUIIO.mouseHovers(sliderButtonX, sliderButtonY, sliderButtonWidth, DEFAULT_SLIDER_BUTTON_HEIGHT) && Raylib.IsMouseButtonDown(Raylib.MOUSE_BUTTON_LEFT)) {
-            buttonColor = VUIIO.style.getPressedCol();
-        } else if(!VUIIO.disabled && VUIIO.mouseHovers(sliderButtonX, sliderButtonY, sliderButtonWidth, DEFAULT_SLIDER_BUTTON_HEIGHT)) {
-            buttonColor = VUIIO.style.getFocusedCol();
-        } else if(VUIIO.disabled) {
-            buttonColor = VUIIO.style.getDisabledCol();
+        if(!GUIIO.disabled && GUIIO.mouseHovers(sliderButtonX, sliderButtonY, sliderButtonWidth, DEFAULT_SLIDER_BUTTON_HEIGHT) && Raylib.IsMouseButtonDown(Raylib.MOUSE_BUTTON_LEFT)) {
+            buttonColor = GUIIO.style.getPressedCol();
+        } else if(!GUIIO.disabled && GUIIO.mouseHovers(sliderButtonX, sliderButtonY, sliderButtonWidth, DEFAULT_SLIDER_BUTTON_HEIGHT)) {
+            buttonColor = GUIIO.style.getFocusedCol();
+        } else if(GUIIO.disabled) {
+            buttonColor = GUIIO.style.getDisabledCol();
         }
 
-        if(!VUIIO.disabled && VUIIO.mouseHovers(sliderButtonX, sliderButtonY, sliderButtonWidth, DEFAULT_SLIDER_BUTTON_HEIGHT)) {
+        if(!GUIIO.disabled && GUIIO.mouseHovers(sliderButtonX, sliderButtonY, sliderButtonWidth, DEFAULT_SLIDER_BUTTON_HEIGHT)) {
             if(Raylib.IsMouseButtonDown(Raylib.MOUSE_BUTTON_LEFT)) {
                 dragging = true;
 
@@ -865,7 +865,7 @@ public class VUI {
             }
         }
 
-        if(!VUIIO.disabled && VUIIO.mouseHovers(x, y, DEFAULT_SLIDER_WIDTH, DEFAULT_SLIDER_HEIGHT) && Raylib.IsMouseButtonPressed(Raylib.MOUSE_BUTTON_LEFT) && !dragging) {
+        if(!GUIIO.disabled && GUIIO.mouseHovers(x, y, DEFAULT_SLIDER_WIDTH, DEFAULT_SLIDER_HEIGHT) && Raylib.IsMouseButtonPressed(Raylib.MOUSE_BUTTON_LEFT) && !dragging) {
             sliderVRef.set((float) clamp(min, max, sliderVRef.get() + (Raylib.GetMouseX() - sliderButtonX) - 10));
 
             valueChanged = true;
@@ -882,7 +882,7 @@ public class VUI {
      * @param value Value.
      * @param step Step.
      */
-    public static float applyStepRef(VOutRef<Float> value, float step) {
+    public static float applyStepRef(GOutRef<Float> value, float step) {
         return value.get() * step;
     }
 
@@ -896,13 +896,13 @@ public class VUI {
      * @param tint Image tint.
      * @return Is image clicked.
      */
-    public static boolean image(Texture image, int x, int y, float scale, VUIColor tint) {
-        assert_t(!image.valid(), "image != valid (vui)");
+    public static boolean image(Texture image, int x, int y, float scale, GUIColor tint) {
+        assert_t(!image.valid(), "image != valid (GUI)");
 
         Raylib.DrawTextureEx(image.getTex(), new Raylib.Vector2().x(x).y(y), 0.0f, scale, tint.toRlCol());
 
-        return !VUIIO.disabled
-            && VUIIO.mouseHovers(x, y, image.getTex().width() * scale, image.getTex().height() * scale)
+        return !GUIIO.disabled
+            && GUIIO.mouseHovers(x, y, image.getTex().width() * scale, image.getTex().height() * scale)
                 && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
     }
 
@@ -916,7 +916,7 @@ public class VUI {
      * @return Is image clicked.
      */
     public static boolean image(Texture image, int x, int y, float scale) {
-        return image(image, x, y, scale, new VUIColor(255, 255, 255, 255));
+        return image(image, x, y, scale, new GUIColor(255, 255, 255, 255));
     }
 
     /**
@@ -928,7 +928,7 @@ public class VUI {
      * @return Is image clicked.
      */
     public static boolean image(Texture image, int x, int y) {
-        return image(image, x, y, 1.0f, new VUIColor(255, 255, 255, 255));
+        return image(image, x, y, 1.0f, new GUIColor(255, 255, 255, 255));
     }
 
 
@@ -942,7 +942,7 @@ public class VUI {
      * @param scale Icon scale.
      * @param tint Icon tint.
      */
-    public static void loadingIcon(VOutRef<Float> pRef, Texture icon, int x, int y, float scale, VUIColor tint) {
+    public static void loadingIcon(GOutRef<Float> pRef, Texture icon, int x, int y, float scale, GUIColor tint) {
         float progress = (float) clamp(0.0, 1.0, pRef.get() == null ? 0.0 : pRef.get());
 
         if(prevLoadingIconProgress != progress) {
@@ -967,8 +967,8 @@ public class VUI {
      * @param y Y Position.
      * @param scale Icon scale.
      */
-    public static void loadingIcon(VOutRef<Float> pRef, Texture icon, int x, int y, float scale) {
-        loadingIcon(pRef, icon, x, y, scale, new VUIColor(255, 255, 255, 255));
+    public static void loadingIcon(GOutRef<Float> pRef, Texture icon, int x, int y, float scale) {
+        loadingIcon(pRef, icon, x, y, scale, new GUIColor(255, 255, 255, 255));
     }
 
     /**
@@ -979,8 +979,8 @@ public class VUI {
      * @param x X Position.
      * @param y Y Position.
      */
-    public static void loadingIcon(VOutRef<Float> pRef, Texture icon, int x, int y) {
-        loadingIcon(pRef, icon, x, y, 1.0f, new VUIColor(255, 255, 255, 255));
+    public static void loadingIcon(GOutRef<Float> pRef, Texture icon, int x, int y) {
+        loadingIcon(pRef, icon, x, y, 1.0f, new GUIColor(255, 255, 255, 255));
     }
 
     /**
@@ -994,11 +994,11 @@ public class VUI {
      * @param color Line color.
      */
     public static void bezierCurvePair(int startX, int startY, int endX, int endY, float thickness, Raylib.Color color) {
-        color = color == null ? VUIIO.style.getDefaultCol().toRlCol() : color;
+        color = color == null ? GUIIO.style.getDefaultCol().toRlCol() : color;
 
         Raylib.DrawLineBezier(new Raylib.Vector2().x(startX).y(startY), new Raylib.Vector2().x(endX).y(endY), thickness, color);
 
-        if(VUIIO.style.getBorderRounding() > 0) {
+        if(GUIIO.style.getBorderRounding() > 0) {
             if(texelBleedingFixAvailable()) {
                 Raylib.BeginShaderMode(texelBleedingFixShader);
             }
@@ -1026,12 +1026,12 @@ public class VUI {
     }
 
     /**
-     * Create new reference (VOutRef).
+     * Create new reference (GOutRef).
      *
      * @param object Reference default object.
      */
-    public static <T> VOutRef<T> newRef(T object) {
-        return new VOutRef<>(object);
+    public static <T> GOutRef<T> newRef(T object) {
+        return new GOutRef<>(object);
     }
 
     /**
@@ -1039,21 +1039,21 @@ public class VUI {
      *
      * @param state Current state.
      */
-    public static VOutRef<Boolean> newStateRef(boolean state) {
+    public static GOutRef<Boolean> newStateRef(boolean state) {
         return newRef(state);
     }
 
     /**
      * Create new reference on state (VOut<Boolean>) with default value false.
      */
-    public static VOutRef<Boolean> newStateRef() {
+    public static GOutRef<Boolean> newStateRef() {
         return newStateRef(false);
     }
 
     /**
      * Get final (original) style.
      */
-    public static VUIStyle getFinalStyle() {
+    public static GUIStyle getFinalStyle() {
         return finalStyle;
     }
 
@@ -1076,12 +1076,12 @@ public class VUI {
      */
     public static class RadioButtonGroup {
         private static class RadioButton {
-            private final VOutRef<Boolean> active;
+            private final GOutRef<Boolean> active;
 
             private final int id;
 
             protected RadioButton(boolean active_, int id_) {
-                active = new VOutRef<>(active_);
+                active = new GOutRef<>(active_);
 
                 id = id_;
             }

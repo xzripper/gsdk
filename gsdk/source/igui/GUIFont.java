@@ -1,23 +1,23 @@
-package gsdk.source.ivui;
+package gsdk.source.igui;
 
 import com.raylib.Raylib;
 
 import static gsdk.source.generic.Assert.assert_f;
 
 /**
- * VUI Font.
+ * GUI Font.
  */
-public class VUIFont {
+public class GUIFont {
     private final Raylib.Font rlFont;
 
     /**
-     * Load VUI font.
+     * Load GUI font.
      *
      * @param fontPath Font path.
      * @param genMipmaps Generate mipmaps for texture?
      * @param bilinearFiltering Enable bilinear filtering for font?
      */
-    public VUIFont(String fontPath, boolean genMipmaps, boolean bilinearFiltering) {
+    public GUIFont(String fontPath, boolean genMipmaps, boolean bilinearFiltering) {
         rlFont = Raylib.LoadFont(fontPath);
 
         assert_f(Raylib.IsFontReady(rlFont), "rlFont != valid");

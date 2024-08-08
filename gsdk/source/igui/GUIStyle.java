@@ -1,32 +1,32 @@
-package gsdk.source.ivui;
+package gsdk.source.igui;
 
 import static gsdk.r_utilities.PathResolver.resolvePath;
 
 /**
- * VUI Style Configuration.
+ * GUI Style Configuration.
  */
-public class VUIStyle {
-    private VUIColor defaultCol;
-    private VUIColor focusedCol;
-    private VUIColor pressedCol;
-    private VUIColor disabledCol;
+public class GUIStyle {
+    private GUIColor defaultCol;
+    private GUIColor focusedCol;
+    private GUIColor pressedCol;
+    private GUIColor disabledCol;
 
     private float borderThickness;
     private float borderRounding;
-    private VUIColor borderColor;
+    private GUIColor borderColor;
 
     private int textSize;
     private float textSpacing;
-    private VUIFont textFont;
+    private GUIFont textFont;
     private int textAnchor;
-    private VUIColor textCol;
+    private GUIColor textCol;
 
     public static final int TEXT_ANCHOR_LEFT = 0;
     public static final int TEXT_ANCHOR_CENTER = 2;
     public static final int TEXT_ANCHOR_RIGHT = 3;
 
     /**
-     * Create new VUI style configuration.
+     * Create new GUI style configuration.
      *
      * @param defaultCol_ Default object color (not focused/pressed/etc).
      * @param focusedCol_ Focused color (object focused color).
@@ -41,9 +41,9 @@ public class VUIStyle {
      * @param textAnchor_ Text anchor.
      * @param textCol_ Text color.
      */
-    public VUIStyle(VUIColor defaultCol_, VUIColor focusedCol_, VUIColor pressedCol_, VUIColor disabledCol_,
-                    float borderThickness_, float borderRounding_, VUIColor borderColor_,
-                    int textSize_, float textSpacing_, VUIFont textFont_, int textAnchor_, VUIColor textCol_) {
+    public GUIStyle(GUIColor defaultCol_, GUIColor focusedCol_, GUIColor pressedCol_, GUIColor disabledCol_,
+                    float borderThickness_, float borderRounding_, GUIColor borderColor_,
+                    int textSize_, float textSpacing_, GUIFont textFont_, int textAnchor_, GUIColor textCol_) {
         defaultCol = defaultCol_;
         focusedCol = focusedCol_;
         pressedCol = pressedCol_;
@@ -61,23 +61,23 @@ public class VUIStyle {
     }
 
     /**
-     * Create new VUI style configuration (Default).
+     * Create new GUI style configuration (Default).
      */
-    public VUIStyle() {
-        defaultCol = new VUIColor(48, 48, 48, 255);
-        focusedCol = new VUIColor(60, 60, 60, 255);
-        pressedCol = new VUIColor(100, 100, 100, 255);
-        disabledCol = new VUIColor(132, 132, 132, 248);
+    public GUIStyle() {
+        defaultCol = new GUIColor(48, 48, 48, 255);
+        focusedCol = new GUIColor(60, 60, 60, 255);
+        pressedCol = new GUIColor(100, 100, 100, 255);
+        disabledCol = new GUIColor(132, 132, 132, 248);
 
         borderThickness = 1.5f;
         borderRounding = 0.3f;
-        borderColor = new VUIColor(186, 186, 186, 255);
+        borderColor = new GUIColor(186, 186, 186, 255);
 
         textSize = 16;
         textSpacing = 0.5f;
-        textFont = new VUIFont(resolvePath("gsdk/resources/Lato-Regular.ttf"), true, true);
+        textFont = new GUIFont(resolvePath("gsdk/resources/Lato-Regular.ttf"), true, true);
         textAnchor = TEXT_ANCHOR_CENTER;
-        textCol = new VUIColor(248, 248, 248, 255);
+        textCol = new GUIColor(248, 248, 248, 255);
     }
 
     /**
@@ -85,14 +85,14 @@ public class VUIStyle {
      *
      * @param defaultCol_ Default color.
      */
-    public void setDefaultCol(VUIColor defaultCol_) {
+    public void setDefaultCol(GUIColor defaultCol_) {
         defaultCol = defaultCol_;
     }
 
     /**
      * Get default color.
      */
-    public VUIColor getDefaultCol() {
+    public GUIColor getDefaultCol() {
         return defaultCol;
     }
 
@@ -101,14 +101,14 @@ public class VUIStyle {
      *
      * @param focusedCol_ Focused color.
      */
-    public void setFocusedCol(VUIColor focusedCol_) {
+    public void setFocusedCol(GUIColor focusedCol_) {
         focusedCol = focusedCol_;
     }
 
     /**
      * Get focused color.
      */
-    public VUIColor getFocusedCol() {
+    public GUIColor getFocusedCol() {
         return focusedCol;
     }
 
@@ -117,14 +117,14 @@ public class VUIStyle {
      *
      * @param pressedCol_ Pressed color.
      */
-    public void setPressedCol(VUIColor pressedCol_) {
+    public void setPressedCol(GUIColor pressedCol_) {
         pressedCol = pressedCol_;
     }
 
     /**
      * Get pressed color.
      */
-    public VUIColor getPressedCol() {
+    public GUIColor getPressedCol() {
         return pressedCol;
     }
 
@@ -133,14 +133,14 @@ public class VUIStyle {
      *
      * @param disabledCol_ Disabled color.
      */
-    public void setDisabledCol(VUIColor disabledCol_) {
+    public void setDisabledCol(GUIColor disabledCol_) {
         disabledCol = disabledCol_;
     }
 
     /**
      * Get disabled color.
      */
-    public VUIColor getDisabledCol() {
+    public GUIColor getDisabledCol() {
         return disabledCol;
     }
 
@@ -181,14 +181,14 @@ public class VUIStyle {
      *
      * @param borderColor_ Border color.
      */
-    public void setBorderColor(VUIColor borderColor_) {
+    public void setBorderColor(GUIColor borderColor_) {
         borderColor = borderColor_;
     }
 
     /**
      * Get border color.
      */
-    public VUIColor getBorderColor() {
+    public GUIColor getBorderColor() {
         return borderColor;
     }
 
@@ -229,14 +229,14 @@ public class VUIStyle {
      *
      * @param textFont_ Text font.
      */
-    public void setTextFont(VUIFont textFont_) {
+    public void setTextFont(GUIFont textFont_) {
         textFont = textFont_;
     }
 
     /**
      * Get text font.
      */
-    public VUIFont getTextFont() {
+    public GUIFont getTextFont() {
         return textFont;
     }
 
@@ -261,14 +261,14 @@ public class VUIStyle {
      *
      * @param textCol_ Text color.
      */
-    public void setTextCol(VUIColor textCol_) {
+    public void setTextCol(GUIColor textCol_) {
         textCol = textCol_;
     }
 
     /**
      * Get text color.
      */
-    public VUIColor getTextCol() {
+    public GUIColor getTextCol() {
         return textCol;
     }
 }
