@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 import gsdk.source.grender.Texture;
 
-import gsdk.source.generic.VShader;
+import gsdk.source.generic.GShader;
 
 import static gsdk.source.generic.Range.inRange;
 
-import static gsdk.source.generic.VMath.clamp;
-import static gsdk.source.generic.VMath.scale;
+import static gsdk.source.generic.GMath.clamp;
+import static gsdk.source.generic.GMath.scale;
 
 import static gsdk.r_utilities.PathResolver.resolvePath;
 
@@ -46,7 +46,7 @@ public class GUI {
 
     private static Raylib.Shader texelBleedingFixShader = null;
 
-    private static VShader loadingIconShader = null;
+    private static GShader loadingIconShader = null;
 
     private static float prevLoadingIconProgress, loadingIconTint;
 
@@ -81,7 +81,7 @@ public class GUI {
     public static void newVuiCtx(GUIStyle style) {
         GUIIO.newCtx(style);
 
-        loadingIconShader = new VShader(null, resolvePath("gsdk/shaders/loading_icon2d.fs"), VShader.FILE);
+        loadingIconShader = new GShader(null, resolvePath("gsdk/shaders/loading_icon2d.fs"), GShader.FILE);
 
         setLoadingIconMode(TOP);
 

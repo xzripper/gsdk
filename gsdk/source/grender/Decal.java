@@ -4,7 +4,7 @@ import com.raylib.Raylib;
 
 import gsdk.source.vectors.Vector3Df;
 
-import static gsdk.source.generic.VMath.PI;
+import static gsdk.source.generic.GMath.PI;
 
 import static gsdk.source.generic.Assert.assert_f;
 

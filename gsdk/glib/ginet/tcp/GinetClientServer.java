@@ -1,4 +1,4 @@
-package gsdk.vlib.vinet.tcp;
+package gsdk.glib.ginet.tcp;
 
 import java.net.Socket;
 
@@ -9,12 +9,12 @@ import java.io.IOException;
 /**
  * Client representation of a server.
  */
-public class VinetClientServer {
+public class GinetClientServer {
     private final Socket server;
 
     private final PrintWriter out;
 
-    protected VinetClientServer(Socket server_) throws IOException {
+    protected GinetClientServer(Socket server_) throws IOException {
         server = server_;
 
         out = new PrintWriter(server.getOutputStream(), true);

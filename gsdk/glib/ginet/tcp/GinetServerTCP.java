@@ -1,4 +1,4 @@
-package gsdk.vlib.vinet.tcp;
+package gsdk.glib.ginet.tcp;
 
 import java.net.ServerSocket;
 
@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * VinetServerTCP -
+ * GinetServerTCP -
  *
  * A thread-friendly, no-bloat, event-driven, and asynchronous TCP server
  * for Violent Immediate mode Networking (Vinet) that is designed to be
@@ -32,12 +32,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * - Asynchronous: The server accepts and communicates with clients asynchronously.<br>
  * - Easy and simple: Provides straightforward methods for sending data, broadcasting messages, and emitting events to clients.<br><br>
  *
- * The VinetServerTCP class allows you to:<br>
+ * The GinetServerTCP class allows you to:<br>
  * - Initialize the server with a specified port and events handler.<br>
  * - Start the server and accept client connections.<br>
  * - Send data to specific clients or broadcast to all clients.<br>
  * - Emit custom events to specific clients or broadcast to all clients.<br>
- * - Handle different events through the VinetServerEventsTCP interface.<br>
+ * - Handle different events through the GinetServerEventsTCP interface.<br>
  * - Soft handling of critical situations.<br><br>
  *
  * The Transmission Control Protocol (TCP) is one of the main protocols of the Internet protocol suite.
@@ -55,14 +55,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * <br>
  * @see <a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">Transmission Control Protocol (Wikipedia).</a>
  */
-public class VinetServerTCP {
+public class GinetServerTCP {
     private final ServerSocket socket;
 
-    private final List<VinetServerClient> clients;
+    private final List<GinetServerClient> clients;
 
     private final HashMap<String, String> visitors;
 
-    private final VinetServerEventsTCP events;
+    private final GinetServerEventsTCP events;
 
     private boolean active;
 
@@ -72,7 +72,7 @@ public class VinetServerTCP {
      * @param events_ Events handler.
      * @param port Server port.
      */
-    public VinetServerTCP(VinetServerEventsTCP events_, int port) throws IOException {
+    public GinetServerTCP(GinetServerEventsTCP events_, int port) throws IOException {
         socket = new ServerSocket(port);
 
         clients = new CopyOnWriteArrayList<>();
@@ -94,7 +94,7 @@ public class VinetServerTCP {
                 try {
                     Socket client = socket.accept();
 
-                    VinetServerClient vinetClient = new VinetServerClient(client, getVisitorIdentifier(socket.getInetAddress().getHostAddress()));
+                    GinetServerClient vinetClient = new GinetServerClient(client, getVisitorIdentifier(socket.getInetAddress().getHostAddress()));
 
                     clients.add(vinetClient);
 
@@ -110,7 +110,7 @@ public class VinetServerTCP {
         }).start();
     }
 
-    private void client(VinetServerClient client) {
+    private void client(GinetServerClient client) {
         try(BufferedReader in = new BufferedReader(new InputStreamReader(client.getClient().getInputStream()))) {
             String data;
 
@@ -154,7 +154,7 @@ public class VinetServerTCP {
      * @param data Data to send.
      * @param client Client.
      */
-    public void send(String data, VinetServerClient client) {
+    public void send(String data, GinetServerClient client) {
         if(!hasClient(client)) return;
 
         client.send(data);
@@ -167,7 +167,7 @@ public class VinetServerTCP {
      * @param data Event data.
      * @param client Client.
      */
-    public void emit(String eventName, String data, VinetServerClient client) {
+    public void emit(String eventName, String data, GinetServerClient client) {
         send("EV-BGN EVENT-NAME%s&&&EVENT-DATA%s EV-END".formatted(eventName, data), client);
     }
 
@@ -177,7 +177,7 @@ public class VinetServerTCP {
      * @param data Data to broadcast.
      */
     public void broadcast(String data) {
-        for(VinetServerClient client : clients) send(data, client);
+        for(GinetServerClient client : clients) send(data, client);
     }
 
     /**
@@ -187,7 +187,7 @@ public class VinetServerTCP {
      * @param data Event data.
      */
     public void broadcastEvent(String eventName, String data) {
-        for(VinetServerClient client : clients) emit(eventName, data, client);
+        for(GinetServerClient client : clients) emit(eventName, data, client);
     }
 
     /**
@@ -195,7 +195,7 @@ public class VinetServerTCP {
      *
      * @param client Client to disconnect.
      */
-    public void disconnect(VinetServerClient client) {
+    public void disconnect(GinetServerClient client) {
         if(!hasClient(client)) return;
 
         try {
@@ -210,7 +210,7 @@ public class VinetServerTCP {
      *
      * @param index Client index.
      */
-    public VinetServerClient getClient(int index) {
+    public GinetServerClient getClient(int index) {
         return clients.get(index);
     }
 
@@ -219,7 +219,7 @@ public class VinetServerTCP {
      *
      * @param client Client.
      */
-    public boolean hasClient(VinetServerClient client) {
+    public boolean hasClient(GinetServerClient client) {
         return clients.contains(client);
     }
 
@@ -232,7 +232,7 @@ public class VinetServerTCP {
         try {
             socket.close();
 
-            for(VinetServerClient client : clients) {
+            for(GinetServerClient client : clients) {
                 client.getClient().close();
 
                 client.getClientOut().close();
@@ -247,7 +247,7 @@ public class VinetServerTCP {
      *
      * @param client Client.
      */
-    public void registerVisitor(VinetServerClient client) {
+    public void registerVisitor(GinetServerClient client) {
         visitors.put(client.getIP(), client.getClientIdentifier());
     }
 
@@ -256,8 +256,8 @@ public class VinetServerTCP {
      *
      * @param ip Visitor IP.
      */
-    public VinetServerClient getVisitor(String ip) {
-        for(VinetServerClient client : clients) {
+    public GinetServerClient getVisitor(String ip) {
+        for(GinetServerClient client : clients) {
             if(client.getClientIdentifier().equals(getVisitorIdentifier(ip))) {
                 return client;
             }
@@ -294,7 +294,7 @@ public class VinetServerTCP {
     /**
      * Get clients list.
      */
-    public List<VinetServerClient> getClients() {
+    public List<GinetServerClient> getClients() {
         return clients;
     }
 

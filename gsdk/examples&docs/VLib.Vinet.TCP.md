@@ -2,11 +2,11 @@ Example of creating simple TCP chat.
 
 Client:
 ```java
-import gsdk.vlib.vinet.tcp.VinetClientTCP;
-import gsdk.vlib.vinet.tcp.VinetClientEventsTCP;
-import gsdk.vlib.vinet.tcp.VinetClientServer;
+import gsdk.glib.ginet.tcp.GinetClientTCP;
+import gsdk.glib.ginet.tcp.GinetClientEventsTCP;
+import gsdk.glib.ginet.tcp.GinetClientServer;
 
-import gsdk.vlib.vinet.VinetTransferableObjectUtility;
+import gsdk.glib.ginet.GinetTransferableObjectUtility;
 
 import java.util.Scanner;
 
@@ -14,26 +14,26 @@ import java.io.IOException;
 
 public class ClientTest {
     public static void main(String[] args) {
-        VinetClientTCP client = new VinetClientTCP(new VinetClientEventsTCP() {
+        GinetClientTCP client = new GinetClientTCP(new GinetClientEventsTCP() {
             @Override
-            public void connection(VinetClientServer server, VinetClientTCP client) {
+            public void connection(GinetClientServer server, GinetClientTCP client) {
                 System.out.println("Connected to the server.");
 
-                server.answer(VinetTransferableObjectUtility.assemble("I'm connected!"));
+                server.answer(GinetTransferableObjectUtility.assemble("I'm connected!"));
             }
 
             @Override
-            public void disconnection(VinetClientServer server, VinetClientTCP client) {
+            public void disconnection(GinetClientServer server, GinetClientTCP client) {
                 if(client.isConnected()) {
-                    server.answer(VinetTransferableObjectUtility.assemble("Bye bye!"));
+                    server.answer(GinetTransferableObjectUtility.assemble("Bye bye!"));
                 }
 
                 System.out.println("Disconnected from the server.");
             }
 
             @Override
-            public void receive(String data, VinetClientServer server, VinetClientTCP client) {
-                String message = VinetTransferableObjectUtility.disassemble(data)[0];
+            public void receive(String data, GinetClientServer server, GinetClientTCP client) {
+                String message = GinetTransferableObjectUtility.disassemble(data)[0];
 
                 if(message.equals("disconnect")) client.disconnect();
 
@@ -42,22 +42,22 @@ public class ClientTest {
             }
 
             @Override
-            public void event(String name, String data, VinetClientServer server, VinetClientTCP client) {
-                System.out.printf("Event from server! %s : %s!\n", name, VinetTransferableObjectUtility.disassemble(data)[0]);
+            public void event(String name, String data, GinetClientServer server, GinetClientTCP client) {
+                System.out.printf("Event from server! %s : %s!\n", name, GinetTransferableObjectUtility.disassemble(data)[0]);
             }
 
             @Override
-            public void exception(Exception exception, VinetClientTCP client) {
+            public void exception(Exception exception, GinetClientTCP client) {
                 exception.printStackTrace();
             }
 
             @Override
-            public void lost(VinetClientTCP client) {
+            public void lost(GinetClientTCP client) {
                 System.out.println("Lost server connection!");
             }
 
             @Override
-            public void timeout(VinetClientTCP client) {
+            public void timeout(GinetClientTCP client) {
                 System.out.printf("Tried connecting to the server for %d/ms but failed!\n", client.getTimeout());
 
                 client.disconnect();
@@ -76,9 +76,9 @@ public class ClientTest {
             }
 
             if(messageToServer.startsWith("ev ")) {
-                client.emit("message", VinetTransferableObjectUtility.assemble(messageToServer));
+                client.emit("message", GinetTransferableObjectUtility.assemble(messageToServer));
             } else {
-                client.send(VinetTransferableObjectUtility.assemble(messageToServer));
+                client.send(GinetTransferableObjectUtility.assemble(messageToServer));
             }
         }
     }
@@ -91,11 +91,11 @@ public class ClientTest {
 
 Server:
 ```java
-import gsdk.vlib.vinet.VinetServerTCP;
-import gsdk.vlib.vinet.VinetServerClient;
-import gsdk.vlib.vinet.VinetServerEventsTCP;
+import gsdk.glib.ginet.GinetServerTCP;
+import gsdk.glib.ginet.GinetServerClient;
+import gsdk.glib.ginet.GinetServerEventsTCP;
 
-import gsdk.vlib.vinet.VinetTransferableObjectUtility;
+import gsdk.glib.ginet.GinetTransferableObjectUtility;
 
 import java.util.Scanner;
 
@@ -103,19 +103,19 @@ import java.io.IOException;
 
 public class ServerTest {
     public static void main(String[] args) {
-        VinetServerTCP server = new VinetServerTCP(new VinetServerEventsTCP() {
+        GinetServerTCP server = new GinetServerTCP(new GinetServerEventsTCP() {
             @Override
-            public void start(VinetServerTCP server) {
+            public void start(GinetServerTCP server) {
                 System.out.println("Server is running!");
             }
 
             @Override
-            public void end(VinetServerTCP server) {
+            public void end(GinetServerTCP server) {
                 System.out.println("Server is closed.");
             }
 
             @Override
-            public void connection(VinetServerClient client, VinetServerTCP server) {
+            public void connection(GinetServerClient client, GinetServerTCP server) {
                 System.out.printf("Client %s joined.\n", client.getClientIdentifier());
 
                 if(server.hadVisitor(client.getIP())) {
@@ -123,33 +123,33 @@ public class ServerTest {
                 } else {
                     server.registerVisitor(client);
 
-                    server.getVisitor(client.getIP()).send(VinetTransferableObjectUtility.assemble("Hello new client (%s)! Registered you as a new visitor!".formatted(client.getClientIdentifier())));
+                    server.getVisitor(client.getIP()).send(GinetTransferableObjectUtility.assemble("Hello new client (%s)! Registered you as a new visitor!".formatted(client.getClientIdentifier())));
                 }
             }
 
             @Override
-            public void disconnection(VinetServerClient client, VinetServerTCP server) {
+            public void disconnection(GinetServerClient client, GinetServerTCP server) {
                 System.out.printf("Client %s left from the server.\n", client.getClientIdentifier());
             }
 
             @Override
-            public void receive(String data, VinetServerClient client, VinetServerTCP server) {
-                System.out.printf("Client %s says %s\n", client.getClientIdentifier(), VinetTransferableObjectUtility.disassemble(data)[0]);
+            public void receive(String data, GinetServerClient client, GinetServerTCP server) {
+                System.out.printf("Client %s says %s\n", client.getClientIdentifier(), GinetTransferableObjectUtility.disassemble(data)[0]);
                 System.out.printf("Client %s says %s (no disassembling)\n", client.getClientIdentifier(), data);
             }
 
             @Override
-            public void event(String name, String data, VinetServerClient client, VinetServerTCP server) {
-                System.out.printf("Got event from client!: %s: %s\n", name, VinetTransferableObjectUtility.disassemble(data)[0]);
+            public void event(String name, String data, GinetServerClient client, GinetServerTCP server) {
+                System.out.printf("Got event from client!: %s: %s\n", name, GinetTransferableObjectUtility.disassemble(data)[0]);
             }
 
             @Override
-            public void exception(Exception exception, VinetServerTCP server) {
+            public void exception(Exception exception, GinetServerTCP server) {
                  System.out.printf("Exception!: %s: %s\n", exception.getClass().getName(), exception.getMessage());
             }
 
             @Override
-            public void lost(VinetServerClient client, VinetServerTCP server) {
+            public void lost(GinetServerClient client, GinetServerTCP server) {
                 System.out.printf("Client %s left without saying goodbye :(\n", client.getClientIdentifier());
             }
         }, 8080);
@@ -166,9 +166,9 @@ public class ServerTest {
             }
 
             if(messageToClients.startsWith("ev ")) {
-                server.broadcastEvent("message", VinetTransferableObjectUtility.assemble(messageToClients));
+                server.broadcastEvent("message", GinetTransferableObjectUtility.assemble(messageToClients));
             } else {
-                server.broadcast(VinetTransferableObjectUtility.assemble(messageToClients));
+                server.broadcast(GinetTransferableObjectUtility.assemble(messageToClients));
             }
         }
     }

@@ -2,9 +2,9 @@ package gsdk.source.shaders;
 
 import gsdk.source.vectors.Vector2Di;
 
-import gsdk.source.generic.VShader;
+import gsdk.source.generic.GShader;
 
-import static gsdk.source.generic.VLogger.warning;
+import static gsdk.source.generic.GLogger.warning;
 
 import static gsdk.r_utilities.PathResolver.resolvePath;
 
@@ -17,7 +17,7 @@ public class BlurShader {
     private static final String BLUR_SHADER_VERT_PATH = resolvePath("gsdk/shaders/blur.vs");
     private static final String BLUR_SHADER_FRAG_PATH = resolvePath("gsdk/shaders/blur.fs");
 
-    private static VShader blurShader;
+    private static GShader blurShader;
 
     /**
      * Load blur shader.
@@ -26,7 +26,7 @@ public class BlurShader {
      * @param radius Blur radius.
      */
     public static void loadBlurShader(Vector2Di texSize, float radius) {
-        blurShader = new VShader(BLUR_SHADER_VERT_PATH, BLUR_SHADER_FRAG_PATH, VShader.FILE);
+        blurShader = new GShader(BLUR_SHADER_VERT_PATH, BLUR_SHADER_FRAG_PATH, GShader.FILE);
 
         blurShader.setUniformFloat("xs", texSize.x());
         blurShader.setUniformFloat("ys", texSize.y());
@@ -68,7 +68,7 @@ public class BlurShader {
     /**
      * Get blur shader.
      */
-    public static VShader getShader() {
+    public static GShader getShader() {
         return blurShader;
     }
 

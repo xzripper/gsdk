@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * GSDK Logger class.
  */
-public class VLogger {
+public class GLogger {
     private static boolean LOG_TO_FILES = false;
 
     private static final ArrayList<String> logs = new ArrayList<>();

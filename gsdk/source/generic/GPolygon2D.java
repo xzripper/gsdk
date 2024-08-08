@@ -9,7 +9,7 @@ import static gsdk.source.generic.Assert.assert_t;
 /**
  * Utility class for working with polygons.
  */
-public class VPolygon2D {
+public class GPolygon2D {
     /**
      * Draw 2D Polygon.
      *

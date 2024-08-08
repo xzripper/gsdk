@@ -2,7 +2,7 @@ package gsdk.source.audio;
 
 import com.raylib.Raylib;
 
-import gsdk.source.generic.VMath;
+import gsdk.source.generic.GMath;
 
 import gsdk.source.vectors.Vector3Df;
 
@@ -65,10 +65,10 @@ public class SpatialAudio {
         float dist = 0.0f;
 
         for(int posIndex=0; posIndex < 3; posIndex++) {
-            dist += VMath.abs((spAudioData.getAudioPos().toArray()[posIndex] * 0.1f) - (camPos.toArray()[posIndex] * 0.1f));
+            dist += GMath.abs((spAudioData.getAudioPos().toArray()[posIndex] * 0.1f) - (camPos.toArray()[posIndex] * 0.1f));
         }
 
-        return (float) VMath.clamp(SpatialAudioData.MIN_VOL, SpatialAudioData.MAX_VOL,  (SpatialAudioData.MAX_VOL + spAudioData.getAudioLoudness()) - dist);
+        return (float) GMath.clamp(SpatialAudioData.MIN_VOL, SpatialAudioData.MAX_VOL,  (SpatialAudioData.MAX_VOL + spAudioData.getAudioLoudness()) - dist);
     }
 
     /**
@@ -80,13 +80,13 @@ public class SpatialAudio {
      */
     public float calcDistPan(float camPositionZ, float camTargetZ, boolean inverse) {
         if(inverse) {
-            return (float) VMath.clamp(
+            return (float) GMath.clamp(
                 SpatialAudioData.LEFT_PAN,
                 SpatialAudioData.RIGHT_PAN,
 
                 SpatialAudioData.CENTER_PAN + (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.1f);
         } else {
-            return (float) VMath.clamp(
+            return (float) GMath.clamp(
                 SpatialAudioData.LEFT_PAN,
                 SpatialAudioData.RIGHT_PAN,
 

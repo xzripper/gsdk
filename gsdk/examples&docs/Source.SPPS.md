@@ -5,7 +5,7 @@ import com.raylib.Raylib;
 import gsdk.source.spps.PixelColliderContainer;
 import gsdk.source.spps.SPCData;
 import gsdk.source.spps.SpritePixelCollider;
-import gsdk.source.generic.VPolygon2D;
+import gsdk.source.generic.GPolygon2D;
 import gsdk.source.vectors.Vector2Di;
 
 import static com.raylib.Jaylib.BLACK;
@@ -36,7 +36,7 @@ public class Main {
         // rectangle.rotateCollider(60);
 
         SpritePixelCollider collider = new SpritePixelCollider(Raylib.LoadImage("g.png"));
-        SpritePixelCollider rectangle = new SpritePixelCollider(PixelColliderContainer.polygon(new VPolygon2D.Polygon(150, 100, 100, 200, 200, 200)));
+        SpritePixelCollider rectangle = new SpritePixelCollider(PixelColliderContainer.polygon(new GPolygon2D.Polygon(150, 100, 100, 200, 200, 200)));
 
         long s = System.currentTimeMillis();
         collider.bake();
@@ -71,7 +71,7 @@ public class Main {
             // Raylib.DrawRectanglePro(new Raylib.Rectangle().x(pointX).y(pointY).width(pointW).height(pointH), new Raylib.Vector2().x(pointW / 2).y(pointH / 2), 60, WHITE);
             // Raylib.DrawRectangle(pointX, pointY, pointW, pointH, WHITE);
             // Raylib.DrawLine( pointX + 0,  pointY + 0,  pointX + 50,  pointY + 80, WHITE);
-            VPolygon2D.drawPoly2D(new VPolygon2D.Polygon(pointX + 150, pointY + 100, pointX + 100, pointY + 200, pointX + 200, pointY + 200), WHITE);
+            GPolygon2D.drawPoly2D(new GPolygon2D.Polygon(pointX + 150, pointY + 100, pointX + 100, pointY + 200, pointX + 200, pointY + 200), WHITE);
 
             SPCData.debug(550);
 

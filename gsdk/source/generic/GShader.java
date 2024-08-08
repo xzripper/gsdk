@@ -8,19 +8,19 @@ import org.bytedeco.javacpp.Pointer;
 import org.bytedeco.javacpp.IntPointer;
 import org.bytedeco.javacpp.FloatPointer;
 
-import static gsdk.vlib.futils.FReadUtil.read;
+import static gsdk.glib.futils.FReadUtil.read;
 
 import static gsdk.source.generic.Assert.assert_t;
 import static gsdk.source.generic.Assert.assert_f;
 
 /**
- * VShader is a high-level abstraction level for shaders in Raylib.
- * Key features of VShader are: Unparalleled feature for merging shader with another shaders (vertex and fragment),
+ * GShader is a high-level abstraction level for shaders in Raylib.
+ * Key features of GShader are: Unparalleled feature for merging shader with another shaders (vertex and fragment),
  * preprocessor definitions implementation, loading shaders from file or memory just by changing flag,
  * simple loop-safe automatic shader uniform locations handler, pointer-free and flag-free shader uniform updater (+ advanced types supported: matrix, texture),
  * utility functions like reload, unload, etc.
  */
-public class VShader {
+public class GShader {
     private Raylib.Shader shader = null;
 
     private HashMap<String, Integer> locations;
@@ -42,7 +42,7 @@ public class VShader {
      * @param loadFlag Load type (file/memory).
      * @param load Load shader (can be set to false if shader is designed to be combined with others).
      */
-    public VShader(String vertex, String fragment, int loadFlag, boolean load) {
+    public GShader(String vertex, String fragment, int loadFlag, boolean load) {
         assert_f(vertex != null || fragment != null, "expected vertex or fragment shader");
 
         assert_f(loadFlag == FILE || loadFlag == MEMORY, "expected file or memory shader");
@@ -66,7 +66,7 @@ public class VShader {
      * @param fragment Fragment shader.
      * @param loadFlag Load type (file/memory).
      */
-    public VShader(String vertex, String fragment, int loadFlag) {
+    public GShader(String vertex, String fragment, int loadFlag) {
         this(vertex, fragment, loadFlag, true);
     }
 
@@ -81,7 +81,7 @@ public class VShader {
      * @param ppDefsVert Preprocessor definitions for vertex shader.
      * @param ppDefsFrag Preprocessor definitions for fragment shader.
      */
-    public VShader(String vertex, String fragment, int loadFlag, boolean load, int glslVersion, String[] ppDefsVert, String[] ppDefsFrag) {
+    public GShader(String vertex, String fragment, int loadFlag, boolean load, int glslVersion, String[] ppDefsVert, String[] ppDefsFrag) {
         assert_f(vertex != null || fragment != null, "expected vertex or fragment shader");
 
         assert_f(loadFlag == FILE || loadFlag == MEMORY, "expected file or memory shader");
@@ -114,7 +114,7 @@ public class VShader {
      * @param ppDefsVert Preprocessor definitions for vertex shader.
      * @param ppDefsFrag Preprocessor definitions for fragment shader.
      */
-    public VShader(String vertex, String fragment, int loadFlag, int glslVersion, String[] ppDefsVert, String[] ppDefsFrag) {
+    public GShader(String vertex, String fragment, int loadFlag, int glslVersion, String[] ppDefsVert, String[] ppDefsFrag) {
         this(vertex, fragment, loadFlag, true, glslVersion, ppDefsVert, ppDefsFrag);
     }
 

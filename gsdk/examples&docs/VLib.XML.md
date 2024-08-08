@@ -13,7 +13,7 @@ It allows you to read or write XML easier and faster.
 ```
 
 ```java
-import gsdk.vlib.ezxml.EzXML;
+import gsdk.glib.ezxml.EzXML;
 
 import static gsdk.source.generic.Assert.assert_t;
 
@@ -44,7 +44,7 @@ Output:
 ```java
 import org.w3c.dom.Element;
 
-import gsdk.vlib.ezxml.EzXML;
+import gsdk.glib.ezxml.EzXML;
 
 import static gsdk.source.generic.Assert.assert_t;
 

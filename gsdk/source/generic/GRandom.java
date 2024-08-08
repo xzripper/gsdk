@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Utility class that makes work with random easier.
  */
-public class VRandom {
+public class GRandom {
     private static final Random random = new Random();
 
     /**

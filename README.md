@@ -25,7 +25,7 @@ import vsdk.source.vectors.Vector3Df;
 
 import vsdk.source.vrender.Quad;
 
-import vsdk.source.utils.VShader;
+import vsdk.source.utils.GShader;
 
 public class Main {
     public static void main(String[] args) {
@@ -46,9 +46,9 @@ public class Main {
                 .fovy(45.0f)
                 .projection(Raylib.CAMERA_PERSPECTIVE);
 
-        VShader rainbow = new VShader(null, "shdr.frag", VShader.FILE, false);
+        GShader rainbow = new GShader(null, "shdr.frag", GShader.FILE, false);
 
-        rainbow.combineFragment(VShader.FILE, "shdr2.frag");
+        rainbow.combineFragment(GShader.FILE, "shdr2.frag");
 
         Raylib.DisableCursor();
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import gsdk.source.vectors.Vector2Di;
 
-import static gsdk.source.generic.VPolygon2D.Polygon;;
+import static gsdk.source.generic.GPolygon2D.Polygon;;
 
 /**
  * Pixel Collider Container.

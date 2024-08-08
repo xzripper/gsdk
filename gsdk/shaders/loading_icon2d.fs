@@ -1,5 +1,5 @@
 // GSDK Loading Icon (IVUI) Fragment Shader.
-// Since v0.0.0.6-alpha/dev shader is supported only by VShader (or custom pre-processor definitions system implementation).
+// Since v0.0.0.6-alpha/dev shader is supported only by GShader (or custom pre-processor definitions system implementation).
 
 #version 330
 

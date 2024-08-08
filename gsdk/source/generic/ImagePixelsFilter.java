@@ -6,7 +6,7 @@ import static com.raylib.Jaylib.BLANK;
 
 import gsdk.source.vectors.Vector4Di;
 
-import static gsdk.source.generic.VMath.tolerance;
+import static gsdk.source.generic.GMath.tolerance;
 
 /**
  * Utility class for filtering image pixels.

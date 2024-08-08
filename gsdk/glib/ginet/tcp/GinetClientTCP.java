@@ -1,4 +1,4 @@
-package gsdk.vlib.vinet.tcp;
+package gsdk.glib.ginet.tcp;
 
 import java.net.Socket;
 
@@ -14,7 +14,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 /**
- * VinetClientTCP -
+ * GinetClientTCP -
  *
  * A thread-friendly, no-bloat, event-driven, and asynchronous TCP client
  * for Violent Immediate mode Networking (Vinet) that is designed to be
@@ -29,11 +29,11 @@ import java.io.IOException;
  * - Asynchronous: The client connects and communicates with the server asynchronously.<br>
  * - Easy and simple: Provides straightforward methods for connecting, sending data, and emitting events.<br><br>
  *
- * The VinetClientTCP class allows you to:<br>
+ * The GinetClientTCP class allows you to:<br>
  * - Initialize the client with server host, port, and connection timeout.<br>
  * - Connect to the server and manage the connection state.<br>
  * - Send data to the server and emit custom events.<br>
- * - Handle different events through the VinetClientEventsTCP interface.<br>
+ * - Handle different events through the GinetClientEventsTCP interface.<br>
  * - Soft handling of critical situations.<br><br>
  *
  * The Transmission Control Protocol (TCP) is one of the main protocols of the Internet protocol suite.
@@ -51,7 +51,7 @@ import java.io.IOException;
  * <br>
  * @see <a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">Transmission Control Protocol (Wikipedia).</a>
  */
-public class VinetClientTCP {
+public class GinetClientTCP {
     private Socket socket;
 
     private final String host;
@@ -62,9 +62,9 @@ public class VinetClientTCP {
 
     private final InetSocketAddress inetAddress;
 
-    private final VinetClientEventsTCP events;
+    private final GinetClientEventsTCP events;
 
-    private VinetClientServer serverRepr;
+    private GinetClientServer serverRepr;
 
     private boolean active;
 
@@ -76,7 +76,7 @@ public class VinetClientTCP {
      * @param port_ Server port.
      * @param connectionTime Time client has to connect to the server.
      */
-    public VinetClientTCP(VinetClientEventsTCP events_, String host_, int port_, int connectionTime) {
+    public GinetClientTCP(GinetClientEventsTCP events_, String host_, int port_, int connectionTime) {
         host = host_;
         port = port_;
 
@@ -105,7 +105,7 @@ public class VinetClientTCP {
                 }
 
                 if(socket.isConnected()) {
-                    serverRepr = new VinetClientServer(socket);
+                    serverRepr = new GinetClientServer(socket);
 
                     events.connection(serverRepr, this);
 
@@ -228,7 +228,7 @@ public class VinetClientTCP {
     /**
      * Get server representation.
      */
-    public VinetClientServer getServerRepr() {
+    public GinetClientServer getServerRepr() {
         return serverRepr;
     }
 

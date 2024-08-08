@@ -1,4 +1,4 @@
-package gsdk.vlib.vinet.tcp;
+package gsdk.glib.ginet.tcp;
 
 import java.net.Socket;
 
@@ -13,7 +13,7 @@ import static java.util.UUID.randomUUID;;
 /**
  * Server representation of a client.
  */
-public class VinetServerClient {
+public class GinetServerClient {
     private final Socket client;
 
     private final InetAddress clientAddress;
@@ -22,7 +22,7 @@ public class VinetServerClient {
 
     private final String clientIdentifier;
 
-    protected VinetServerClient(Socket client_, String identifier) throws IOException {
+    protected GinetServerClient(Socket client_, String identifier) throws IOException {
         client = client_;
 
         clientAddress = client.getInetAddress();

@@ -7,7 +7,7 @@ import com.raylib.Raylib;
 
 import gsdk.source.grender.Texture;
 
-import gsdk.source.generic.VMath;
+import gsdk.source.generic.GMath;
 
 import gsdk.source.vectors.Vector2Df;
 
@@ -51,7 +51,7 @@ public class Main {
 
             GUI.text("Hover me!", 393, 300);
 
-            int dist = (int) VMath.dist2D(new Vector2Df(Raylib.GetMouseX(), Raylib.GetMouseY()), new Vector2Df(420, 310));
+            int dist = (int) GMath.dist2D(new Vector2Df(Raylib.GetMouseX(), Raylib.GetMouseY()), new Vector2Df(420, 310));
 
             if (GUI.hollowRectangle(375, 285, 100, 50, true)) {
                 GUIColor color = new GUIColor(255 - dist, dist, 148 + dist, 255);
@@ -103,9 +103,9 @@ public class Main {
             }
 
             if (GUI.rectangle(535, 295, 30, 30, new GUIColor(
-                (int) VMath.clamp(0, 255, dist / 2.0f), 0, 0,
+                (int) GMath.clamp(0, 255, dist / 2.0f), 0, 0,
 
-                (int) VMath.clamp(0, slider.get(), VMath.dist2D(
+                (int) GMath.clamp(0, slider.get(), GMath.dist2D(
                     new Vector2Df(Raylib.GetMouseX(), Raylib.GetMouseY()),
                     new Vector2Df(550, 310)))))) {
                 System.out.println("Clicked rectangle!");

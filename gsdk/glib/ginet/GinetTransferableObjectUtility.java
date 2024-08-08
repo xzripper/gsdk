@@ -1,4 +1,4 @@
-package gsdk.vlib.vinet;
+package gsdk.glib.ginet;
 
 import static java.util.Arrays.stream;
 
@@ -7,7 +7,7 @@ import java.util.Base64;
 /**
  * Utility for encoding/decoding transfer data.
  */
-public class VinetTransferableObjectUtility{
+public class GinetTransferableObjectUtility{
     private static final String SPLIT = "'";
     private static final String SINGLE_QUOTE_C = "sqv1";
     private static final String SIGNATURE_C = "VTrfO1-";

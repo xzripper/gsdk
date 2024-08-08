@@ -4,7 +4,7 @@ import com.raylib.Raylib;
 
 import static com.raylib.Jaylib.WHITE;
 
-import gsdk.source.generic.VShader;
+import gsdk.source.generic.GShader;
 
 /**
  * Filter Shader or Post Processing Shader simplified.
@@ -12,7 +12,7 @@ import gsdk.source.generic.VShader;
 public class FilterShader {
     private final Raylib.RenderTexture filterTex;
 
-    private final VShader filterShader;
+    private final GShader filterShader;
 
     /**
      * Initialize filter.
@@ -21,7 +21,7 @@ public class FilterShader {
      * @param areaH Filter area height.
      * @param filterShader_ Filter shader.
      */
-    public FilterShader(int areaW, int areaH, VShader filterShader_) {
+    public FilterShader(int areaW, int areaH, GShader filterShader_) {
         filterTex = Raylib.LoadRenderTexture(areaW, areaH);
 
         filterShader = filterShader_;
@@ -37,7 +37,7 @@ public class FilterShader {
     /**
      * Get filter shader.
      */
-    public VShader getFilterShader() {
+    public GShader getFilterShader() {
         return filterShader;
     }
 

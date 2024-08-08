@@ -10,9 +10,9 @@ import gsdk.source.vectors.Vector3Df;
 
 import static gsdk.source.generic.Range.inRange;
 
-import static gsdk.source.generic.VLogger.warning;
+import static gsdk.source.generic.GLogger.warning;
 
-import static gsdk.source.generic.VMath.clamp;
+import static gsdk.source.generic.GMath.clamp;
 
 import static gsdk.source.generic.Assert.assert_t;
 import static gsdk.source.generic.Assert.assert_f;

@@ -39,9 +39,9 @@ import gsdk.source.vectors.Vector2Df;
 
 import static gsdk.source.generic.ImagePixelsFilter.filterPixels;
 
-import static gsdk.source.generic.VMath.clamp;
+import static gsdk.source.generic.GMath.clamp;
 
-import static gsdk.source.generic.VLogger.warning;
+import static gsdk.source.generic.GLogger.warning;
 
 import static gsdk.source.generic.Assert.assert_t;
 
