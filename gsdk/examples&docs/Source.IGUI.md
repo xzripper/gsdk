@@ -1,4 +1,4 @@
-IVUI is an immediate mode graphical user interface designed for simple, fast, customizable UI for applications/games.
+IGUI is an immediate mode graphical user interface designed for simple, fast, customizable UI for applications/games.
 
 ### Example of using:
 
