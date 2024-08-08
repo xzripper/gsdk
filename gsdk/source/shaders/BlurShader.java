@@ -17,6 +17,9 @@ public class BlurShader {
     private static final String BLUR_SHADER_VERT_PATH = resolvePath("gsdk/shaders/blur.vs");
     private static final String BLUR_SHADER_FRAG_PATH = resolvePath("gsdk/shaders/blur.fs");
 
+    private static Vector2Di texSizeShader;
+    private static float blurRadiusShader;
+
     private static GShader blurShader;
 
     /**
@@ -40,6 +43,9 @@ public class BlurShader {
 
         blurShader.setUniformFloat("r", radius);
 
+        texSizeShader = texSize;
+        blurRadiusShader = radius;
+
         if(radius >= 24) {
             warning("High blur radius may cause performance issues (%f >= 24).".formatted(radius));
         }
@@ -55,6 +61,8 @@ public class BlurShader {
 
         blurShader.setUniformFloat("xs", texSize.x());
         blurShader.setUniformFloat("ys", texSize.y());
+
+        texSizeShader = texSize;
     }
 
     /**
@@ -67,9 +75,25 @@ public class BlurShader {
 
         blurShader.setUniformFloat("r", radius);
 
+        blurRadiusShader = radius;
+
         if(radius >= 24) {
             warning("High blur radius may cause performance issues (%f >= 24).".formatted(radius));
         }
+    }
+
+    /**
+     * Get current set texture size.
+     */
+    public static Vector2Di getCurrTexSize() {
+        return texSizeShader;
+    }
+
+    /**
+     * Get current set blur radius.
+     */
+    public static float getCurrBlurRadius() {
+        return blurRadiusShader;
     }
 
     /**
