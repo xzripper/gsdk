@@ -4,8 +4,6 @@ import com.raylib.Raylib;
 
 import java.util.ArrayList;
 
-import org.bytedeco.javacpp.FloatPointer;
-
 import gsdk.source.vrender.Texture;
 
 import gsdk.source.generic.VShader;
