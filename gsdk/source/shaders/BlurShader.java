@@ -20,6 +20,13 @@ public class BlurShader {
     private static GShader blurShader;
 
     /**
+     * Is blur shader loaded.
+     */
+    public static boolean shaderLoaded() {
+        return blurShader != null;
+    }
+
+    /**
      * Load blur shader.
      * 
      * @param texSize Texture size.
@@ -44,7 +51,7 @@ public class BlurShader {
      * @param texSize Texture size.
      */
     public static void setTexSize(Vector2Di texSize) {
-        assert_t(blurShader == null, "blurShader == null: use loadBlurShader");
+        assert_t(!shaderLoaded(), "blurShader == null: use loadBlurShader");
 
         blurShader.setUniformFloat("xs", texSize.x());
         blurShader.setUniformFloat("ys", texSize.y());
@@ -56,7 +63,7 @@ public class BlurShader {
      * @param radius Blur radius.
      */
     public static void setRadius(float radius) {
-        assert_t(blurShader == null, "blurShader == null: use loadBlurShader");
+        assert_t(!shaderLoaded(), "blurShader == null: use loadBlurShader");
 
         blurShader.setUniformFloat("r", radius);
 
@@ -76,7 +83,7 @@ public class BlurShader {
      * Begin blur shader.
      */
     public static void begin() {
-        assert_t(blurShader == null, "blurShader == null: use loadBlurShader");
+        assert_t(!shaderLoaded(), "blurShader == null: use loadBlurShader");
 
         blurShader.begin();
     }
@@ -85,7 +92,7 @@ public class BlurShader {
      * End blur shader.
      */
     public static void end() {
-        assert_t(blurShader == null, "blurShader == null: use loadBlurShader");
+        assert_t(!shaderLoaded(), "blurShader == null: use loadBlurShader");
 
         blurShader.end();
     }
@@ -94,7 +101,7 @@ public class BlurShader {
      * Unload blur shader.
      */
     public static void unload() {
-        assert_t(blurShader == null, "blurShader == null: use loadBlurShader");
+        assert_t(!shaderLoaded(), "blurShader == null: use loadBlurShader");
 
         blurShader.unload();
     }
