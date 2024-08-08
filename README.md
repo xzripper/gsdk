@@ -1,6 +1,6 @@
 <h1 align="center">VSDK is now being rebranded to GSDK due to transfer of project from studio profile to main developer profile.</h1>
 
-<p align="center"><img src="https://github.com/violent-studio/vmedia/blob/main/vsdk.gif?raw=true"></p>
+<p align="center"><img src="gsdk.png"></p>
 
 <h3 align="center">GSDK Development Phase: <code>GSDK_V0.0.0.6-ALPHA/DEV_PUBLISH</code>.</h3>
 <h3 align="center">GSDK is currently being developed by a solo developer. I appreciate your patience and understanding as progress may take some time.</h3>
