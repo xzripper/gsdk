@@ -1,4 +1,4 @@
-<h1 align="center">GSDK is now being rebranded to GSDK due to transfer of project from studio profile to main developer profile.</h1>
+<h1 align="center">VSDK is now being rebranded to GSDK due to transfer of project from studio profile to main developer profile.</h1>
 
 <p align="center"><img src="https://github.com/violent-studio/vmedia/blob/main/vsdk.gif?raw=true"></p>
 
