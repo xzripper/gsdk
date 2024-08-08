@@ -12,7 +12,7 @@
  * To integrate OPC2D into your project, simply move the files written above to your project directory.
  *
  * Violent Studio :: GSDK 2024
- * https://github.com/violent-studio/gsdk
+ * https://github.com/xzripper/gsdk
  */
 
  package gsdk.source.opc2d;
