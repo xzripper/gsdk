@@ -20,7 +20,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * GinetServerTCP -
  *
  * A thread-friendly, no-bloat, event-driven, and asynchronous TCP server
- * for Violent Immediate mode Networking (Vinet) that is designed to be
+ * for Game Immediate mode Networking (Vinet) that is designed to be
  * easy and simple to use. The server manages client connections,
  * communication, and various events such as client connection,
  * disconnection, data reception, and exceptions.<br>
@@ -67,7 +67,7 @@ public class GinetServerTCP {
     private boolean active;
 
     /**
-     * Initialize Violent Immediate mode Networking server (TCP).
+     * Initialize Game Immediate mode Networking server (TCP).
      *
      * @param events_ Events handler.
      * @param port Server port.

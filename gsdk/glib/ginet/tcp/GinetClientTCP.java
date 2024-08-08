@@ -17,7 +17,7 @@ import java.io.IOException;
  * GinetClientTCP -
  *
  * A thread-friendly, no-bloat, event-driven, and asynchronous TCP client
- * for Violent Immediate mode Networking (Vinet) that is designed to be
+ * for Game Immediate mode Networking (Ginet) that is designed to be
  * easy and simple to use. The client establishes a connection to a server,
  * manages communication, and handles various events such as connection,
  * disconnection, data reception, and exceptions.<br>
@@ -69,7 +69,7 @@ public class GinetClientTCP {
     private boolean active;
 
     /**
-     * Initialize Violent Immediate mode Networking client (TCP).
+     * Initialize Game Immediate mode Networking client (TCP).
      *
      * @param events_ Events handler.
      * @param host_ Server host.
