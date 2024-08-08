@@ -58,7 +58,7 @@ public class ShaderPlayground {
 
         Raylib.InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
 
-        setWinIcon("gsdk/resources/vicon.png", true);
+        setWinIcon("gsdk/resources/gicon.png", true);
 
         Raylib.SetWindowMinSize(WINDOW_WIDTH - 15, WINDOW_HEIGHT - 15);
 
