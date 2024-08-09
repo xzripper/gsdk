@@ -132,6 +132,8 @@ void main() {
 
 <p align="center"><img src="https://github.com/user-attachments/assets/f46519ac-9f5c-4656-baf8-04eb11e94921"></p>
 
+<h3 align="center">GSDK Baked 2D Glow Textures.</h3>
+<p align="center"><img src="https://github.com/user-attachments/assets/9319d13b-cb0c-4287-9a3c-f99a30bf3cc6"></p>
 
 <h3 align="center">GSDK Bump Mapping (Youtube).</h3>
 <p align="center"><a href="https://www.youtube.com/watch?v=HUJ3RxE8DhQ"><img src="http://markdown-videos-api.jorgenkh.no/youtube/HUJ3RxE8DhQ.gif?width=450&height=250&duration=1000" alt="Bump Mapping ALPHA" title="Bump Mapping ALPHA"/></a></p>
