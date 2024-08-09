@@ -13,6 +13,8 @@ import gsdk.source.shaders.BlurShader;
 import static gsdk.source.generic.GMath.clamp;
 import static gsdk.source.generic.GMath.scale;
 
+import static gsdk.source.generic.Assert.assert_f;
+
 /**
  * Class for baking 2D glow texture/image.
  */
@@ -30,8 +32,8 @@ public class BakedGlow {
      * @param gBlur Glow blur level.
      * @param gColor Glow color.
      */
-    public BakedGlow(GlowShape gShape, Vector2Di gSize, float gIntensity, GlowBlur gBlur, int gBlurVar, Raylib.Color gColor) {
-        bakeGlow(gShape, gSize, gIntensity, gBlur, gBlurVar, gColor);
+    public BakedGlow(GlowShape gShape, Vector2Di gSize, float gIntensity, GlowBlur gBlur, Raylib.Color gColor) {
+        bakeGlow(gShape, gSize, gIntensity, gBlur, gColor);
     }
 
     /**
@@ -43,7 +45,7 @@ public class BakedGlow {
      * @param gBlur Glow blur level.
      * @param gColor Glow color.
      */
-    public Raylib.Texture bakeGlow(GlowShape gShape, Vector2Di gSize, float gIntensity, GlowBlur gBlur, int gBlurVar, Raylib.Color gColor) {
+    public Raylib.Texture bakeGlow(GlowShape gShape, Vector2Di gSize, float gIntensity, GlowBlur gBlur, Raylib.Color gColor) {
         float blurRadius = 0;
 
         if(gBlur.equals(GlowBlur.WEAK)) blurRadius = WEAK_BLUR_VAL;
@@ -55,17 +57,15 @@ public class BakedGlow {
 
         float preRadius = -1;
 
-        if(!BlurShader.shaderLoaded()) {
-            BlurShader.loadBlurShader(gBlurVar, new Vector2Di(gSize.x() * (gBlur.ordinal() + 1), gSize.y() * (gBlur.ordinal() + 1)), blurRadius);
-        } else {
-            preTexSize = BlurShader.getCurrTexSize();
+        assert_f(BlurShader.shaderLoaded(), "can't bake glow texture: blur shader is not loaded (BlurShader::loadBlurShader)");
 
-            preRadius = BlurShader.getCurrBlurRadius();
+        preTexSize = BlurShader.getCurrTexSize();
 
-            BlurShader.setTexSize(gSize);
+        preRadius = BlurShader.getCurrBlurRadius();
 
-            BlurShader.setRadius(blurRadius);
-        }
+        BlurShader.setTexSize(gSize);
+
+        BlurShader.setRadius(blurRadius);
 
         gColor.a((byte) clamp(0, 255, scale(gIntensity, 255, 1.0)));
 
