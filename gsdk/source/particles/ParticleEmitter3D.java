@@ -1,6 +1,6 @@
 /**
- * 3D Particles' implementation by XZRipper in the GSDK project: VFlux.
- * VFlux is currently in an unstable state and under active development.
+ * 3D Particles' implementation by XZRipper in the GSDK project: GFlux.
+ * GFlux is currently in an unstable state and under active development.
  * Known issues:
  * - Particles have invalid rotation origin (only if rotation is used).
  * - Particles may have black borders (see https://www.reddit.com/r/raylib/comments/1e11xdo/weird_texture_billboard_black_borders/):
@@ -48,7 +48,7 @@ import static gsdk.source.generic.Assert.assert_t;
 import static gsdk.r_utilities.PathResolver.resolvePath;
 
 /**
- * 3D particle emitter for the GSDK project: VFlux.
+ * 3D particle emitter for the GSDK project: GFlux.
  * Handles the creation, simulation, and rendering of particles in a 3D environment.
 **/
 public class ParticleEmitter3D {
@@ -166,7 +166,7 @@ public class ParticleEmitter3D {
      * Fill particle container with particles.
      */
     public void loadParticles() {
-        warning("VFlux is currently in an unstable state and under active development.");
+        warning("GFlux is currently in an unstable state and under active development.");
 
         for(int i=0; i < emitterConfig.getMaxParticles(); i++) {
             particleContainer[i] = new Particle(
