@@ -277,6 +277,6 @@ public class BakedGlow {
         /**
          * Transcendent glow blur.
          */
-        TRANSCENDENT,
+        TRANSCENDENT
     }
 }
