@@ -136,10 +136,10 @@ public class BakedGlow {
      * 
      * @param degrees Angle.
      */
-    public void rotateGlow(double degrees) {
+    public void rotateGlow(int degrees) {
         Raylib.Image rotated = getBakedGlowImage();
 
-        Raylib.ImageRotate(rotated, (int) degrees);
+        Raylib.ImageRotate(rotated, degrees);
 
         bakedGlow = Raylib.LoadTextureFromImage(rotated);
     }
