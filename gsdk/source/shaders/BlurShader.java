@@ -15,12 +15,15 @@ import static gsdk.source.generic.Assert.assert_t;
  */
 public class BlurShader {
     private static final String BLUR_SHADER_VERT_PATH = resolvePath("gsdk/shaders/blur.vs");
-    private static final String BLUR_SHADER_FRAG_PATH = resolvePath("gsdk/shaders/blur.fs");
+    private static final String BLUR1_SHADER_FRAG_PATH = resolvePath("gsdk/shaders/blur.fs");
+    private static final String BLUR2_SHADER_FRAG_PATH = resolvePath("gsdk/shaders/blur2.fs");
 
     private static Vector2Di texSizeShader;
     private static float blurRadiusShader;
 
     private static GShader blurShader;
+
+    public static final int BLUR_1 = 1, BLUR_2 = 2;
 
     /**
      * Is blur shader loaded.
@@ -32,11 +35,16 @@ public class BlurShader {
     /**
      * Load blur shader.
      * 
+     * @param blurVar Blur variant.
      * @param texSize Texture size.
      * @param radius Blur radius.
      */
-    public static void loadBlurShader(Vector2Di texSize, float radius) {
-        blurShader = new GShader(BLUR_SHADER_VERT_PATH, BLUR_SHADER_FRAG_PATH, GShader.FILE);
+    public static void loadBlurShader(int blurVar, Vector2Di texSize, float radius) {
+        assert_t(blurVar != BLUR_1 && blurVar != BLUR_2, "invalid blur variant (expected 1 or 2)");
+
+        String blurFragment = blurVar == BLUR_1 ? BLUR1_SHADER_FRAG_PATH : BLUR2_SHADER_FRAG_PATH;
+
+        blurShader = new GShader(BLUR_SHADER_VERT_PATH, blurFragment, GShader.FILE);
 
         blurShader.setUniformFloat("xs", texSize.x());
         blurShader.setUniformFloat("ys", texSize.y());
