@@ -33,7 +33,7 @@ public class BlurShader {
     }
 
     /**
-     * Load blur shader.
+     * Load blur shader and set texture size and blur radius.
      * 
      * @param blurVar Blur variant.
      * @param texSize Texture size.
@@ -57,6 +57,19 @@ public class BlurShader {
         if(radius >= 24) {
             warning("High blur radius may cause performance issues (%f >= 24).".formatted(radius));
         }
+    }
+
+    /**
+     * Load blur shader.
+     * 
+     * @param blurVar Blur variant.
+     */
+    public static void loadBlurShader(int blurVar) {
+        assert_t(blurVar != BLUR_1 && blurVar != BLUR_2, "invalid blur variant (expected 1 or 2)");
+
+        String blurFragment = blurVar == BLUR_1 ? BLUR1_SHADER_FRAG_PATH : BLUR2_SHADER_FRAG_PATH;
+
+        blurShader = new GShader(BLUR_SHADER_VERT_PATH, blurFragment, GShader.FILE);
     }
 
     /**
