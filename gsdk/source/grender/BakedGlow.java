@@ -19,7 +19,7 @@ import static gsdk.source.generic.Assert.assert_f;
  * Class for baking 2D glow texture/image.
  */
 public class BakedGlow {
-    private static final float WEAK_BLUR_VAL = 6.0f, MID_BLUR_VAL = 12.5f, INTENSE_BLUR_VAL = 19.0f, TRANSCENDENT_BLUR_VAL = 23.5f;
+    private static final float WEAK_BLUR_VAL = 6.0f, MID_BLUR_VAL = 12.5f, HARD_BLUR_VAL = 16.5f, INTENSE_BLUR_VAL = 21.0f, TRANSCENDENT_BLUR_VAL = 25.0f;
 
     private Raylib.Texture bakedGlow;
 
@@ -50,6 +50,7 @@ public class BakedGlow {
 
         if(gBlur.equals(GlowBlur.WEAK)) blurRadius = WEAK_BLUR_VAL;
         else if(gBlur.equals(GlowBlur.MID)) blurRadius = MID_BLUR_VAL;
+        else if(gBlur.equals(GlowBlur.HARD)) blurRadius = HARD_BLUR_VAL;
         else if(gBlur.equals(GlowBlur.INTENSE)) blurRadius = INTENSE_BLUR_VAL;
         else if(gBlur.equals(GlowBlur.TRANSCENDENT)) blurRadius = TRANSCENDENT_BLUR_VAL;
 
@@ -103,13 +104,17 @@ public class BakedGlow {
             if(preTexSize != null) BlurShader.setTexSize(preTexSize);
             if(preRadius != -1) BlurShader.setRadius(preRadius);
 
-            bakedGlow = Raylib.LoadTextureFromImage(Raylib.LoadImageFromTexture(glowBlurredRTex.texture())); // Trick for resource managing (copy texture).
+            bakedGlow = Raylib.LoadTextureFromImage(Raylib.LoadImageFromTexture(glowBlurredRTex.texture())); // Trick for resource managment (copy texture).
 
             Raylib.UnloadRenderTexture(glowBlurredRTex);
 
             return bakedGlow;
         } else {
-            bakedGlow = Raylib.LoadTextureFromImage(Raylib.LoadImageFromTexture(glowShapeRTex.texture()));
+            Raylib.Image rotatedTex = Raylib.LoadImageFromTexture(glowShapeRTex.texture());
+
+            Raylib.ImageRotate(rotatedTex, 180);
+
+            bakedGlow = Raylib.LoadTextureFromImage(rotatedTex);
 
             Raylib.UnloadRenderTexture(glowShapeRTex);
 
@@ -260,6 +265,11 @@ public class BakedGlow {
         MID,
 
         /**
+         * Hard glow blur.
+         */
+        HARD,
+
+        /**
          * Intense glow blur.
          */
         INTENSE,
@@ -267,6 +277,6 @@ public class BakedGlow {
         /**
          * Transcendent glow blur.
          */
-        TRANSCENDENT
+        TRANSCENDENT,
     }
 }
