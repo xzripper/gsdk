@@ -164,10 +164,11 @@ public class BakedGlow {
     }
 
     private static void spotlight(Vector2Di size, float intensity, Raylib.Color color, int narrowness) {
-        int baseWidth = size.x() / narrowness;
-        int topWidth = size.x();
+        int baseWidth = (int) (size.x() / narrowness);
 
-        int height = size.y();
+        int topWidth = size.x() * 2; // TODO: Customizable spotlight width proportion.
+
+        int height = size.y() * 2; // TODO: Customizable spotlight height proportion.
 
         for(int y = 0; y < height; y++) {
             int width = baseWidth + (int) ((topWidth - baseWidth) * ((float) y / height));
