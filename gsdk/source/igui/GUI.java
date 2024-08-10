@@ -306,6 +306,29 @@ public class GUI {
     }
 
     /**
+     * Draw regular text with pulsing effect.
+     * 
+     * @param content Text content.
+     * @param x X Position.
+     * @param y Y Position.
+     */
+    public static boolean pulsingText(String content, int x, int y) {
+        Raylib.DrawTextEx(
+            GUIIO.style.getTextFont().getFont(),
+            content, new Raylib.Vector2().x(x).y(y),
+            GUIIO.style.getTextSize(), GUIIO.style.getTextSpacing(),
+
+            new Raylib.Color()
+                .r((byte) GUIIO.style.getTextCol().get('r'))
+                .g((byte) GUIIO.style.getTextCol().get('g'))
+                .b((byte) GUIIO.style.getTextCol().get('b'))
+                .a((byte) clamp(128, 255, scale(Math.abs(Math.cos(Raylib.GetTime() * 2.5)), 255, 1.0f)))
+        );
+
+        return !GUIIO.disabled && GUIIO.mouseHoversText(content, x, y) && Raylib.IsMouseButtonReleased(Raylib.MOUSE_BUTTON_LEFT);
+    }
+
+    /**
      * Draw regular button.
      *
      * @param content Button text.
