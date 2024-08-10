@@ -19,7 +19,7 @@ import static gsdk.source.generic.Assert.assert_f;
  * Class for baking 2D glow texture/image.
  */
 public class BakedGlow {
-    private static final float WEAK_BLUR_VAL = 6.0f, MID_BLUR_VAL = 12.5f, HARD_BLUR_VAL = 16.5f, INTENSE_BLUR_VAL = 21.0f, TRANSCENDENT_BLUR_VAL = 25.0f;
+    private static final float WEAK_BLUR_VAL = 6.0f, MID_BLUR_VAL = 12.5f, HARD_BLUR_VAL = 16.5f, INTENSE_BLUR_VAL = 21.0f, TRANSCENDENT_BLUR_VAL = 25.5f;
 
     private Raylib.Texture bakedGlow;
 
