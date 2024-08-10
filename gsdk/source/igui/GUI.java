@@ -78,7 +78,7 @@ public class GUI {
      *
      * @param style Style.
      */
-    public static void newVuiCtx(GUIStyle style) {
+    public static void newGuiCtx(GUIStyle style) {
         GUIIO.newCtx(style);
 
         loadingIconShader = new GShader(null, resolvePath("gsdk/shaders/loading_icon2d.fs"), GShader.FILE);
