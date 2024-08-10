@@ -2,7 +2,7 @@
 
 <p align="center"><img src="gsdk.png"></p>
 
-<h3 align="center">GSDK Development Phase: <code>GSDK_V0.0.0.6-ALPHA/DEV_PUBLISH</code>.</h3>
+<h3 align="center">GSDK Development Phase: <code>GSDK_V0.0.0.7-ALPHA/DEV_PUBLISH</code>.</h3>
 <h3 align="center">GSDK is currently being developed by a solo developer. I appreciate your patience and understanding as progress may take some time.</h3>
 
 ![opera_bFDdi1rxJH](https://github.com/user-attachments/assets/eb75b696-df66-453c-98d9-80a1c10e35b3)
