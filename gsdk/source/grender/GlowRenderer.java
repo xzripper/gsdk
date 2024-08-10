@@ -4,11 +4,15 @@ import com.raylib.Raylib;
 
 import static com.raylib.Jaylib.WHITE;
 
+import java.util.ArrayList;
+
 /**
  * Class for rendering 2D glow objects.
  */
 public class GlowRenderer {
-    private final BakedGlow[] bakedGlowArr;
+    private final ArrayList<BakedGlow> bakedGlowList;
+
+    private boolean renderEnabled;
 
     /**
      * Initialize glow renderer.
@@ -16,9 +20,56 @@ public class GlowRenderer {
      * @param bakedGlowObjs Baked glow objects.
      */
     public GlowRenderer(BakedGlow ...bakedGlowObjs) {
-        bakedGlowArr = new BakedGlow[bakedGlowObjs.length];
+        bakedGlowList = new ArrayList<>();
 
-        System.arraycopy(bakedGlowObjs, 0, bakedGlowArr, 0, bakedGlowObjs.length);
+        appendGlowTex(bakedGlowObjs);
+
+        renderEnabled = true;
+    }
+
+    /**
+     * Append baked glow textures.
+     * 
+     * @param bakedGlowObjs Baked glow objects.
+     */
+    public void appendGlowTex(BakedGlow ...bakedGlowObjs) {
+        for(BakedGlow bakedGlow : bakedGlowObjs) bakedGlowList.add(bakedGlow);
+    }
+
+    /**
+     * Get amount of registered baked glow textures.
+     */
+    public int getBakedGlowTexAmount() {
+        return bakedGlowList.size();
+    }
+
+    /**
+     * Clear all baked glow textures.
+     */
+    public void clearBakedGlowTexList() {
+        bakedGlowList.clear();
+    }
+
+    /**
+     * Enable objects rendering.
+     */
+    public void enableRendering() {
+        renderEnabled = true;
+    }
+
+    /**
+     * Disable objects rendering.
+     */
+    public void disableRendering() {
+        renderEnabled = false;
+    }
+
+    /**
+     * Enable rendering if rendering is disabled and vice-versa.
+     */
+    public void invertRenderingState() {
+        if(renderEnabled) disableRendering();
+        else enableRendering();
     }
 
     /**
@@ -27,7 +78,7 @@ public class GlowRenderer {
      * @param pos Position.
      */
     public BakedGlow getBakedGlow(int pos) {
-        return bakedGlowArr[pos - 1];
+        return bakedGlowList.get(pos - 1);
     }
 
     /**
@@ -40,6 +91,8 @@ public class GlowRenderer {
      * @param blendMode Glow blend mode.
      */
     public void renderGlow(int pos, int x, int y, Raylib.Color tint, int blendMode) {
+        if(!renderEnabled) return;
+
         if(blendMode != 0) Raylib.BeginBlendMode(blendMode);    
 
         Raylib.DrawTexture(getBakedGlow(pos).getBakedGlow(), x, y, tint);
@@ -68,5 +121,14 @@ public class GlowRenderer {
      */
     public void renderGlow(int pos, int x, int y) {
         renderGlow(pos, x, y, WHITE);
+    }
+
+    /**
+     * Unload all baked glow textures.
+     */
+    public void unload() {
+        for(BakedGlow glow : bakedGlowList) {
+            Raylib.UnloadTexture(glow.getBakedGlow());
+        }
     }
 }
