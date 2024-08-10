@@ -61,11 +61,9 @@ public class BakedGlow {
         assert_f(BlurShader.shaderLoaded(), "can't bake glow texture: blur shader is not loaded (BlurShader::loadBlurShader)");
 
         preTexSize = BlurShader.getCurrTexSize();
-
         preRadius = BlurShader.getCurrBlurRadius();
 
         BlurShader.setTexSize(gSize);
-
         BlurShader.setRadius(blurRadius);
 
         gColor.a((byte) clamp(0, 255, scale(gIntensity, 255, 1.0)));
