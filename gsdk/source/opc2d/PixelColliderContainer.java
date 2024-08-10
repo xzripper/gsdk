@@ -175,6 +175,25 @@ public class PixelColliderContainer {
     }
 
     /**
+     * Generate an isosceles triangle as an array of points.
+     *
+     * @param width  Width of the triangle's base.
+     * @param height Height of the triangle.
+     */
+    public static PixelColliderContainer triangle(int width, int height) {
+        ArrayList<int[]> points = new ArrayList<>();
+
+        int x1 = 0, x2 = width, x3 = width / 2;
+        int y1 = height, y2 = height, y3 = 0;
+
+        points.addAll(java.util.Arrays.asList(line(x1, y1, x2, y2).getPoints()));
+        points.addAll(java.util.Arrays.asList(line(x2, y2, x3, y3).getPoints()));
+        points.addAll(java.util.Arrays.asList(line(x3, y3, x1, y1).getPoints()));
+
+        return _createContainer(points);
+    }
+
+    /**
      * Generate a line as a point array.
      * 
      * @param startX Line start X.
