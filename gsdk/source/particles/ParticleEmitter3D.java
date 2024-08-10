@@ -163,6 +163,15 @@ public class ParticleEmitter3D {
     }
 
     /**
+     * Set emitter config delta.
+     * 
+     * @param delta Delta.
+     */
+    public void setDelta(float delta) {
+        emitterConfig.setDelta(delta);
+    }
+
+    /**
      * Fill particle container with particles.
      */
     public void loadParticles() {
@@ -186,7 +195,7 @@ public class ParticleEmitter3D {
      * Iterates each particle and simulates its behaviour.
      */
     public void simulateParticles() {
-        assert_t(!emitterConfig.deltaUpdated(), "deltaUpdated == false: use ParticleEmitterConfig::setDelta to update delta");
+        assert_t(!emitterConfig.deltaUpdated(), "deltaUpdated == false: use ParticleEmitter3D::setDelta to update delta");
 
         if(emitterConfig.getPLifetime() < 2.0f) warning("pLifetime_ < 2.0f! particles lifetime is TOO low!; i.e expect non-smooth fades & etc");
 
