@@ -1,4 +1,4 @@
-package gsdk.glib.ezxml;
+package gsdk.glib.gxml;
 
 import org.xml.sax.SAXException;
 
@@ -36,8 +36,9 @@ import java.io.IOException;
 /**
  * XML Simplified.
  */
-public class EzXML {
+public class GXML {
     private DocumentBuilderFactory factory;
+
     private DocumentBuilder parser = null;
 
     private Document document;
