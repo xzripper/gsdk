@@ -9,7 +9,7 @@ import static gsdk.source.generic.Assert.assert_t;
 /**
  * Utility class for using grayscale shader.
  */
-public class Grayscale {
+public class GrayscaleShader {
     private static final String GRAYSCALE_SHADER_FRAG_PATH = resolvePath("gsdk/shaders/grayscale.fs");
 
     private static GShader grayscaleShader;
