@@ -6,6 +6,10 @@ import static com.raylib.Jaylib.WHITE;
 
 import java.util.ArrayList;
 
+import static gsdk.source.generic.Range.inRange;
+
+import static gsdk.source.generic.Assert.assert_f;
+
 /**
  * Class for rendering 2D glow objects.
  */
@@ -78,6 +82,8 @@ public class GlowRenderer {
      * @param pos Position.
      */
     public BakedGlow getBakedGlow(int pos) {
+        assert_f(inRange(pos, 1, getBakedGlowTexAmount()), "invalid baked glow id/pos");
+
         return bakedGlowList.get(pos - 1);
     }
 
