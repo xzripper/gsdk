@@ -1,3 +1,5 @@
+// GSDK Grayscale Fragment Shader.
+
 #version 330
 
 in vec2 fragTexCoord;
