@@ -127,6 +127,18 @@ public class GMath {
     }
 
     /**
+     * Calculate the distance between two points in 2D space (non-vector variant).
+     *
+     * @param fX First X point.
+     * @param fY First Y point.
+     * @param sX Second X point.
+     * @param sY Second Y point.
+     */
+    public static double dist2DNV(float fX, float fY, float sX, float sY) {
+        return sqrt(pow(sX - fX, 2) + pow(sY - fY, 2));
+    }
+
+    /**
      * Calculate the distance between two point in 3D space.
      *
      * @param fPoint First point.
