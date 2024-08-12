@@ -6,6 +6,8 @@ import gsdk.source.vectors.Vector2Di;
 
 import static gsdk.source.generic.GPolygon2D.Polygon;
 
+import static gsdk.source.generic.Assert.assert_t;
+
 /**
  * Pixel Collider Container.
  */
@@ -27,7 +29,18 @@ public class PixelColliderContainer {
      * @param points_ Array.
      */
     public void setPoints(int[][] points_) {
+        assert_t(points_.length > points.length, "array of points is bigger than maximal possible size");
+
         points = points_;
+    }
+
+    /**
+     * Set points array.
+     * 
+     * @param points_ Array list.
+     */
+    public void setPoints(ArrayList<int[]> points_) {
+        setPoints(points_.toArray(new int[0][2]));
     }
 
     /**
@@ -267,11 +280,7 @@ public class PixelColliderContainer {
     private static PixelColliderContainer _createContainer(ArrayList<int[]> points) {
         PixelColliderContainer container = new PixelColliderContainer(points.size());
 
-        int[][] pointsArray = new int[points.size()][2];
-
-        points.toArray(pointsArray);
-
-        container.setPoints(pointsArray);
+        container.setPoints(points);
 
         return container;
     }
