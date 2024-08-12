@@ -145,7 +145,7 @@ void main() {
 
 <h3 align="center">GSDK Shader Playground.</h3>
 
-<p align="center"><img src="https://github.com/violent-studio/vsdk/blob/main/vsdk/r_utilities/shader_playground/utility.png?raw=true" width="600"></p>
+<p align="center"><img src="https://github.com/xzripper/gsdk/blob/main/gsdk/r_utilities/shader_playground/utility.png?raw=true" width="600"></p>
 
 <h3 align="center">GSDK IGUI.</h3>
 
