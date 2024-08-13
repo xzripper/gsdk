@@ -432,6 +432,13 @@ public class GShader {
     }
 
     /**
+     * Is shader valid.
+     */
+    public boolean valid() {
+        return Raylib.IsShaderReady(shader);
+    }
+
+    /**
      * Unload shader.
      */
     public void unload() {
