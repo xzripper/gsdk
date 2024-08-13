@@ -30,7 +30,7 @@ import java.util.Random;
 
 import org.bytedeco.javacpp.FloatPointer;
 
-import gsdk.source.grender.Texture;
+import gsdk.source.generic.GTexture;
 
 import gsdk.source.vectors.Vector4Df;
 import gsdk.source.vectors.Vector4Di;
@@ -56,7 +56,7 @@ public class ParticleEmitter3D {
 
     private final Particle[] particleContainer;
 
-    private Texture particleTex = null;
+    private GTexture particleTex = null;
 
     private float lastSpawn;
 
@@ -119,12 +119,12 @@ public class ParticleEmitter3D {
      *
      * @param tex Texture.
      */
-    public void setParticleTex(Texture tex) {
+    public void setParticleTex(GTexture tex) {
         particleTex = emitterConfig.getPType() == ParticleType.TEXTURE ? tex : particleTex;
 
         Raylib.GenTextureMipmaps(particleTex.getTex());
 
-        tex.setTexFilter(Texture.TEX_FILTER_BILINEAR);
+        tex.setTexFilter(GTexture.TEX_FILTER_BILINEAR);
     }
 
     /**
@@ -145,7 +145,7 @@ public class ParticleEmitter3D {
                 .b((byte) color.z())
                 .a((byte) color.w()), threshold);
 
-        particleTex = new Texture(filtered);
+        particleTex = new GTexture(filtered);
 
         Raylib.GenTextureMipmaps(particleTex.getTex());
 

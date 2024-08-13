@@ -6,6 +6,8 @@ import static com.raylib.Jaylib.WHITE;
 
 import static com.raylib.Jaylib.BLANK;
 
+import gsdk.source.generic.GTexture;
+
 import gsdk.source.vectors.Vector3Df;
 
 import static gsdk.source.generic.Assert.assert_f;
@@ -231,7 +233,7 @@ public class BillboardTexture2D {
      * @param tint Texture tint.
      * @param background Texture background.
      */
-    public static BillboardTexture2D billboardTexture(Texture tex, Raylib.Color tint, Raylib.Color background) {
+    public static BillboardTexture2D billboardTexture(GTexture tex, Raylib.Color tint, Raylib.Color background) {
         return new BillboardTexture2D(
             tex.getTexWidth(), tex.getTexHeight(), background,
 
@@ -245,7 +247,7 @@ public class BillboardTexture2D {
      * @param tex Texture.
      * @param tint Texture tint.
      */
-    public static BillboardTexture2D billboardTexture(Texture tex, Raylib.Color tint) {
+    public static BillboardTexture2D billboardTexture(GTexture tex, Raylib.Color tint) {
         return billboardTexture(tex, tint, BLANK);
     }
 
@@ -255,7 +257,7 @@ public class BillboardTexture2D {
      *
      * @param tex Texture.
      */
-    public static BillboardTexture2D billboardTexture(Texture tex) {
+    public static BillboardTexture2D billboardTexture(GTexture tex) {
         return billboardTexture(tex, null, BLANK);
     }
 

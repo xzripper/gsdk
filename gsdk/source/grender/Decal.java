@@ -2,6 +2,8 @@ package gsdk.source.grender;
 
 import com.raylib.Raylib;
 
+import gsdk.source.generic.GTexture;
+
 import gsdk.source.vectors.Vector3Df;
 
 import static gsdk.source.generic.GMath.PI;
@@ -14,7 +16,7 @@ import static gsdk.source.generic.Assert.assert_f;
 public class Decal {
     private final Raylib.Model decalPlane;
 
-    private Texture decalTex;
+    private GTexture decalTex;
 
     /**
      * Create new decal.
@@ -24,7 +26,7 @@ public class Decal {
      * @param decalHeight Decal height.
      * @param segments Decal segments (can be 1 by default).
      */
-    public Decal(Texture decalTex_, float decalWidth, float decalHeight, int segments) {
+    public Decal(GTexture decalTex_, float decalWidth, float decalHeight, int segments) {
         decalPlane = Raylib.LoadModelFromMesh(Raylib.GenMeshPlane(decalWidth, decalHeight, segments, segments));
 
         decalPlane.transform(Raylib.MatrixRotateX((float) -PI / 2));
@@ -59,7 +61,7 @@ public class Decal {
      *
      * @param dTex Decal texture.
      */
-    public void setDecalTex(Texture dTex) {
+    public void setDecalTex(GTexture dTex) {
         assert_f(dTex.valid(), "dTex != valid");
 
         assert_f(Raylib.IsModelReady(decalPlane), "decalPlane != valid");
@@ -72,7 +74,7 @@ public class Decal {
     /**
      * Get decal texture.
      */
-    public Texture getDecalTex() {
+    public GTexture getDecalTex() {
         return decalTex;
     }
 

@@ -1,10 +1,8 @@
-package gsdk.source.grender;
+package gsdk.source.generic;
 
 import com.raylib.Raylib;
 
 import static com.raylib.Jaylib.WHITE;
-
-import gsdk.source.generic.GShader;
 
 import gsdk.source.vectors.Vector2Di;
 
@@ -15,7 +13,7 @@ import static gsdk.source.generic.Assert.assert_f;
 /**
  * Helper class for Raylib.Texture.
  */
-public class Texture {
+public class GTexture {
     private Raylib.Texture tex;
 
     private int texFilter;
@@ -40,7 +38,7 @@ public class Texture {
      *
      * @param texPath Texture path.
      */
-    public Texture(String texPath) {
+    public GTexture(String texPath) {
         tex = Raylib.LoadTexture(texPath);
     }
 
@@ -50,7 +48,7 @@ public class Texture {
      * @param texPath Texture path.
      * @param texFilter_ Texture filter.
      */
-    public Texture(String texPath, int texFilter_) {
+    public GTexture(String texPath, int texFilter_) {
         tex = Raylib.LoadTexture(texPath);
 
         assert_f(validTexFilter(texFilter_), "invalid texture filter");
@@ -67,7 +65,7 @@ public class Texture {
      * @param texFilter_ Texture filter.
      * @param texWrap_ Texture wrap.
      */
-    public Texture(String texPath, int texFilter_, int texWrap_) {
+    public GTexture(String texPath, int texFilter_, int texWrap_) {
         tex = Raylib.LoadTexture(texPath);
 
         assert_f(validTexFilter(texFilter_), "invalid texture filter");
@@ -85,7 +83,7 @@ public class Texture {
      *
      * @param texImg Image.
      */
-    public Texture(Raylib.Image texImg) {
+    public GTexture(Raylib.Image texImg) {
         tex = Raylib.LoadTextureFromImage(texImg);
     }
 
@@ -95,7 +93,7 @@ public class Texture {
      * @param texImg Image.
      * @param texFilter_ Texture filter.
      */
-    public Texture(Raylib.Image texImg, int texFilter_) {
+    public GTexture(Raylib.Image texImg, int texFilter_) {
         tex = Raylib.LoadTextureFromImage(texImg);
 
         assert_f(validTexFilter(texFilter_), "invalid texture filter");
@@ -112,7 +110,7 @@ public class Texture {
      * @param texFilter_ Texture filter.
      * @param texWrap_ Texture wrap.
      */
-    public Texture(Raylib.Image texImg, int texFilter_, int texWrap_) {
+    public GTexture(Raylib.Image texImg, int texFilter_, int texWrap_) {
         tex = Raylib.LoadTextureFromImage(texImg);
 
         assert_f(validTexFilter(texFilter_), "invalid texture filter");

@@ -4,7 +4,7 @@ import com.raylib.Raylib;
 
 import java.util.ArrayList;
 
-import gsdk.source.grender.Texture;
+import gsdk.source.generic.GTexture;
 
 import gsdk.source.generic.GShader;
 
@@ -919,7 +919,7 @@ public class GUI {
      * @param tint Image tint.
      * @return Is image clicked.
      */
-    public static boolean image(Texture image, int x, int y, float scale, GUIColor tint) {
+    public static boolean image(GTexture image, int x, int y, float scale, GUIColor tint) {
         assert_t(!image.valid(), "image != valid (GUI)");
 
         Raylib.DrawTextureEx(image.getTex(), new Raylib.Vector2().x(x).y(y), 0.0f, scale, tint.toRlCol());
@@ -938,7 +938,7 @@ public class GUI {
      * @param scale Image scale.
      * @return Is image clicked.
      */
-    public static boolean image(Texture image, int x, int y, float scale) {
+    public static boolean image(GTexture image, int x, int y, float scale) {
         return image(image, x, y, scale, new GUIColor(255, 255, 255, 255));
     }
 
@@ -950,7 +950,7 @@ public class GUI {
      * @param y Y Position.
      * @return Is image clicked.
      */
-    public static boolean image(Texture image, int x, int y) {
+    public static boolean image(GTexture image, int x, int y) {
         return image(image, x, y, 1.0f, new GUIColor(255, 255, 255, 255));
     }
 
@@ -965,7 +965,7 @@ public class GUI {
      * @param scale Icon scale.
      * @param tint Icon tint.
      */
-    public static void loadingIcon(GOutRef<Float> pRef, Texture icon, int x, int y, float scale, GUIColor tint) {
+    public static void loadingIcon(GOutRef<Float> pRef, GTexture icon, int x, int y, float scale, GUIColor tint) {
         float progress = (float) clamp(0.0, 1.0, pRef.get() == null ? 0.0 : pRef.get());
 
         if(prevLoadingIconProgress != progress) {
@@ -990,7 +990,7 @@ public class GUI {
      * @param y Y Position.
      * @param scale Icon scale.
      */
-    public static void loadingIcon(GOutRef<Float> pRef, Texture icon, int x, int y, float scale) {
+    public static void loadingIcon(GOutRef<Float> pRef, GTexture icon, int x, int y, float scale) {
         loadingIcon(pRef, icon, x, y, scale, new GUIColor(255, 255, 255, 255));
     }
 
@@ -1002,7 +1002,7 @@ public class GUI {
      * @param x X Position.
      * @param y Y Position.
      */
-    public static void loadingIcon(GOutRef<Float> pRef, Texture icon, int x, int y) {
+    public static void loadingIcon(GOutRef<Float> pRef, GTexture icon, int x, int y) {
         loadingIcon(pRef, icon, x, y, 1.0f, new GUIColor(255, 255, 255, 255));
     }
 
