@@ -81,12 +81,19 @@ public class GinetServerTCP {
 
         events = events_;
 
-        active = true;
-
-        server();
+        active = false;
     }
 
-    private void server() {
+    /**
+     * Start server loop.
+     */
+    public void start() {
+        active = true;
+
+        serve();
+    }
+
+    private void serve() {
         events.start(this);
 
         new Thread(() -> {
@@ -100,7 +107,7 @@ public class GinetServerTCP {
 
                     events.connection(vinetClient, this);
 
-                    client(vinetClient);
+                    handleClient(vinetClient);
                 } catch(IOException ioExc) {
                     events.exception(ioExc, this);
                 }
@@ -110,7 +117,7 @@ public class GinetServerTCP {
         }).start();
     }
 
-    private void client(GinetServerClient client) {
+    private void handleClient(GinetServerClient client) {
         try(BufferedReader in = new BufferedReader(new InputStreamReader(client.getClient().getInputStream()))) {
             String data;
 

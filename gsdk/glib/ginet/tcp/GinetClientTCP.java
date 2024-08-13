@@ -86,12 +86,19 @@ public class GinetClientTCP {
 
         events = events_;
 
-        active = true;
-
-        connect();
+        active = false;
     }
 
-    private void connect() {
+    /**
+     * Try to connect to a server.
+     */
+    public void connect() {
+        active = true;
+
+        cHandler();
+    }
+
+    private void cHandler() {
         new Thread(() -> {
             try {
                 socket = new Socket();

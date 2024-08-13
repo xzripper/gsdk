@@ -45,11 +45,15 @@ public interface GinetClientEventsTCP {
 
     /**
      * Triggered when lost connection to the server.
+     * 
+     * @param client Client reference.
      */
     void lost(GinetClientTCP client);
 
     /**
      * Triggered when connection time is out.
+     * 
+     * @param client Client reference.
      */
     void timeout(GinetClientTCP client);
 }
