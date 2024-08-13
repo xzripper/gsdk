@@ -4,6 +4,8 @@ import com.raylib.Raylib;
 
 import static com.raylib.Jaylib.WHITE;
 
+import gsdk.source.generic.GShader;
+
 import gsdk.source.vectors.Vector2Di;
 
 import static gsdk.source.generic.Range.inRange;
@@ -14,7 +16,7 @@ import static gsdk.source.generic.Assert.assert_f;
  * Helper class for Raylib.Texture.
  */
 public class Texture {
-    private final Raylib.Texture tex;
+    private Raylib.Texture tex;
 
     private int texFilter;
     private int texWrap;
@@ -205,6 +207,17 @@ public class Texture {
     }
 
     /**
+     * Generate texture mipmaps (Raylib&GL).
+     */
+    public void genTexMipmaps() {
+        Raylib.GenTextureMipmaps(tex);
+    }
+
+    public void applyShader(GShader shader) {
+        tex = applyTexShader(tex, shader);
+    }
+
+    /**
      * Get texture width.
      */
     public int getTexWidth() {
@@ -271,5 +284,41 @@ public class Texture {
      */
     public static boolean validMap(int map) {
         return inRange(map, Raylib.MATERIAL_MAP_DIFFUSE, Raylib.MATERIAL_MAP_BRDF);
+    }
+
+    /**
+     * Apply shader for texture.
+     * 
+     * @param tex Texture.
+     * @param shader Shader.
+     */
+    public static Raylib.Texture applyTexShader(Raylib.Texture tex, GShader shader) {
+        assert_f(Raylib.IsTextureReady(tex), "can't apply shader on texture: invalid texture");
+
+        assert_f(shader.valid(), "can't apply shader on texture: invalid shader");
+
+        Raylib.RenderTexture shaded = Raylib.LoadRenderTexture(tex.width(), tex.height());
+
+        Raylib.BeginTextureMode(shaded);
+
+        shader.begin();
+
+        Raylib.DrawTexture(tex, 0, 0, WHITE);
+
+        shader.end();
+
+        Raylib.EndTextureMode();
+
+        Raylib.Image shadedTexImgTmp = Raylib.LoadImageFromTexture(shaded.texture());
+
+        Raylib.ImageFlipVertical(shadedTexImgTmp);
+
+        Raylib.UnloadRenderTexture(shaded);
+
+        Raylib.Texture out = Raylib.LoadTextureFromImage(shadedTexImgTmp);
+
+        Raylib.UnloadImage(shadedTexImgTmp);
+
+        return out;
     }
 }
