@@ -82,4 +82,16 @@ public class GinetServerClient {
     public String getClientIdentifier() {
         return clientIdentifier;
     }
+
+    /**
+     * Compare this client with the different one.
+     * 
+     * @param client Client to compare.
+     */
+    public boolean compare(GinetServerClient client) {
+        if(client == null) return false;
+        if(client == this) return true;
+
+        return client.getIP() == getIP() && client.getPort() == getPort() && client.getClientIdentifier() == getClientIdentifier();
+    }
 }
