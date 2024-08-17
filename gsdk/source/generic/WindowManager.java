@@ -7,7 +7,7 @@ import static gsdk.r_utilities.PathResolver.resolvePath;
 /**
  * Class for window utilities.
  */
-public class WindowUtilities {
+public class WindowManager {
     public static final float STANDARD_DPI_THRESHOLD = 120.0f;
     public static final float MODERN_DPI_THRESHOLD = 144.0f;
     public static final float HIGH_RESOLUTION_DPI_THRESHOLD = 160.0f;

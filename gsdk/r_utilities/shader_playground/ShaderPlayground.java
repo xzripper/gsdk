@@ -28,7 +28,7 @@ import org.bytedeco.javacpp.FloatPointer;
 
 import gsdk.glib.jlImGui.JaylibImGui;
 
-import static gsdk.source.generic.WindowUtilities.setWinIcon;
+import static gsdk.source.generic.WindowManager.setWinIcon;
 
 import static gsdk.source.imthemes.ImGuiDeepDarkTheme.updateTheme;
 

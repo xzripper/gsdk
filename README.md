@@ -17,8 +17,8 @@ import com.raylib.Jaylib.Vector3;
 
 import static com.raylib.Jaylib.BLACK;
 
-import vsdk.source.utils.WindowUtilities;
-import static vsdk.source.utils.WindowUtilities.WindowFlags;
+import vsdk.source.utils.WindowManager;
+import static vsdk.source.utils.WindowManager.WindowFlags;
 
 import vsdk.source.vectors.Vector2Df;
 import vsdk.source.vectors.Vector3Df;
@@ -29,12 +29,12 @@ import vsdk.source.utils.GShader;
 
 public class Main {
     public static void main(String[] args) {
-        WindowFlags flags = WindowUtilities.initWindow(
+        WindowFlags flags = WindowManager.initWindow(
             "Window.",
             1000,
             800,
             120,
-            WindowUtilities.FULLSCREEN_MODE,
+            WindowManager.FULLSCREEN_MODE,
             Raylib.FLAG_VSYNC_HINT | Raylib.FLAG_MSAA_4X_HINT,
             false
         );
