@@ -1,6 +1,6 @@
 // ImGui integration with Raylib bindings for Java.
 
-package gsdk.sdk_vendor.jlImGui;
+package gsdk.glib.jlImGui;
 
 import com.raylib.Raylib;
 
