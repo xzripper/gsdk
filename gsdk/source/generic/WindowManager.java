@@ -20,14 +20,15 @@ public class WindowManager {
      * Window initialization utility.
      * 
      * @param title Window title.
+     * @param icon Window icon (leave null to disable).
      * @param width Window width.
      * @param height Window height.
      * @param targetFPS Window target FPS (leave 0 to disable).
      * @param mode Window mode (leave 0 to toggle default windowed mode and apply flags).
-     * @param flags Window flags (leave 0)
+     * @param flags Window flags (leave 0 to disable window flags).
      * @param initAudio Initialize audio device?
      */
-    public static WindowFlags initWindow(String title, int width, int height, int targetFPS, int mode, int flags, boolean initAudio) {
+    public static WindowFlags initWindow(String title, String icon, int width, int height, int targetFPS, int mode, int flags, boolean initAudio) {
         WindowFlags wFlags = new WindowFlags(flags);
 
         if(mode == FULLSCREEN_MODE) setWinFullscreen(wFlags);
@@ -36,6 +37,8 @@ public class WindowManager {
         else if(mode == 0) wFlags.setWindowFlags();
 
         Raylib.InitWindow(width, height, title);
+
+        if(icon != null) setWinIcon(icon, true);
 
         if(targetFPS != 0) Raylib.SetTargetFPS(targetFPS);
 
