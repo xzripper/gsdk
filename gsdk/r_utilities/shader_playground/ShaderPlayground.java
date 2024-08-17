@@ -26,7 +26,7 @@ import org.bytedeco.javacpp.IntPointer;
 
 import org.bytedeco.javacpp.FloatPointer;
 
-import gsdk.sdk_vendor.jlImGui.JaylibImGui;
+import gsdk.glib.jlImGui.JaylibImGui;
 
 import static gsdk.source.generic.WindowUtilities.setWinIcon;
 
