@@ -173,6 +173,15 @@ public class WindowManager {
     }
 
     /**
+     * Set Raylib trace log level.
+     * 
+     * @param level Level.
+     */
+    public static void setRlTraceLogLevel(int level) {
+        Raylib.SetTraceLogLevel(level);
+    }
+
+    /**
      * Window flags container.
      */
     public static class WindowFlags {
