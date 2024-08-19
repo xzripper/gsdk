@@ -1173,8 +1173,8 @@ public class GUI {
 
             Raylib.DrawTextEx(
                 GUIIO.style.getTextFont().getFont(),
-                content, new Raylib.Vector2().x(x + 1).y(y + titleSize.y() + 5),
-                18, GUIIO.style.getTextSpacing(),
+                content, new Raylib.Vector2().x(x + 4).y(y + titleSize.y() + 7),
+                17, GUIIO.style.getTextSpacing(),
                 contrastingColor
             );
 
