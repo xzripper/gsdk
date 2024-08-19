@@ -89,7 +89,7 @@ public class SpatialAudio {
      * @param inverse Inverse effect?
      */
     public float calcDistPan(float camPositionZ, float camTargetZ, boolean inverse) {
-        float dist = (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.1f;
+        float dist = (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.05f;
 
         return (float) GMath.clamp(
             SpatialAudioData.LEFT_PAN,
