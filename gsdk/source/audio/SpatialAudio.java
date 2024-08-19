@@ -42,6 +42,13 @@ public class SpatialAudio {
     }
 
     /**
+     * Is sound playing.
+     */
+    public boolean isPlaying() {
+        return Raylib.IsSoundPlaying(getAudio());
+    }
+
+    /**
      * Handle spatial sound.
      *
      * @param camPos Camera position.
@@ -72,13 +79,21 @@ public class SpatialAudio {
      * @param camPos Camera position.
      */
     public float calcDistVol(Vector3Df camPos) {
-        float dist = 0.0f;
+        float distSquared = 0.0f;
+    
+        for(int posIndex = 0; posIndex < 3; posIndex++) {
+            float delta = spAudioData.getAudioPos().toArray()[posIndex] - camPos.toArray()[posIndex];
 
-        for(int posIndex=0; posIndex < 3; posIndex++) {
-            dist += GMath.abs((spAudioData.getAudioPos().toArray()[posIndex] * 0.1f) - (camPos.toArray()[posIndex] * 0.1f));
+            distSquared += delta * delta;
         }
+    
+        float scaledDist = (float) Math.sqrt(distSquared) * (getAudioLoudness() * 0.1f);
+    
+        return (float) GMath.clamp(
+            SpatialAudioData.MIN_VOL,
+            SpatialAudioData.MAX_VOL,
 
-        return (float) GMath.clamp(SpatialAudioData.MIN_VOL, SpatialAudioData.MAX_VOL,  (SpatialAudioData.MAX_VOL + spAudioData.getAudioLoudness()) - dist);
+            spAudioData.getAudioLoudness() / (scaledDist * scaledDist + 1.0f));
     }
 
     /**
@@ -89,7 +104,7 @@ public class SpatialAudio {
      * @param inverse Inverse effect?
      */
     public float calcDistPan(float camPositionZ, float camTargetZ, boolean inverse) {
-        float dist = (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.05f;
+        float dist = (getAudioPos().x() - (camPositionZ + camTargetZ)) * getAudioPSens();
 
         return (float) GMath.clamp(
             SpatialAudioData.LEFT_PAN,
