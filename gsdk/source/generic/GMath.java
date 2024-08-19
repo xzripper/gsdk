@@ -683,6 +683,52 @@ public class GMath {
         return sumVec(numbers) / numbers.length;
     }
 
+
+    /**
+     * Calculate average color from RGB vector.
+     * 
+     * @param rgb RGB Integer vector.
+     */
+    public static double averageRGB(gsdk.source.vectors.Vector3Di rgb) {
+        return average(new double[] {rgb.x(), rgb.y(), rgb.z()});
+    }
+
+    /**
+     * Calculate average color from RGB vector.
+     * 
+     * @param rgb RGB Float vector (0.0 <-> 1.0 range supported).
+     */
+    public static double averageRGBf(gsdk.source.vectors.Vector3Df rgb) {
+        return average(new double[] {
+            ((rgb.x() >= 0.0f && rgb.x() <= 1.0f) ? rgb.x() * 255.0f : rgb.x()),
+            ((rgb.y() >= 0.0f && rgb.y() <= 1.0f) ? rgb.y() * 255.0f : rgb.y()),
+            ((rgb.z() >= 0.0f && rgb.z() <= 1.0f) ? rgb.z() * 255.0f : rgb.z()),
+        });
+    }
+
+    /**
+     * Calculate average color from RGBA vector.
+     * 
+     * @param rgba RGBA Integer vector.
+     */
+    public static double averageRGBA(gsdk.source.vectors.Vector4Di rgba) {
+        return average(new double[] {rgba.x(), rgba.y(), rgba.z(), rgba.w()});
+    }
+
+    /**
+     * Calculate average color from RGBA vector.
+     * 
+     * @param rgba RGBA Float vector (0.0 <-> 1.0 range supported).
+     */
+    public static double averageRGBAf(gsdk.source.vectors.Vector4Df rgba) {
+        return average(new double[] {
+            ((rgba.x() >= 0.0f && rgba.x() <= 1.0f) ? rgba.x() * 255.0f : rgba.x()),
+            ((rgba.y() >= 0.0f && rgba.y() <= 1.0f) ? rgba.y() * 255.0f : rgba.y()),
+            ((rgba.z() >= 0.0f && rgba.z() <= 1.0f) ? rgba.z() * 255.0f : rgba.z()),
+            ((rgba.w() >= 0.0f && rgba.w() <= 1.0f) ? rgba.w() * 255.0f : rgba.w()),
+        });
+    }
+
     /**
      * Calculate the median of an array of numbers.
      *
