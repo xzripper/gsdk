@@ -95,7 +95,7 @@ public class SpatialAudio {
             SpatialAudioData.LEFT_PAN,
             SpatialAudioData.RIGHT_PAN,
 
-            SpatialAudioData.CENTER_PAN + (inverse ? -dist : dist));
+            SpatialAudioData.CENTER_PAN - (inverse ? -dist : dist));
     }
 
     /**
