@@ -2,7 +2,12 @@ package gsdk.source.igui;
 
 import com.raylib.Raylib;
 
+import static com.raylib.Jaylib.BLACK;
+import static com.raylib.Jaylib.WHITE;
+
 import java.util.ArrayList;
+
+import java.util.HashMap;
 
 import gsdk.source.generic.GTexture;
 
@@ -12,6 +17,7 @@ import static gsdk.source.generic.Range.inRange;
 
 import static gsdk.source.generic.GMath.clamp;
 import static gsdk.source.generic.GMath.scale;
+import static gsdk.source.generic.GMath.average;
 
 import static gsdk.r_utilities.PathResolver.resolvePath;
 
@@ -49,6 +55,8 @@ public class GUI {
     private static GShader loadingIconShader = null;
 
     private static float prevLoadingIconProgress, loadingIconTint;
+
+    private static HashMap<String, Double> objectTimers = new HashMap<>();
 
     public static final int TOP = 1, VERTICAL = 2, PIE = 3;
 
@@ -748,14 +756,14 @@ public class GUI {
 
             Raylib.DrawRectangleRounded(
                 new Raylib.Rectangle().x(x - 1).y(y - 1).width(barProgress + 1).height(barHeight + 1),
-                GUIIO.style.getBorderRounding(), 16, GUIIO.style.getDefaultCol().toRlCol()
+                GUIIO.style.getBorderRounding(), 16, GUIIO.style.getPressedCol().toRlCol()
             );
 
             if(texelBleedingFixAvailable()) {
                 Raylib.EndShaderMode();
             }
         } else {
-            Raylib.DrawRectangle(x, y, barProgress, barHeight, GUIIO.style.getDefaultCol().toRlCol());
+            Raylib.DrawRectangle(x, y, barProgress, barHeight, GUIIO.style.getPressedCol().toRlCol());
         }
 
         if(GUIIO.style.getBorderThickness() > 0) {
@@ -1046,6 +1054,142 @@ public class GUI {
      */
     public static void bezierCurvePair(int startX, int startY, int endX, int endY, float thickness) {
         bezierCurvePair(startX, startY, endX, endY, thickness, null);
+    }
+
+    /**
+     * Draw GUI popup with timer.
+     * 
+     * @param openStateRef Popup open state.
+     * @param title Popup title.
+     * @param content Popup content/text.
+     * @param timeOnScreen Popup time on the screen.
+     * @param renderProgressBar Render left time on the screen with progress bar.
+     * @param x Popup X.
+     * @param y Popup Y.
+     * @param primaryColor Popup primary color.
+     * @return Whether the popup's rendering state is active; returns true if the state is active, otherwise returns false if the state is disabled by the developer or the popup is out of date.
+     */
+    public static boolean popup(
+        GOutRef<Boolean> openStateRef,
+        String title, String content,
+        double timeOnScreen, boolean renderProgressBar,
+        int x, int y, GUIColor primaryColor
+    ) {
+        if(openStateRef.get() == null) openStateRef.set(false);
+
+        if(openStateRef.get()) {
+            double startTime = objectTimers.getOrDefault(title, -1.);
+
+            if(startTime == -1.) {
+                startTime = Raylib.GetTime();
+
+                objectTimers.put(title, startTime);
+            }
+
+            double elapsedTime = Raylib.GetTime() - startTime;
+
+            if(elapsedTime > timeOnScreen) {
+                openStateRef.set(false);
+
+                objectTimers.remove(title);
+
+                return false;
+            }
+
+            title = title.split("\n")[0];
+
+            Raylib.Vector2 titleSize = Raylib.MeasureTextEx(
+                GUIIO.style.getTextFont().getFont(), title,
+                GUIIO.style.getTextSize(),
+                GUIIO.style.getTextSpacing());
+
+            Raylib.Vector2 textSize = Raylib.MeasureTextEx(
+                GUIIO.style.getTextFont().getFont(), content,
+                GUIIO.style.getTextSize(),
+                GUIIO.style.getTextSpacing());
+
+            boolean largeContent = content.split("\n").length >= 2;
+
+            int popupWidth = (int) (textSize.x() * 1.2f);
+
+            int popupHeight = (int) (textSize.y() + titleSize.y() * (largeContent ? 2.0 : 1.5));
+
+            Raylib.Color contrastingColor = average(
+                new double[] {
+                    primaryColor.get('r'),
+                    primaryColor.get('g'),
+                    primaryColor.get('b')
+                }) > 127.5 ? BLACK : WHITE;
+
+            if(renderProgressBar) {
+                popupHeight += DEFAULT_PROGRESS_BAR_HEIGHT + 3;
+            }
+
+            if(GUIIO.style.getBorderRounding() > 0) {
+                if(texelBleedingFixAvailable()) {
+                    Raylib.BeginShaderMode(texelBleedingFixShader);
+                }
+
+                Raylib.DrawRectangleRounded(
+                    new Raylib.Rectangle().x(x).y(y)
+                        .width(popupWidth).height(popupHeight),
+                    GUIIO.style.getBorderRounding(), 16, primaryColor.toRlCol()
+                );
+
+                if(texelBleedingFixAvailable()) {
+                    Raylib.EndShaderMode();
+                }
+            } else {
+                Raylib.DrawRectangle(x, y, popupWidth, popupHeight, primaryColor.toRlCol());
+            }
+
+            if(GUIIO.style.getBorderThickness() > 0) {
+                if(GUIIO.style.getBorderRounding() > 0) {
+                    Raylib.DrawRectangleRoundedLines(
+                        new Raylib.Rectangle().x(x).y(y).width(popupWidth).height(popupHeight),
+                        GUIIO.style.getBorderRounding(), 16,
+                        GUIIO.style.getBorderThickness(), GUIIO.style.getBorderColor().toRlCol()
+                    );
+                } else {
+                    Raylib.DrawRectangleLinesEx(
+                        new Raylib.Rectangle().x(x).y(y).width(popupWidth).height(popupHeight),
+                        GUIIO.style.getBorderThickness(),
+                        GUIIO.style.getBorderColor().toRlCol()
+                    );
+                }
+            }
+
+            Raylib.DrawTextEx(
+                GUIIO.style.getTextFont().getFont(),
+                title, new Raylib.Vector2().x(x + (popupWidth - titleSize.x()) / 2.0f).y(y),
+                18, GUIIO.style.getTextSpacing(),
+                contrastingColor
+            );
+
+            Raylib.DrawLine(
+                x + (int) GUIIO.style.getBorderThickness() - 1, y + (int) titleSize.y() + 5,
+                x + popupWidth, y + (int) titleSize.y() + 5, contrastingColor
+            );
+
+            Raylib.DrawTextEx(
+                GUIIO.style.getTextFont().getFont(),
+                content, new Raylib.Vector2().x(x + 1).y(y + titleSize.y() + 5),
+                18, GUIIO.style.getTextSpacing(),
+                contrastingColor
+            );
+
+            if(renderProgressBar) {
+                progressBar(
+                    newRef((int) scale(elapsedTime, 100, timeOnScreen) + 1),
+                    x + 5, y + (int) ((titleSize.y() + 5) + (textSize.y() + 20)) - (largeContent ? 5 : 11),
+                    popupWidth - 10, DEFAULT_PROGRESS_BAR_HEIGHT - 10
+                );
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
