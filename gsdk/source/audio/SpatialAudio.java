@@ -57,6 +57,16 @@ public class SpatialAudio {
     }
 
     /**
+     * Handle spatial sound.
+     * 
+     * @param camPos Camera position.
+     * @param camTargetZ Camera target Z.
+     */
+    public void handleSpatiality(Vector3Df camPos, float camTargetZ) {
+        handleSpatiality(camPos, camTargetZ, false);
+    }
+
+    /**
      * Calculate distanced volume between camera and audio.
      *
      * @param camPos Camera position.
@@ -79,19 +89,13 @@ public class SpatialAudio {
      * @param inverse Inverse effect?
      */
     public float calcDistPan(float camPositionZ, float camTargetZ, boolean inverse) {
-        if(inverse) {
-            return (float) GMath.clamp(
-                SpatialAudioData.LEFT_PAN,
-                SpatialAudioData.RIGHT_PAN,
+        float dist = (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.1f;
 
-                SpatialAudioData.CENTER_PAN + (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.1f);
-        } else {
-            return (float) GMath.clamp(
-                SpatialAudioData.LEFT_PAN,
-                SpatialAudioData.RIGHT_PAN,
+        return (float) GMath.clamp(
+            SpatialAudioData.LEFT_PAN,
+            SpatialAudioData.RIGHT_PAN,
 
-                SpatialAudioData.CENTER_PAN - (spAudioData.getAudioPos().x() - (camPositionZ + camTargetZ)) * 0.1f);
-        }
+            SpatialAudioData.CENTER_PAN + (inverse ? -dist : dist));
     }
 
     /**
