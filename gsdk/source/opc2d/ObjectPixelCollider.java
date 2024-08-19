@@ -244,7 +244,8 @@
              int y = point[1] + spritePos.y();
  
              if (x >= pointPos.x() && x < pointPos.x() + pointSize.x() &&
-                 y >= pointPos.y() && y < pointPos.y() + pointSize.y()) SPCData.TOTAL_COLLISIONS_SUCCEEDED++; return true;
+                 y >= pointPos.y() && y < pointPos.y() + pointSize.y()) {
+                    SPCData.TOTAL_COLLISIONS_SUCCEEDED++; return true; }
          }
  
          SPCData.TOTAL_COLLISIONS_FAILED++;
@@ -289,7 +290,8 @@
              int y = point[1] + spritePos.y();
  
              if(x >= pointBounds[0] && x < pointBounds[2] &&
-                 y >= pointBounds[1] && y < pointBounds[3]) SPCData.TOTAL_COLLISIONS_SUCCEEDED++; return true;
+                 y >= pointBounds[1] && y < pointBounds[3]) {
+                    SPCData.TOTAL_COLLISIONS_SUCCEEDED++; return true; }
          }
  
          SPCData.TOTAL_COLLISIONS_FAILED++;
