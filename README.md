@@ -135,8 +135,67 @@ void main() {
 <h3 align="center">GSDK Baked 2D Glow Textures.</h3>
 <p align="center"><img src="https://github.com/user-attachments/assets/9319d13b-cb0c-4287-9a3c-f99a30bf3cc6"></p>
 
-<h3 align="center">GSDK Bump Mapping (Youtube).</h3>
-<p align="center"><a href="https://www.youtube.com/watch?v=HUJ3RxE8DhQ"><img src="http://markdown-videos-api.jorgenkh.no/youtube/HUJ3RxE8DhQ.gif?width=450&height=250&duration=1000" alt="Bump Mapping ALPHA" title="Bump Mapping ALPHA"/></a></p>
+<h3 align="center">GSDK Bump Mapping.</h3>
+
+```java
+import com.raylib.Raylib;
+
+import static com.raylib.Jaylib.Vector3;
+
+import static com.raylib.Jaylib.BLACK;
+import static com.raylib.Jaylib.WHITE;
+
+import gsdk.source.grender.BumpMap;
+
+public class Main {
+    public static void main(String[] args) {
+        Raylib.InitWindow(1000, 800, "Test window.");
+
+        Raylib.SetTargetFPS(60);
+
+        Raylib.Camera3D cam = new Raylib.Camera3D()
+                ._position(new Vector3(3.0f, 0.0f, 0.0f))
+                .target(new Vector3(0.0f, 0.0f, 0.0f))
+                .up(new Vector3(0.0f, 1.0f, 0.0f))
+                .fovy(45.0f)
+                .projection(Raylib.CAMERA_PERSPECTIVE);
+
+        Raylib.Model cube = Raylib.LoadModelFromMesh(Raylib.GenMeshCube(3.0f, 2.5f, 0.3f));
+
+        BumpMap bumpMap = new BumpMap("RES\\albedo2.png",
+                                    "RES\\normal2.png",
+                                    new float[] {0.0f, 0.0f, 0.0f},
+                                    new float[] {0.0f, 0.0f, 0.0f}, 32.0f, 0.1f, true);
+
+        cube.materials(bumpMap.getBumpMaterial());
+
+        while(!Raylib.WindowShouldClose()) {
+            Raylib.UpdateCamera(cam, Raylib.CAMERA_ORBITAL);
+
+            Raylib.BeginDrawing();
+
+            Raylib.ClearBackground(BLACK);
+            Raylib.BeginMode3D(cam);
+
+            bumpMap.updLightPos(new float[] {Raylib.GetMouseX(), Raylib.GetMouseY(), 0.0f});
+            bumpMap.updViewPos(new float[]{cam.target().x(), cam.target().y(), cam.target().z()});
+
+            Raylib.DrawModel(cube, new Vector3(0.0f, 0.0f, 0.0f), 1.0f, WHITE);
+
+            Raylib.EndMode3D();
+            Raylib.EndDrawing();
+        }
+
+        Raylib.UnloadModel(cube);
+
+
+        Raylib.CloseWindow();
+    }
+}
+```
+
+<img src="https://github.com/user-attachments/assets/b2481e05-1233-40c6-ba35-e24d42274990">
+
 <h3 align="center"><a href="https://github.com/violent-studio/vsdk/blob/main/vsdk/examples%26docs/GLib.Ginet.TCP.md">GSDK Chat implementation via Ginet (Game Immediate mode Networking library).</a></h3>
 
 <h3 align="center">GSDK Noise Generator.</h3>
