@@ -12,6 +12,7 @@
  * - Particle simulation is slow: using trivial for-loop to iterate particles.
  * - Particles may spawn with more black tint than others after some emission time (probably fixed).
  * - Particle simulation can freeze game/application after some emission time.
+ * - Particles may freeze if emission is reversed.
  *
  * TODO Features:
  * - Color curve based on lifetime (e.g red at start and green at end).
@@ -19,6 +20,11 @@
  * - Random fade delay for each particle (based of pFade).
  * - Random initial rotation for each particle.
  * - Simulate only visible particles (optimization).
+ * - Shift color/velocity/etc by lifetime.
+ * - Particle attractor.
+ * - 2D Particles.
+ * - More blend modes.
+ * - Particle emitter presets.
  * - Improve code quality (generic).
  */
 
