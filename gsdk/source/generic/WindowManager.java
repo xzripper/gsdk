@@ -31,12 +31,12 @@ public class WindowManager {
     public static WindowFlags initWindow(String title, String icon, int width, int height, int targetFPS, int mode, int flags, boolean initAudio) {
         WindowFlags wFlags = new WindowFlags(flags);
 
+        Raylib.InitWindow(width, height, title);
+
         if(mode == FULLSCREEN_MODE) setWinFullscreen(wFlags);
         else if(mode == BORDERLESS_MODE) setWinBorderless(wFlags);
         else if(mode == WINDOWED_MODE) setWinWindowed(wFlags, width, height);
         else if(mode == 0) wFlags.setWindowFlags();
-
-        Raylib.InitWindow(width, height, title);
 
         if(icon != null) setWinIcon(icon, true);
 
