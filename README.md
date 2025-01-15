@@ -1,3 +1,4 @@
+![java_kbSEhZPUez-min](https://github.com/user-attachments/assets/35914fb0-5649-4180-9261-1141a694e486)
 <h1 align="center">VSDK is now being rebranded to GSDK due to transfer of project from studio profile to main developer profile.</h1>
 
 <p align="center"><img src="gsdk2.png"></p>
