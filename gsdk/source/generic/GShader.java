@@ -31,6 +31,8 @@ public class GShader {
 
     private int loadType;
 
+    private boolean hasBegun;
+
     public static final int FILE = 1;
     public static final int MEMORY = 2;
 
@@ -158,6 +160,8 @@ public class GShader {
      */
     public void begin() {
         Raylib.BeginShaderMode(shader);
+
+        hasBegun = true;
     }
 
     /**
@@ -165,6 +169,15 @@ public class GShader {
      */
     public void end() {
         Raylib.EndShaderMode();
+
+        hasBegun = false;
+    }
+
+    /**
+     * Is shader being used right now?
+     */
+    public boolean inUse() {
+        return hasBegun;
     }
 
     /**

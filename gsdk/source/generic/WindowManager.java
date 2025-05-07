@@ -27,9 +27,14 @@ public class WindowManager {
      * @param mode Window mode (leave 0 to toggle default windowed mode and apply flags).
      * @param flags Window flags (leave 0 to disable window flags).
      * @param initAudio Initialize audio device?
+     * @param rlTLL Raylib's trace log level (leave -1 to leave it by Raylib's default value).
      */
-    public static WindowFlags initWindow(String title, String icon, int width, int height, int targetFPS, int mode, int flags, boolean initAudio) {
+    public static WindowFlags initWindow(String title, String icon, int width, int height, int targetFPS, int mode, int flags, boolean initAudio, int rlTLL) {
         WindowFlags wFlags = new WindowFlags(flags);
+
+        if(rlTLL != -1) {
+            setRlTraceLogLevel(rlTLL);
+        }
 
         Raylib.InitWindow(width, height, title);
 
