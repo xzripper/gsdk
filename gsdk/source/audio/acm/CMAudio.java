@@ -1,12 +1,14 @@
 package gsdk.source.audio.acm;
 
+import static gsdk.source.generic.Assert.assert_t;
+
 /**
  * Context Manager's audio data class.
  */
 public class CMAudio {
-    private String audioName;
+    private final String audioName;
 
-    private CMContext[] ctxArray;
+    private final CMContext[] ctxArray;
 
     /**
      * Create new CM's audio instance.
@@ -15,6 +17,8 @@ public class CMAudio {
      * @param audioCtxs Possible audio contexts.
      */
     public CMAudio(String ctxAudioName, CMContext... audioCtxs) {
+        assert_t(ctxAudioName == null || audioCtxs == null, "ctxAudioName and audioCtxs can't be null");
+
         audioName = ctxAudioName;
 
         ctxArray = audioCtxs;

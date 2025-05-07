@@ -2,11 +2,13 @@ package gsdk.source.audio.acm;
 
 import static com.raylib.Raylib.Sound;
 
+import static gsdk.source.generic.Assert.assert_t;
+
 /**
  * Utility for separating audio by contexts. Useful for creating variations for single audio (example: separate footsteps' sounds by a ground material: sand, water, etc).
  */
 public class AudioContextManager {
-    private CMAudio[] contextAudioArray;
+    private final CMAudio[] contextAudioArray;
 
     private String currentContext;
 
@@ -17,6 +19,8 @@ public class AudioContextManager {
      * @param ctxAudio A list of sounds' contexts.
      */
     public AudioContextManager(String defaultCtx, CMAudio... ctxAudio) {
+        assert_t(defaultCtx == null || ctxAudio == null, "defaultCtx and ctxAudio can't be null");
+
         currentContext = defaultCtx;
 
         contextAudioArray = ctxAudio;
@@ -45,9 +49,9 @@ public class AudioContextManager {
      */
     public Sound getContextAudio(String audioName) {
         for(CMAudio ctxAudio : contextAudioArray) {
-            if(ctxAudio.getName() == audioName) {
+            if(ctxAudio.getName().equals(audioName)) {
                 for(CMContext audioCtx : ctxAudio.getContextArray()) {
-                    if(audioCtx.getContext() == currentContext) {
+                    if(audioCtx.getContext().equals(currentContext)) {
                         return audioCtx.getContextSoundObject();
                     }
                 }

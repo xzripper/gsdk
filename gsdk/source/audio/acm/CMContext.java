@@ -2,13 +2,15 @@ package gsdk.source.audio.acm;
 
 import static com.raylib.Raylib.Sound;
 
+import static gsdk.source.generic.Assert.assert_t;
+
 /**
  * Context Manager's context data class.
  */
 public class CMContext {
-    private String context;
+    private final String context;
 
-    private Sound contextSoundObject;
+    private final Sound contextSoundObject;
 
     /**
      * Create new CM's context instance.
@@ -17,6 +19,8 @@ public class CMContext {
      * @param audioCtxObject Raylib's audio object.
      */
     public CMContext(String audioCtx, Sound audioCtxObject) {
+        assert_t(audioCtx == null || audioCtxObject == null, "audioCtx and audioCtxObject can't be null");
+
         context = audioCtx;
 
         contextSoundObject = audioCtxObject;
