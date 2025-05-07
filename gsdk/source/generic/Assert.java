@@ -5,7 +5,7 @@ package gsdk.source.generic;
  */
 public class Assert {
     /**
-     * Throw assertion error if bool == false.
+     * Throw assertion error if bool is false.
      *
      * @param bool Boolean.
      * @param message Assertion message.
@@ -21,7 +21,7 @@ public class Assert {
     }
 
     /**
-     * Throw assertion error if bool == false.
+     * Throw assertion error if bool is false.
      *
      * @param bool Boolean.
      */
@@ -30,7 +30,7 @@ public class Assert {
     }
 
     /**
-     * Throw assertion error if bool == true.
+     * Throw assertion error if bool is true.
      *
      * @param bool Boolean.
      * @param message Assertion message.
@@ -46,7 +46,7 @@ public class Assert {
     }
 
     /**
-     * Throw assertion error if bool == false.
+     * Throw assertion error if bool is true.
      *
      * @param bool Boolean.
      */
