@@ -1,6 +1,5 @@
 ![java_kbSEhZPUez-min](https://github.com/user-attachments/assets/35914fb0-5649-4180-9261-1141a694e486)
-<h1 align="center">VSDK is now being rebranded to GSDK due to transfer of project from studio profile to main developer profile.</h1>
-todo gshader:begin:end:is_begun
+
 <p align="center"><img src="gsdk2.png"></p>
 
 <h3 align="center">GSDK Development Phase: <code>GSDK_V0.0.0.8-ALPHA/DEV_PUBLISH</code>.</h3>
