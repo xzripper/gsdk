@@ -83,5 +83,5 @@ public class Main {
 }
 ```
 
-<img src="https://github.com/violent-studio/gsdk/assets/94743980/58f7891d-ba0f-4f4b-b89f-3317fc21e094">
+<img src="https://github.com/xzripper/gsdk/assets/94743980/58f7891d-ba0f-4f4b-b89f-3317fc21e094">
 (old gif; used to show approx. result; many things changed).
